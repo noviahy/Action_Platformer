@@ -1,25 +1,25 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private SpawnManager spawnManager;
-    [SerializeField] private DespawnManager despawnManager;
+    [SerializeField] private EventManager eventManager;
+
     public GameState CurrentState { get; private set; }
     public enum GameState
     {
+        Idle,
+        Loading,
         Playing,
         Pause,
         GameOver,
-        Idle
-        // 추후 Loading 추가
+        Clear
     }
     private void Awake()
     {
         ChangeState(GameState.Idle);
-        EventManager.RequestGameState += ChangeState;
-        EventManager.RequestStageData += RequestSpawnStage;
     }
 
     public void ChangeState(GameState next) // UIManager, GameManager
@@ -29,8 +29,13 @@ public class GameManager : MonoBehaviour
         switch (next)
         {
             case GameState.Idle:
-                requestDespawnStage();
+                EventManager.RequestGameState -= ChangeState;
                 break;
+            case GameState.Loading:
+                EventManager.RequestGameState += ChangeState;
+                StartCoroutine(waitForLoadingUI());
+                break;
+
             case GameState.Playing:
                 Time.timeScale = 1;
                 break;
@@ -42,23 +47,18 @@ public class GameManager : MonoBehaviour
             case GameState.GameOver:
                 break;
 
-            /*
-            case GameState.Loading:
-            break;
-            */
+            case GameState.Clear:
+                eventManager.RequestClear();
+                break;
 
             default:
                 Debug.LogError($"Unhandled UIState: {CurrentState}");
                 break;
         }
     }
-
-    public void RequestSpawnStage(string stageNum)
+    IEnumerator waitForLoadingUI()
     {
-        spawnManager.SpawnStage(stageNum);
-    }
-    private void requestDespawnStage()
-    {
-        despawnManager.DespawnAllObject();
+        yield return new WaitForSeconds(4f);
+        ChangeState(GameState.Playing);
     }
 }

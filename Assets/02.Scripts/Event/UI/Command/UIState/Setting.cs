@@ -3,30 +3,23 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Setting : MonoBehaviour, IUIState
+public class Setting : UIState
 {
-    [SerializeField] private UIManager uiManager;
-    [SerializeField] private List<Button> settingBT;
-    [SerializeField] private List<TextMeshProUGUI> settingText;
-    [SerializeField] private List<Image> images;
-    public void Enter()
+    [SerializeField] private CanvasGroup settingUI;
+    public override EStateType StateType => EStateType.Setting;
+    public override void Enter()
     {
-        setActiveAll(settingBT, true);
-        setActiveAll(settingText, true);
-        setActiveAll(images, true);
+        setVisible(true);
     }
-    public void Exit()
+    public override void Exit()
     {
-        setActiveAll(settingBT, false);
-        setActiveAll(settingText, false);
-        setActiveAll(images, false);
+        setVisible(false);
     }
 
-    private void setActiveAll<T>(List<T> targets, bool active) where T : Component
+    private void setVisible(bool value)
     {
-        foreach (var t in targets)
-        {
-            t.gameObject.SetActive(active);
-        }
+        settingUI.alpha = value ? 1f : 0f;
+        settingUI.interactable = value;
+        settingUI.blocksRaycasts = value;
     }
 }

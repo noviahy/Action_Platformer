@@ -1,12 +1,12 @@
 using UnityEngine;
 
-// Button에 직접 넣기 + 이벤트 넣기
+// 모든 Button에 직접 넣기
 public class UIButton : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
     [SerializeField] private EStateType stateType;
-    [SerializeField] private string worldNum;
-    [SerializeField] private string stageNum;
+    [SerializeField] private string worldID;
+    [SerializeField] private string stageID;
     public void OnClick()
     {
         uiManager.ChangeState(stateType);
@@ -15,27 +15,28 @@ public class UIButton : MonoBehaviour
     public void OnClickWorld()
     {
         uiManager.ChangeState(stateType);
-        uiManager.SetWorldNum(worldNum);
+        if (worldID != null)
+        {
+            uiManager.SetWorldNum(worldID);
+        }
+        else
+        {
+            uiManager.SetWorldNum(uiManager.SelectedWorld);
+        }
     }
     // 현재 Stage 설정
     public void OnClickStage()
     {
-        uiManager.SetStageNum(stageNum);
+        uiManager.SetStageNum(stageID);
+    }
+    // 뒤로가기
+    public void OnClickBack()
+    {
+        uiManager.GoBackState();
+    }
+
+    public void OnClickExit()
+    {
+        Application.Quit();
     }
 }
-
-/*  [SerializeField] private Button world;
-    [SerializeField] private Button world_1;
-    [SerializeField] private Button world_2;
-    [SerializeField] private Button world_3;
-    [SerializeField] private Button stage_1;
-    [SerializeField] private Button stage_2;
-    [SerializeField] private Button stage_3;
-    [SerializeField] private Button settingBT;
-    [SerializeField] private Button pauseBT;
-    [SerializeField] private Button continueBT;
-    [SerializeField] private Button gameStartBT;
-    [SerializeField] private Button gameStopBT;
-    [SerializeField] private Button backToStageBT;
-    [SerializeField] private Button backBT; 
-*/

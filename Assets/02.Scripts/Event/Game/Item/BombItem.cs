@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class BombItem : MonoBehaviour
+public class BombItem : MonoBehaviour, IItem
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Despawn()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Destroy(gameObject);
     }
 }

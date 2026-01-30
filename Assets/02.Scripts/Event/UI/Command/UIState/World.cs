@@ -1,31 +1,22 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-public class World : MonoBehaviour, IUIState
+public class World : UIState
 {
-    [SerializeField] private UIManager uiManager;
-    [SerializeField] private List<Button> worldBT;
-    [SerializeField] private List<TextMeshProUGUI> worldText;
-    [SerializeField] private List<Image> images;
-    public void Enter()
+    [SerializeField] private CanvasGroup worldUI;
+    public override EStateType StateType => EStateType.World;
+    public override bool IsMenuState => true;
+    public override void Enter()
     {
-        setActiveAll(worldBT, true);
-        setActiveAll(worldText, true);
-        setActiveAll(images, true);
+        setVisible(true);
     }
-    public void Exit()
+    public override void Exit()
     {
-        setActiveAll(worldBT, false);
-        setActiveAll(worldText, false);
-        setActiveAll(images, false);
+        setVisible(false);
     }
 
-    private void setActiveAll<T>(List<T> targets, bool active) where T : Component
+    private void setVisible(bool value)
     {
-        foreach (var t in targets)
-        {
-            t.gameObject.SetActive(active);
-        }
+        worldUI.alpha = value ? 1f : 0f;
+        worldUI.interactable = value;
+        worldUI.blocksRaycasts = value;
     }
 }

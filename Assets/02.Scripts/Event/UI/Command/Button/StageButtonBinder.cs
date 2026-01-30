@@ -4,7 +4,6 @@ using UnityEngine;
 public class StageButtonBinder : MonoBehaviour
 {
     [SerializeField] private StageProgressManager progressManager;
-
     [SerializeField] private List<StageButton> stageButtons;
     [SerializeField] private UIManager uiManager;
 
@@ -14,7 +13,7 @@ public class StageButtonBinder : MonoBehaviour
         {
             var data = progressManager.GetStageData(uiManager.SelectedWorld + "-" + stageButton.StageID);
 
-            if (data != null)
+            if (data == null)
             {
                 stageButton.SetInteractable(false);
                 continue;

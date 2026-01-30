@@ -4,27 +4,29 @@ using static GameManager;
 
 public class EventManager : MonoBehaviour
 {
-    // GameManager -> UIManager 상태 변경시 사용
-
     public static event Action OnGameOverUI;
+    public static event Action OnGameClearUI;
     public static event Action<GameState> RequestGameState;
-    public static event Action<string> RequestStageData;
 
-    public void RequestGameStart(string stageNum) // UIManager에서 호출
+    public void RequestGameStart(string stageNum) // UIState(Playering에서 호출)
     {
-        RequestGameState?.Invoke(GameManager.GameState.Playing);
-        RequestStageData?.Invoke(stageNum); 
+        RequestGameState?.Invoke(GameManager.GameState.Loading); // (GameManager에서 구독)
     }
-
     public void RequestGamePause() // UIManager에서 호출
     {
         RequestGameState?.Invoke(GameManager.GameState.Pause);
     }
-
     public void RequestGameOver() // TimeManager + CoinHPManager에서 호출
     {
-        OnGameOverUI?.Invoke();
+        OnGameOverUI?.Invoke(); //  UIState(Clear, GameOver에서 구독/취소)
+        RequestGameState?.Invoke(GameManager.GameState.GameOver);
+    }
+    public void RequestClear() // GameManger에서 호출
+    {
+        OnGameClearUI?.Invoke(); // UIState(Clear, GameOver에서 구독/취소)
+    }
+    public void RequestIdle()
+    {
         RequestGameState?.Invoke(GameManager.GameState.Idle);
     }
-
 }

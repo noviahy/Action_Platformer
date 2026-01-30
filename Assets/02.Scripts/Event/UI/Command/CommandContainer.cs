@@ -3,17 +3,25 @@ using UnityEngine;
 
 public class CommandContainer : MonoBehaviour
 {
-    [SerializeField] private List<IUIState> states;
+    [SerializeField] private List<StatePair> states;
 
-    public Dictionary<EStateType, IUIState> commandDict;
+    public Dictionary<EStateType, UIState> commandDict;
 
     private void Awake()
     {
-        initalize();
+        Initialize();
     }
-
-    private void initalize()
+    private void Initialize()
     {
-        commandDict = new Dictionary<EStateType, IUIState>();
+        commandDict = new Dictionary<EStateType, UIState>();
+        foreach (var pair in states) {
+            commandDict[pair.State] = pair.UIClass;
+        }
     }
+}
+[System.Serializable]
+public class StatePair
+{
+    public EStateType State;
+    public UIState UIClass;
 }

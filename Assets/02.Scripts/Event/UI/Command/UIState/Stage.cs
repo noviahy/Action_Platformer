@@ -2,31 +2,34 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class Stage : MonoBehaviour, IUIState
+public class Stage : UIState
 {
-    // 추후 UI 설정시 코드 추가 필요
     [SerializeField] private UIManager uiManager;
-    [SerializeField] private List<Button> stageBT;
-    [SerializeField] private List<TextMeshProUGUI> stageText;
-    [SerializeField] private List<Image> images;
-    public void Enter()
+    [SerializeField] private CanvasGroup stageUI;
+    [SerializeField] private TextMeshPro stage1;
+    [SerializeField] private TextMeshPro stage2;
+    [SerializeField] private TextMeshPro stage3;
+    [SerializeField] private TextMeshPro selectedStage;
+    [SerializeField] private TextMeshPro bestTime;
+    [SerializeField] private TextMeshPro life;
+    [SerializeField] private TextMeshPro coin;
+    [SerializeField] private Image lifeImage;
+    [SerializeField] private Image coinImage;
+    public override EStateType StateType => EStateType.Stage;
+    public override void Enter()
     {
-        setActiveAll(stageBT, true);
-        setActiveAll(stageText, true);
-        setActiveAll(images, true);
+        uiManager.RefreshStageBT();
+        setVisible(true);
     }
-    public void Exit()
+    public override void Exit()
     {
-        setActiveAll(stageBT, false);
-        setActiveAll(stageText, false);
-        setActiveAll(images, false);
+        setVisible(false);
     }
 
-    private void setActiveAll<T>(List<T> targets, bool active) where T : Component
+    private void setVisible(bool value)
     {
-        foreach (var t in targets)
-        {
-            t.gameObject.SetActive(active);
-        }
+        stageUI.alpha = value ? 1f : 0f;
+        stageUI.interactable = value;
+        stageUI.blocksRaycasts = value;
     }
 }

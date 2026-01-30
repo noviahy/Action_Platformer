@@ -3,30 +3,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour, IUIState
+public class MainMenu : UIState
 {
-    [SerializeField] private UIManager uiManager;
-    [SerializeField] private List<Button> menuBT;
-    [SerializeField] private List<TextMeshProUGUI> worldText;
-    [SerializeField] private List<Image> images;
-    public void Enter()
+    [SerializeField] private CanvasGroup mainMenuUI;
+    public override EStateType StateType => EStateType.MainMenu;
+    public override bool IsMenuState => true;
+    public override void Enter()
     {
-        setActiveAll(menuBT, true);
-        setActiveAll(worldText, true);
-        setActiveAll(images, true);
+        setVisible(true);
     }
-    public void Exit()
+    public override void Exit()
     {
-        setActiveAll(menuBT, false);
-        setActiveAll(worldText, false);
-        setActiveAll(images, false);
+        setVisible(false);
     }
 
-    private void setActiveAll<T>(List<T> targets, bool active) where T : Component
+    private void setVisible(bool value)
     {
-        foreach (var t in targets)
-        {
-            t.gameObject.SetActive(active);
-        }
+        mainMenuUI.alpha = value ? 1f : 0f;
+        mainMenuUI.interactable = value;
+        mainMenuUI.blocksRaycasts = value;
     }
 }
