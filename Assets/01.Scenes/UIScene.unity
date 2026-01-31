@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   eventManager: {fileID: 1814415547}
-  stageData: {fileID: 0}
+  stageData: {fileID: 1814415548}
   commandContainer: {fileID: 220987045}
   stageButtonBinder: {fileID: 220987046}
 --- !u!114 &220987045
@@ -1254,11 +1254,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageWindow
   uiManager: {fileID: 220987044}
   coinHPCalculator: {fileID: 425750939}
+  startButton: {fileID: 268385856}
   stage1: {fileID: 249444742}
   stage2: {fileID: 1050155057}
   stage3: {fileID: 863369263}
   selectedStage: {fileID: 1962625437}
-  bestTime: {fileID: 1974912052}
+  bestTime: {fileID: 55448749}
   life: {fileID: 1196329668}
   coin: {fileID: 1833485638}
   lifeImage: {fileID: 1932269306}
@@ -1825,7 +1826,7 @@ MonoBehaviour:
   stateType: 3
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &306403676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2033,7 +2034,7 @@ MonoBehaviour:
   stateType: 0
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &350629890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,8 +2080,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stage
   uiManager: {fileID: 220987044}
+  eventManager: {fileID: 1814415547}
   stageUI: {fileID: 193724521}
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &354253857
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,8 +2180,8 @@ RectTransform:
   - {fileID: 101873807}
   - {fileID: 306403677}
   - {fileID: 193724520}
-  - {fileID: 537431697}
   - {fileID: 1276335179}
+  - {fileID: 537431697}
   - {fileID: 899538174}
   - {fileID: 1813331314}
   - {fileID: 19703394}
@@ -2310,8 +2312,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5076b24da33e9444aa34feb839b6149b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Loading
-  uiManager: {fileID: 0}
+  uiManager: {fileID: 220987044}
   loadingUI: {fileID: 537431696}
+  playingUI: {fileID: 1276335180}
 --- !u!1 &425750934
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,8 +2326,6 @@ GameObject:
   - component: {fileID: 425750935}
   - component: {fileID: 425750939}
   - component: {fileID: 425750938}
-  - component: {fileID: 425750937}
-  - component: {fileID: 425750936}
   - component: {fileID: 425750940}
   m_Layer: 0
   m_Name: GamePlaySystems
@@ -2348,35 +2349,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1065958228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &425750936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 425750934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54458ca41e82bd14d94944263ce2673c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
-  stageManager: {fileID: 0}
-  playerManager: {fileID: 1273780394}
-  monsterManager: {fileID: 1273780395}
-  obstacleManager: {fileID: 1273780393}
-  itemManager: {fileID: 1273780397}
---- !u!114 &425750937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 425750934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06287b86a0f8f2742a88a270dd7b443b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DespawnManager
 --- !u!114 &425750938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2883,7 +2855,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 2
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!114 &464979666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3335,7 +3307,7 @@ MonoBehaviour:
   stateType: 0
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &512026444
 GameObject:
   m_ObjectHideFlags: 0
@@ -3485,7 +3457,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3611,18 +3582,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ec6bacfc6ef54a498bdcda8246f8367, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow2D
 --- !u!1 &531239669
 GameObject:
   m_ObjectHideFlags: 0
@@ -4033,11 +3992,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f7f488c4393d74e9b586379b301fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
-  uiManager: {fileID: 0}
+  uiManager: {fileID: 220987044}
   stateType: 0
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &573586241
 GameObject:
   m_ObjectHideFlags: 0
@@ -4641,12 +4600,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619394800}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3869.2085, y: -520.9305, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 747919420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &622142159
 GameObject:
@@ -5096,7 +5055,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 2
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &702792503
 GameObject:
   m_ObjectHideFlags: 0
@@ -5583,6 +5542,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738629342}
   m_CullTransparentMesh: 1
+--- !u!1 &747919418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 747919420}
+  - component: {fileID: 747919419}
+  m_Layer: 0
+  m_Name: Bootstrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &747919419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747919418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019c2508a6f517e4d91af36aa66a5efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bootstrap
+--- !u!4 &747919420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747919418}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3869.2085, y: 520.9305, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1065958228}
+  - {fileID: 1177821961}
+  - {fileID: 1993854326}
+  - {fileID: 619394802}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &749142616
 GameObject:
   m_ObjectHideFlags: 0
@@ -5733,7 +5740,7 @@ MonoBehaviour:
   stateType: 1
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &790795267
 GameObject:
   m_ObjectHideFlags: 0
@@ -6220,7 +6227,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 3
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &833880964
 GameObject:
   m_ObjectHideFlags: 0
@@ -7215,37 +7222,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004050320}
   m_CullTransparentMesh: 1
---- !u!1 &1024361968
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1024361969}
-  m_Layer: 0
-  m_Name: StageData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1024361969
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1024361968}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1065958228}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032383494
 GameObject:
   m_ObjectHideFlags: 0
@@ -7756,16 +7732,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065958227}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3869.2085, y: -520.9305, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1814415543}
   - {fileID: 425750935}
   - {fileID: 1273780392}
-  - {fileID: 1024361969}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 747919420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1134275633
 GameObject:
@@ -7914,10 +7889,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   uiManager: {fileID: 220987044}
-  stateType: 3
+  stateType: 4
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &1148682407
 GameObject:
   m_ObjectHideFlags: 0
@@ -8068,7 +8043,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &1168625073
 GameObject:
   m_ObjectHideFlags: 0
@@ -8219,7 +8194,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &1177821960
 GameObject:
   m_ObjectHideFlags: 0
@@ -8244,15 +8219,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177821960}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1031.9878, y: 709.20825, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2837.2207, y: 188.27777, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 354253861}
   - {fileID: 574300065}
   - {fileID: 220987043}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 747919420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196329666
 GameObject:
@@ -8748,10 +8723,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1273780392}
   - component: {fileID: 1273780396}
-  - component: {fileID: 1273780395}
-  - component: {fileID: 1273780394}
-  - component: {fileID: 1273780393}
-  - component: {fileID: 1273780397}
   m_Layer: 0
   m_Name: InGameSystem
   m_TagString: Untagged
@@ -8774,45 +8745,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1065958228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1273780393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273780391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fcfa8de77753934988c62494782d17d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleManager
-  obstaclePrefabList: []
---- !u!114 &1273780394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273780391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54773d5fab05db64d861ff28cc3d365c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  playerPrefab: {fileID: 8419052663954355227, guid: 174da6e09e2d07249b294b41102bb50e, type: 3}
---- !u!114 &1273780395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273780391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ecc91c67138d3547a2556398dae154c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterManager
-  monsterPrefabList: []
 --- !u!114 &1273780396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8826,19 +8758,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   eventManager: {fileID: 1814415547}
---- !u!114 &1273780397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273780391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2c9c3d56055f14498f15cbea5d16446, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemManager
-  ItemPrefabList: []
+  stageProgressManager: {fileID: 1814415548}
+  timeManager: {fileID: 425750940}
 --- !u!1 &1276335178
 GameObject:
   m_ObjectHideFlags: 0
@@ -9454,7 +9375,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 1
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!114 &1395705459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10102,10 +10023,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   uiManager: {fileID: 220987044}
-  stateType: 4
+  stateType: 5
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &1455620224
 GameObject:
   m_ObjectHideFlags: 0
@@ -10716,7 +10637,7 @@ MonoBehaviour:
   stateType: 0
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &1570826322
 GameObject:
   m_ObjectHideFlags: 0
@@ -11138,10 +11059,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
   uiManager: {fileID: 220987044}
-  stateType: 5
+  stateType: 6
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &1671952808
 GameObject:
   m_ObjectHideFlags: 0
@@ -11465,7 +11386,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &1715600737
 GameObject:
   m_ObjectHideFlags: 0
@@ -11810,7 +11731,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 3
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &1806691913
 GameObject:
   m_ObjectHideFlags: 0
@@ -11961,7 +11882,7 @@ MonoBehaviour:
   stateType: 6
   worldID: 
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1 &1813331313
 GameObject:
   m_ObjectHideFlags: 0
@@ -12031,6 +11952,7 @@ GameObject:
   - component: {fileID: 1814415546}
   - component: {fileID: 1814415545}
   - component: {fileID: 1814415548}
+  - component: {fileID: 1814415549}
   m_Layer: 0
   m_Name: RuntimeSystems
   m_TagString: Untagged
@@ -12111,6 +12033,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2efdf488787cf8b4c864ae0254979f60, type: 2}
   - {fileID: 11400000, guid: 81a447847f893a64e9c10169f5038a0b, type: 2}
   - {fileID: 11400000, guid: b053acbe301d1ee49aeee54da8b4722d, type: 2}
+--- !u!114 &1814415549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814415542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8ecc9ca4a8f00488514ef158e78373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeSceneManager
 --- !u!1 &1833485636
 GameObject:
   m_ObjectHideFlags: 0
@@ -12370,6 +12304,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InGame
   playingUI: {fileID: 1276335180}
   uiManager: {fileID: 220987044}
+  life: {fileID: 708596269}
+  coin: {fileID: 531239671}
 --- !u!1 &1871119391
 GameObject:
   m_ObjectHideFlags: 0
@@ -13380,12 +13316,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993854323}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3869.2085, y: -520.9305, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 747919420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2015545780
 GameObject:
@@ -13912,13 +13848,10 @@ MonoBehaviour:
   stateType: 2
   worldID: 1
   stageID: 
-  stageWindow: {fileID: 0}
+  stageWindow: {fileID: 220987047}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 619394802}
-  - {fileID: 1993854326}
-  - {fileID: 1065958228}
-  - {fileID: 1177821961}
+  - {fileID: 747919420}

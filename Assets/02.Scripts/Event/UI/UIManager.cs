@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private StageButtonBinder stageButtonBinder;
     private Stack<UIState> goBackStack = new Stack<UIState>();
     private UIState currentState;
-    private UIState previousState;
+    public UIState previousState{ get; private set; }
     public string SelectedWorld { get; private set; }
     public string SelectedStage { get; private set; }
     private void Start()
@@ -61,6 +61,7 @@ public class UIManager : MonoBehaviour
         if (currentState.StateType == EStateType.Pause)
         {
             ChangeState(EStateType.Playing);
+            return;
         }
 
         if (goBackStack.Count == 0) return;
@@ -95,11 +96,13 @@ public class UIManager : MonoBehaviour
     public void RefreshStageBT()
     {
         stageButtonBinder.Refresh();
+        // Debug.Log($"{SelectedStage}");
     }
 
     public void SetWorldNum(string worldNum)
     {
         SelectedWorld = worldNum;
+        // Debug.Log($"{SelectedWorld}");
     }
 
     public void SetStageNum(string stageNum)
@@ -112,9 +115,6 @@ public class UIManager : MonoBehaviour
     }
     public List<StageProgressData> ReQuestStageDataList()
     {
-        List<StageProgressData> allStages = new List<StageProgressData>();
-
-        var stageList = allStages.Where(stage => stage.StageID.StartsWith($"{SelectedWorld}")).ToList();
-        return stageList;
+        return stageData.GetWorldData(SelectedWorld);
     }
 }

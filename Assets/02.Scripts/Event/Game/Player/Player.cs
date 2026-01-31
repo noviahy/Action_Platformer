@@ -2,23 +2,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] CoinHPManager coinHPManager;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private PlayerTrigger playerTrigger;
+    public Vector3 playerLocation { get; private set; }
 
+
+    private void Update()
+    {
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("monster"))
+        if (other.CompareTag("CollectionCoin"))
         {
-            coinHPManager.Damage();
+            gameManager.SaveCollectionCoin();
         }
-
-        if (other.CompareTag("explosion"))
+        else
         {
-            coinHPManager.Damage();
-        }
-
-        if (other.CompareTag("bomb"))
-        {
-
+            playerTrigger.CollisionPlayer(other);
         }
     }
 }

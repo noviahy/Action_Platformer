@@ -8,6 +8,33 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/UIScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/01.Scenes/Stage_1_1.unity
+    guid: e04a8e02b9fb79b4dab985b4f3dbff5a
+  - enabled: 1
+    path: Assets/01.Scenes/Stage_1_2.unity
+    guid: 4d661c640517cef48a149f72140e98f3
+  - enabled: 1
+    path: Assets/01.Scenes/Stage_1_3.unity
+    guid: 19997770635836044ab050870cdae588
+  - enabled: 1
+    path: Assets/01.Scenes/Stage_2_1.unity
+    guid: e9f1f5cbaf0867642b8dc1e2f85f6b48
+  - enabled: 1
+    path: Assets/01.Scenes/Stage_2_2.unity
+    guid: 4ad8e5a231015304b9b1bfaaa74baf81
+  - enabled: 1
+    path: Assets/01.Scenes/Stage_2_3.unity
+    guid: d684f034a623b8d4d93404f19996059e
+  - enabled: 1
+    path: Assets/01.Scenes/Stage_3_1.unity
+    guid: 6b9c24a067fd78a43b913489ec9a99ec
+  - enabled: 1
+    path: Assets/01.Scenes/Stage_3_2.unity
+    guid: 9ac6a077f71a0f44ea6d2f9942f6d055
+  - enabled: 1
+    path: Assets/01.Scenes/Stage_3_3.unity
+    guid: 2e7bbe3cf640e6b44a6cea30c4da36fb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

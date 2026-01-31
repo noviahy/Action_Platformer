@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StageProgressManager : MonoBehaviour
@@ -8,7 +9,6 @@ public class StageProgressManager : MonoBehaviour
 
     // 실제 게임 중에 쓰는 데이터
     private Dictionary<string, StageProgressData> stageDataDict;
-
     private void Awake()
     {
         Initialize();
@@ -56,6 +56,15 @@ public class StageProgressManager : MonoBehaviour
             stageDataDict[template.StageID] = data;
         }
     }
+    // 특정 월드 데이터 가져오기
+    public List<StageProgressData> GetWorldData(string worldID)
+    {
+        List<StageProgressData> stageList = stageDataDict.Values
+     .Where(stage => stage.StageID.Split('-')[0] == worldID)
+     .ToList();
+        return stageList;
+    }
+
 
     // 특정 스테이지 데이터 가져오기
     public StageProgressData GetStageData(string stageID)
@@ -64,11 +73,12 @@ public class StageProgressManager : MonoBehaviour
         return data;
     }
 
-    // 런타임 값 변경
-    public void SetCleared(string stageID, bool cleared)
+    // stageClear시 호출 (GameManager에서) 
+    public void SetCleared(string stageID, bool cleared, float time)
     {
         if (stageDataDict.TryGetValue(stageID, out var data))
         {
+            setBestTime(stageID, time);
             data.isCleared = cleared;
             string nextStage = getNextStageID(stageID);
             if (!string.IsNullOrEmpty(nextStage))
@@ -77,8 +87,23 @@ public class StageProgressManager : MonoBehaviour
             }
         }
     }
+    // CollectedCoin에서 호출
+    public void SetCollectedCoin(string stageID, bool collected)
+    {
+        if (stageDataDict.TryGetValue(stageID, out var data))
+        {
+            data.CollectedCoin = collected;
+        }
+    }
+    // 모든 스테이지 저장
+    public void SaveAll()
+    {
+        SaveLoadManager.Save(new List<StageProgressData>(stageDataDict.Values).ToArray());
+    }
 
-    public void SetBestTime(string stageID, float time)
+
+    // SetClear에서 호출
+    private void setBestTime(string stageID, float time)
     {
         if (stageDataDict.TryGetValue(stageID, out var data))
         {
@@ -88,20 +113,6 @@ public class StageProgressManager : MonoBehaviour
             }
         }
     }
-
-    public void SetCollectedCoin(string stageID, bool collected)
-    {
-        if (stageDataDict.TryGetValue(stageID, out var data))
-        {
-            data.CollectedCoin = collected;
-        }
-    }
-
-    // 모든 스테이지 저장
-    public void SaveAll()
-    {
-        SaveLoadManager.Save(new List<StageProgressData>(stageDataDict.Values).ToArray());
-    }
     private void SetOpened(string stageID, bool opened)
     {
         if (stageDataDict.TryGetValue(stageID, out var data))
@@ -109,7 +120,6 @@ public class StageProgressManager : MonoBehaviour
             data.isOpened = opened;
         }
     }
-
     private string getNextStageID(string currentStageID)
     {
         for (int i = 0; i < stageTemplates.Count - 1; i++)

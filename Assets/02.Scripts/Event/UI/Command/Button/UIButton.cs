@@ -15,15 +15,11 @@ public class UIButton : MonoBehaviour
     // 현재 Stage 설정
     public void OnClickWorld()
     {
-        if (worldID != null)
+        if (worldID != "")
         {
             uiManager.SetWorldNum(worldID);
         }
-        else
-        {
-            uiManager.SetWorldNum(uiManager.SelectedWorld);
-        } 
-        uiManager.ChangeState(stateType);
+        uiManager.ChangeState(stateType); 
     }
     // 현재 Stage 설정
     public void OnClickStage()

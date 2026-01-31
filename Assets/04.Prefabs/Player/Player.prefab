@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3610038624347660995}
   - component: {fileID: 4783264359240080172}
   - component: {fileID: 9102484762296752153}
+  - component: {fileID: 4415638201296363147}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -104,4 +105,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bce4b323cce2dcf4ebb0b90159697962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  gameManager: {fileID: 0}
+  playerTrigger: {fileID: 4415638201296363147}
+--- !u!114 &4415638201296363147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8419052663954355227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18334c57c40bfc24faaf021d1e65c529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerTrigger
+  gameManager: {fileID: 0}
   coinHPManager: {fileID: 0}

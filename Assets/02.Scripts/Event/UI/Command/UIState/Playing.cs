@@ -8,15 +8,16 @@ public class Playing : UIState
 {
     [SerializeField] private CanvasGroup playingUI;
     [SerializeField] private UIManager uiManager;
+    [SerializeField] private TMP_Text life;
+    [SerializeField] private TMP_Text coin;
     public override EStateType StateType => EStateType.Playing;
     public override void Enter()
     {
         EventManager.OnGameOverUI += () => uiManager.ChangeState(EStateType.GameOver);
         EventManager.OnGameClearUI += () => uiManager.ChangeState(EStateType.Clear);
-        uiManager.RequestEvent();
+        setVisible(true);
 
         StartCoroutine(timerText());
-        setVisible(true);
     }
     public override void Exit()
     {

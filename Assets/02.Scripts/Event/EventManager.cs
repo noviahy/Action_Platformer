@@ -7,11 +7,16 @@ public class EventManager : MonoBehaviour
     public static event Action OnGameOverUI;
     public static event Action OnGameClearUI;
     public static event Action<GameState> RequestGameState;
+    public static event Action<string> RequestStageID;
+    public static event Action<string> RequestStageUI;
 
-    public void RequestGameStart(string stageNum) // UIState(Playering에서 호출)
+    public void RequestGameStart(string stageID) // UIState(Playering에서 호출)
     {
         RequestGameState?.Invoke(GameManager.GameState.Loading); // (GameManager에서 구독)
+
+        RequestStageID?.Invoke(stageID); // GameManager, ChangeSceneManager에서 구독
     }
+
     public void RequestGamePause() // UIManager에서 호출
     {
         RequestGameState?.Invoke(GameManager.GameState.Pause);
@@ -28,5 +33,11 @@ public class EventManager : MonoBehaviour
     public void RequestIdle()
     {
         RequestGameState?.Invoke(GameManager.GameState.Idle);
+
+    }
+
+    public void RequestChangeScene()
+    {
+        RequestStageUI?.Invoke("UIScene");
     }
 }

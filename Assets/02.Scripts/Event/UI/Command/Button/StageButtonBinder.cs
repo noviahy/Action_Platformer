@@ -18,7 +18,6 @@ public class StageButtonBinder : MonoBehaviour
                 stageButton.SetInteractable(false);
                 continue;
             }
-
             stageButton.SetInteractable(data.isOpened);
         }
     }

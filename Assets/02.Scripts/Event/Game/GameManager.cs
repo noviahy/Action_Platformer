@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private EventManager eventManager;
+    [SerializeField] private StageProgressManager stageProgressManager;
+    [SerializeField] private TimeManager timeManager;
+    private string currentStageID;
 
     public GameState CurrentState { get; private set; }
     public enum GameState
@@ -33,11 +36,13 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Loading:
                 EventManager.RequestGameState += ChangeState;
+                EventManager.RequestStageID += RequestStageID;
                 StartCoroutine(waitForLoadingUI());
                 break;
 
             case GameState.Playing:
                 Time.timeScale = 1;
+                timeManager.StartTimer();
                 break;
 
             case GameState.Pause:
@@ -45,10 +50,13 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.GameOver:
+                timeManager.StopTimer();
                 break;
 
             case GameState.Clear:
                 eventManager.RequestClear();
+                timeManager.StopTimer();
+                requestSaveData();
                 break;
 
             default:
@@ -56,9 +64,23 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    public void RequestStageID(string stageID)
+    {
+        currentStageID = stageID;
+    }
+    public void SaveCollectionCoin()
+    {
+        stageProgressManager.SetCollectedCoin(currentStageID, true);
+    }
+
+    private void requestSaveData()
+    {
+        stageProgressManager.SetCleared(currentStageID, true, timeManager.Timer);
+    }
     IEnumerator waitForLoadingUI()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         ChangeState(GameState.Playing);
     }
 }
