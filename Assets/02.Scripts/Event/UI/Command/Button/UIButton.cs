@@ -7,6 +7,7 @@ public class UIButton : MonoBehaviour
     [SerializeField] private EStateType stateType;
     [SerializeField] private string worldID;
     [SerializeField] private string stageID;
+    [SerializeField] private StageWindow stageWindow;
     public void OnClick()
     {
         uiManager.ChangeState(stateType);
@@ -14,7 +15,6 @@ public class UIButton : MonoBehaviour
     // 현재 Stage 설정
     public void OnClickWorld()
     {
-        uiManager.ChangeState(stateType);
         if (worldID != null)
         {
             uiManager.SetWorldNum(worldID);
@@ -22,12 +22,14 @@ public class UIButton : MonoBehaviour
         else
         {
             uiManager.SetWorldNum(uiManager.SelectedWorld);
-        }
+        } 
+        uiManager.ChangeState(stateType);
     }
     // 현재 Stage 설정
     public void OnClickStage()
     {
         uiManager.SetStageNum(stageID);
+        stageWindow.SetWindowData();
     }
     // 뒤로가기
     public void OnClickBack()

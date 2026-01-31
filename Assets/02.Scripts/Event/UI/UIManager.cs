@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Linq;
 
 public class UIManager : MonoBehaviour
 {
@@ -109,5 +109,12 @@ public class UIManager : MonoBehaviour
     public StageProgressData RequestStageData()
     {
         return stageData.GetStageData($"{SelectedWorld}-{SelectedStage}");
+    }
+    public List<StageProgressData> ReQuestStageDataList()
+    {
+        List<StageProgressData> allStages = new List<StageProgressData>();
+
+        var stageList = allStages.Where(stage => stage.StageID.StartsWith($"{SelectedWorld}")).ToList();
+        return stageList;
     }
 }

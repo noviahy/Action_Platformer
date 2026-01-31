@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 78474680}
   - component: {fileID: 78474679}
   m_Layer: 5
-  m_Name: Life_Image
+  m_Name: Coin_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1152,6 +1152,7 @@ GameObject:
   - component: {fileID: 220987044}
   - component: {fileID: 220987045}
   - component: {fileID: 220987046}
+  - component: {fileID: 220987047}
   m_Layer: 0
   m_Name: UISystem
   m_TagString: Untagged
@@ -1187,6 +1188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   eventManager: {fileID: 1814415547}
+  stageData: {fileID: 0}
   commandContainer: {fileID: 220987045}
   stageButtonBinder: {fileID: 220987046}
 --- !u!114 &220987045
@@ -1238,6 +1240,30 @@ MonoBehaviour:
   - {fileID: 464979666}
   - {fileID: 1761587331}
   uiManager: {fileID: 220987044}
+--- !u!114 &220987047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220987042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f1587f8b69d2124c8dbbee3f130d739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageWindow
+  uiManager: {fileID: 220987044}
+  coinHPCalculator: {fileID: 425750939}
+  stage1: {fileID: 249444742}
+  stage2: {fileID: 1050155057}
+  stage3: {fileID: 863369263}
+  selectedStage: {fileID: 1962625437}
+  bestTime: {fileID: 1974912052}
+  life: {fileID: 1196329668}
+  coin: {fileID: 1833485638}
+  lifeImage: {fileID: 1932269306}
+  coinImage: {fileID: 78474679}
+  collectionCoin: {fileID: 934727506}
 --- !u!1 &238905825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,7 +1458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Action Platformer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1799,6 +1825,7 @@ MonoBehaviour:
   stateType: 3
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &306403676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,6 +2033,7 @@ MonoBehaviour:
   stateType: 0
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &350629890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,6 +2080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Stage
   uiManager: {fileID: 220987044}
   stageUI: {fileID: 193724521}
+  stageWindow: {fileID: 0}
 --- !u!1 &354253857
 GameObject:
   m_ObjectHideFlags: 0
@@ -2331,7 +2360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54458ca41e82bd14d94944263ce2673c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
-  stageManager: {fileID: 1814415549}
+  stageManager: {fileID: 0}
   playerManager: {fileID: 1273780394}
   monsterManager: {fileID: 1273780395}
   obstacleManager: {fileID: 1273780393}
@@ -2392,7 +2421,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
   eventManager: {fileID: 1814415547}
   gameManager: {fileID: 1273780396}
-  stageManager: {fileID: 1814415549}
   DefaultTimeLimit: 100
 --- !u!1 &425755466
 GameObject:
@@ -2855,6 +2883,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 2
+  stageWindow: {fileID: 0}
 --- !u!114 &464979666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3306,6 +3335,7 @@ MonoBehaviour:
   stateType: 0
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &512026444
 GameObject:
   m_ObjectHideFlags: 0
@@ -4007,6 +4037,7 @@ MonoBehaviour:
   stateType: 0
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &573586241
 GameObject:
   m_ObjectHideFlags: 0
@@ -5065,6 +5096,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 2
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &702792503
 GameObject:
   m_ObjectHideFlags: 0
@@ -5701,6 +5733,7 @@ MonoBehaviour:
   stateType: 1
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &790795267
 GameObject:
   m_ObjectHideFlags: 0
@@ -6187,6 +6220,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 3
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &833880964
 GameObject:
   m_ObjectHideFlags: 0
@@ -6844,7 +6878,7 @@ GameObject:
   - component: {fileID: 934727507}
   - component: {fileID: 934727506}
   m_Layer: 5
-  m_Name: CoinImage
+  m_Name: CollectionCoinImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7883,6 +7917,7 @@ MonoBehaviour:
   stateType: 3
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &1148682407
 GameObject:
   m_ObjectHideFlags: 0
@@ -8033,6 +8068,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &1168625073
 GameObject:
   m_ObjectHideFlags: 0
@@ -8183,6 +8219,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &1177821960
 GameObject:
   m_ObjectHideFlags: 0
@@ -8229,7 +8266,7 @@ GameObject:
   - component: {fileID: 1196329669}
   - component: {fileID: 1196329668}
   m_Layer: 5
-  m_Name: Coin_Text
+  m_Name: Life_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9417,6 +9454,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 1
+  stageWindow: {fileID: 0}
 --- !u!114 &1395705459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10067,6 +10105,7 @@ MonoBehaviour:
   stateType: 4
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &1455620224
 GameObject:
   m_ObjectHideFlags: 0
@@ -10677,6 +10716,7 @@ MonoBehaviour:
   stateType: 0
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &1570826322
 GameObject:
   m_ObjectHideFlags: 0
@@ -11101,6 +11141,7 @@ MonoBehaviour:
   stateType: 5
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &1671952808
 GameObject:
   m_ObjectHideFlags: 0
@@ -11424,6 +11465,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &1715600737
 GameObject:
   m_ObjectHideFlags: 0
@@ -11768,6 +11810,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 
   stageID: 3
+  stageWindow: {fileID: 0}
 --- !u!1 &1806691913
 GameObject:
   m_ObjectHideFlags: 0
@@ -11918,6 +11961,7 @@ MonoBehaviour:
   stateType: 6
   worldID: 
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1 &1813331313
 GameObject:
   m_ObjectHideFlags: 0
@@ -11986,7 +12030,6 @@ GameObject:
   - component: {fileID: 1814415547}
   - component: {fileID: 1814415546}
   - component: {fileID: 1814415545}
-  - component: {fileID: 1814415549}
   - component: {fileID: 1814415548}
   m_Layer: 0
   m_Name: RuntimeSystems
@@ -12068,28 +12111,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2efdf488787cf8b4c864ae0254979f60, type: 2}
   - {fileID: 11400000, guid: 81a447847f893a64e9c10169f5038a0b, type: 2}
   - {fileID: 11400000, guid: b053acbe301d1ee49aeee54da8b4722d, type: 2}
---- !u!114 &1814415549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814415542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279286b9dfca070409d6a3142e812cd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StageManager
-  allStageData:
-  - {fileID: 11400000, guid: 9add16cb0ba0a01449f388701b075196, type: 2}
-  - {fileID: 11400000, guid: 0b24ea0e5bf6cbe429063b70dd36bd03, type: 2}
-  - {fileID: 11400000, guid: 797c66c114b1d374cbcd263056d8a03a, type: 2}
-  - {fileID: 11400000, guid: a35f7b2b519c4d741a8a3c638a0433a6, type: 2}
-  - {fileID: 11400000, guid: 972fc7430e5e3e34695ee18c46d11ffd, type: 2}
-  - {fileID: 11400000, guid: e0fc0337d25549044a3a79b020993412, type: 2}
-  - {fileID: 11400000, guid: 84ef33323e3e70e4a804007355500bdf, type: 2}
-  - {fileID: 11400000, guid: a769c1c10a7be7f42bba862c61d87778, type: 2}
-  - {fileID: 11400000, guid: b56021e1b237a2e4f944cc3266269e11, type: 2}
 --- !u!1 &1833485636
 GameObject:
   m_ObjectHideFlags: 0
@@ -12102,7 +12123,7 @@ GameObject:
   - component: {fileID: 1833485639}
   - component: {fileID: 1833485638}
   m_Layer: 5
-  m_Name: Life_Text
+  m_Name: Coin_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12875,7 +12896,7 @@ GameObject:
   - component: {fileID: 1932269307}
   - component: {fileID: 1932269306}
   m_Layer: 5
-  m_Name: Coin_Image
+  m_Name: Life_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13554,7 +13575,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043211730}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -13891,6 +13912,7 @@ MonoBehaviour:
   stateType: 2
   worldID: 1
   stageID: 
+  stageWindow: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

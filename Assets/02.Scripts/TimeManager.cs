@@ -4,10 +4,10 @@ public class TimeManager : MonoBehaviour
 {
     [SerializeField] private EventManager eventManager;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private float DefaultTimeLimit; // Stage의 TimeLimit가 Null이면 DefaultTimerLimit 사용
+    [SerializeField] private float DefaultTimeLimit; 
     public float Timer { get; private set; }
     public float? LeftTime { get; private set; }
-    private void Update()
+    private void Update() // 언젠간 IEnumerable로 바꿀거에요
     {
         if (gameManager.CurrentState != GameManager.GameState.Playing) return;
 
