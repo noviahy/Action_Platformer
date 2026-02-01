@@ -26,7 +26,8 @@ public class TimeManager : MonoBehaviour
             eventManager.RequestGameOver();
             yield break;
         }
-        
+
+        Debug.Log(DefaultTimeLimit);
         Timer += Time.deltaTime;
         LeftTime = DefaultTimeLimit - Timer;
         

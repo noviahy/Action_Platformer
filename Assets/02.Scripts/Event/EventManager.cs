@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
     public static event Action OnGameOverUI;
     public static event Action OnGameClearUI;
     public static event Action RequestSaveData;
+    public static event Action RefreshPlayingData;
     public static event Action<GameState> RequestGameState;
     public static event Action<string> RequestStageID;
     public static event Action<string> RequestStageUI;
@@ -36,6 +37,11 @@ public class EventManager : MonoBehaviour
     {
         RequestGameState?.Invoke(GameManager.GameState.Idle);
         RequestSaveData?.Invoke(); // (취소 안 함)CoinHPManager에서 구독
+    }
+
+    public void RefreshPlayingUI() // CoinHPmanager에서 호출
+    {
+        RefreshPlayingData?.Invoke(); // PalyingUI에서 구독 (해제 안 함)
     }
 
     public void RequestChangeScene()

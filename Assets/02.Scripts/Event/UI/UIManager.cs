@@ -1,6 +1,7 @@
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,10 +18,7 @@ public class UIManager : MonoBehaviour
     public UIState previousState{ get; private set; }
     public string SelectedWorld { get; private set; }
     public string SelectedStage { get; private set; }
-    private void Start()
-    {
-        ChangeState(EStateType.MainMenu);
-    }
+
     public void ChangeState(EStateType nextState)
     {
         if (!commandContainer.commandDict.TryGetValue(nextState, out var next))
@@ -28,15 +26,21 @@ public class UIManager : MonoBehaviour
             Debug.LogError($"UIstate not found: {nextState}");
         }
 
-        if (currentState == null)
+        if (next.StateType == EStateType.StartUI)
+        {
+            currentState = next;
+            next.Exit();
+            return;
+        }
+        if(currentState.StateType == EStateType.StartUI)
         {
             currentState = next;
             currentState.Enter();
             return;
         }
-
+        
         if (currentState == next) return;
-
+        
         if (currentState.StateType == EStateType.Setting)
         {
             previousState = currentState;
@@ -51,6 +55,7 @@ public class UIManager : MonoBehaviour
         currentState = next;
         currentState.Enter();
     }
+
     public void GoBackState()
     {
         if (currentState.StateType == EStateType.Setting)

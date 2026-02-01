@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CoinHPData
   m_EditorClassIdentifier: Assembly-CSharp::CoinHPProgressData
   Coin: 0
-  HP: 0
+  HP: 3

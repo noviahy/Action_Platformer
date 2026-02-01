@@ -12,11 +12,14 @@ public class CoinHPManager : MonoBehaviour
     public void Awake()
     {
         EventManager.RequestSaveData += SaveCoinHP;
+        eventManager.RefreshPlayingUI();
     }
     public void ResetData() { calculator._ReStart(defaultHP); }
     public void AddCoin() 
     {
         calculator._AddCoin(coinAmount);
+        eventManager.RefreshPlayingUI();
+
         if (calculator.Coin >= needCoin)
         {
             ChangeCoinToHP();
@@ -26,6 +29,7 @@ public class CoinHPManager : MonoBehaviour
     public void Damage() 
     {
         calculator._Damage(dmg);
+        eventManager.RefreshPlayingUI();
 
         if (calculator.HP == 0)
         {
@@ -37,6 +41,7 @@ public class CoinHPManager : MonoBehaviour
     {
         calculator._SubCoin(needCoin);
         calculator._AddHP(1);
+        eventManager.RefreshPlayingUI();
     }
 
     public void SaveCoinHP()

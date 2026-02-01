@@ -37,11 +37,13 @@ public class GameManager : MonoBehaviour
             case GameState.Loading:
                 EventManager.RequestGameState += ChangeState;
                 EventManager.RequestStageID += RequestStageID;
+                Debug.Log("GameState: " + CurrentState.ToString());
                 StartCoroutine(waitForLoadingUI());
                 break;
 
             case GameState.Playing:
                 Time.timeScale = 1;
+
                 timeManager.StartTimer();
                 break;
 

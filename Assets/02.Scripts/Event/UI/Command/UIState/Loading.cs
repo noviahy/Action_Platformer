@@ -1,22 +1,25 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Loading : UIState
 {
     [SerializeField] private UIManager uiManager;
+    [SerializeField] private PlayingUI playingUIText;
     [SerializeField] private CanvasGroup loadingUI;
     [SerializeField] private CanvasGroup playingUI;
     [SerializeField] private TMP_Text stageID;
     [SerializeField] private TMP_Text HP;
+
     private float value = 1f;
     public override EStateType StateType => EStateType.Loading;
     public override bool IsMenuState => false;
     public override void Enter()
     {
         stageID.text = $"{uiManager.SelectedWorld}-{uiManager.SelectedStage}";
-        HP.text = $"{uiManager.RequestHP()}";
+        HP.text = $"X {uiManager.RequestHP()}";
 
+        playingUIText.StartPlayingUI();
         StartCoroutine(waitForLoadingUI());
         uiManager.RequestEvent();
         setVisible(true);
