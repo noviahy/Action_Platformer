@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private StageProgressManager stageData;
     [SerializeField] private CommandContainer commandContainer;
     [SerializeField] private StageButtonBinder stageButtonBinder;
+    [SerializeField] private CoinHPCalculator coinHPCalculator;
     private Stack<UIState> goBackStack = new Stack<UIState>();
     private UIState currentState;
     public UIState previousState{ get; private set; }
@@ -93,6 +94,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // 데이터 관련
     public void RefreshStageBT()
     {
         stageButtonBinder.Refresh();
@@ -113,8 +115,16 @@ public class UIManager : MonoBehaviour
     {
         return stageData.GetStageData($"{SelectedWorld}-{SelectedStage}");
     }
-    public List<StageProgressData> ReQuestStageDataList()
+    public List<StageProgressData> RequestStageDataList()
     {
         return stageData.GetWorldData(SelectedWorld);
+    }
+    public int RequestCoin()
+    {
+        return coinHPCalculator.Coin;
+    }
+    public int RequestHP()
+    {
+        return coinHPCalculator.HP;
     }
 }

@@ -10,5 +10,6 @@ public enum EStateType
     Pause,
     Setting,
     GameOver,
-    Clear
+    Clear,
+    StartUI
 }

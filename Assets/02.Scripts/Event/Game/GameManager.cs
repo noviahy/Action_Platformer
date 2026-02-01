@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
             case GameState.Clear:
                 eventManager.RequestClear();
                 timeManager.StopTimer();
-                requestSaveData();
+                RequestSaveData();
                 break;
 
             default:
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         stageProgressManager.SetCollectedCoin(currentStageID, true);
     }
 
-    private void requestSaveData()
+    private void RequestSaveData()
     {
         stageProgressManager.SetCleared(currentStageID, true, timeManager.Timer);
     }

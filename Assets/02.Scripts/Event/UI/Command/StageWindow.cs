@@ -6,7 +6,6 @@ using System.Xml.Schema;
 public class StageWindow : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
-    [SerializeField] private CoinHPCalculator coinHPCalculator;
     [SerializeField] private Button startButton;
     [SerializeField] private TMP_Text stage1;
     [SerializeField] private TMP_Text stage2;
@@ -23,8 +22,8 @@ public class StageWindow : MonoBehaviour
         stage1.text = uiManager.SelectedWorld + "-1";
         stage2.text = uiManager.SelectedWorld + "-2";
         stage3.text = uiManager.SelectedWorld + "-3";
-        life.text = $"X {coinHPCalculator.HP}";
-        coin.text = $"X {coinHPCalculator.Coin}";
+        life.text = $"X {uiManager.RequestHP()}";
+        coin.text = $"X {uiManager.RequestCoin()}";
 
         if (uiManager.previousState.StateType == EStateType.Pause)
         {
@@ -33,7 +32,7 @@ public class StageWindow : MonoBehaviour
             return;
         }
 
-        List<StageProgressData> stageList = uiManager.ReQuestStageDataList();
+        List<StageProgressData> stageList = uiManager.RequestStageDataList();
 
         for (int i = stageList.Count - 1; i > 0; i--)
         {

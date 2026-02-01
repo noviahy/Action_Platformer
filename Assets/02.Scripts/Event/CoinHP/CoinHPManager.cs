@@ -9,6 +9,10 @@ public class CoinHPManager : MonoBehaviour
     [SerializeField] private int coinAmount;
     [SerializeField] private int dmg;
     // GameManager에서만 호출되는 코드
+    public void Awake()
+    {
+        EventManager.RequestSaveData += SaveCoinHP;
+    }
     public void ResetData() { calculator._ReStart(defaultHP); }
     public void AddCoin() 
     {
@@ -33,5 +37,10 @@ public class CoinHPManager : MonoBehaviour
     {
         calculator._SubCoin(needCoin);
         calculator._AddHP(1);
+    }
+
+    public void SaveCoinHP()
+    {
+        calculator.saveCoinHPData();
     }
 }

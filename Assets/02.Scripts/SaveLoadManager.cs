@@ -4,6 +4,7 @@ using UnityEngine;
 public static class SaveLoadManager
 {
     private static string path => Application.persistentDataPath + "/stageProgress.json";
+    private static string coinHpPath => Application.persistentDataPath + "/coinhp.json";
 
     [System.Serializable]
     private class StageProgressListWrapper
@@ -65,7 +66,25 @@ public static class SaveLoadManager
 
         return runtimeData;
     }
+
+    // ================= Coin / HP =================
+
+    public static void SaveCoinHP(CoinHPSaveData data)
+    {
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(coinHpPath, json);
+    }
+
+    public static CoinHPSaveData LoadCoinHP()
+    {
+        if (!File.Exists(coinHpPath))
+            return null;
+
+        string json = File.ReadAllText(coinHpPath);
+        return JsonUtility.FromJson<CoinHPSaveData>(json);
+    }
 }
+
 // JSON으로 저장하기 위한 순수 C# 데이터 묶음
 [System.Serializable]
 public class StageProgressSaveData
@@ -75,4 +94,12 @@ public class StageProgressSaveData
     public bool isOpened;
     public float BestTime;
     public bool CollectedCoin;
+}
+
+// Coin / HP 저장용 SaveData
+[System.Serializable]
+public class CoinHPSaveData
+{
+    public int Coin;
+    public int HP;
 }

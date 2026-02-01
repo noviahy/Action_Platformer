@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Loading : UIState
@@ -6,12 +7,16 @@ public class Loading : UIState
     [SerializeField] private UIManager uiManager;
     [SerializeField] private CanvasGroup loadingUI;
     [SerializeField] private CanvasGroup playingUI;
+    [SerializeField] private TMP_Text stageID;
+    [SerializeField] private TMP_Text HP;
     private float value = 1f;
     public override EStateType StateType => EStateType.Loading;
     public override bool IsMenuState => false;
     public override void Enter()
     {
-        // 씬 변경 코드 추가해야함
+        stageID.text = $"{uiManager.SelectedWorld}-{uiManager.SelectedStage}";
+        HP.text = $"{uiManager.RequestHP()}";
+
         StartCoroutine(waitForLoadingUI());
         uiManager.RequestEvent();
         setVisible(true);
