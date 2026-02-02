@@ -8,19 +8,24 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private float DefaultTimeLimit;
     public float Timer { get; private set; }
     public float LeftTime { get; private set; }
-
-    private void Start()
-    {
-        LeftTime = DefaultTimeLimit;
-    }
+    private Coroutine timerCoroutine;
     public void StartTimer()
     {
-        LeftTime = DefaultTimeLimit;
-        StartCoroutine(TimerStart());
+        if (timerCoroutine == null)
+            timerCoroutine = StartCoroutine(TimerStart());
     }
     public void StopTimer()
     {
-        StopCoroutine(TimerStart());
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);
+            timerCoroutine = null;
+        }
+    }
+
+    public void setDefaultTImer()
+    {
+        Timer = 0;
         LeftTime = DefaultTimeLimit;
     }
 
@@ -35,10 +40,11 @@ public class TimeManager : MonoBehaviour
                 LeftTime = DefaultTimeLimit;
                 yield break;
             }
-
-            Timer += Time.deltaTime;
-            LeftTime = DefaultTimeLimit - Timer;
-
+            if (Time.timeScale == 1)
+            {
+                Timer += Time.deltaTime;
+                LeftTime = DefaultTimeLimit - Timer;
+            }
             yield return null;
         }
     }

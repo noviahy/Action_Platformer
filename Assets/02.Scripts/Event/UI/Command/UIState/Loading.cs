@@ -19,12 +19,11 @@ public class Loading : UIState
         stageID.text = $"{uiManager.SelectedWorld}-{uiManager.SelectedStage}";
         HP.text = $"X {uiManager.RequestHP()}";
 
+        uiManager.RequestEvent();
         playingUIText.StartPlayingUI();
         StartCoroutine(waitForLoadingUI());
-        uiManager.RequestEvent();
         setVisible(true);
     }
-    // ¾È ¾¸
     public override void Exit() { }
     private void setVisible(bool value)
     {
@@ -32,7 +31,7 @@ public class Loading : UIState
     }
 
     IEnumerator waitForLoadingUI()
-    {    
+    {
         loadingUI.alpha = 1f;
         float elapsed = 0f;
         yield return new WaitForSeconds(2f);
@@ -44,7 +43,6 @@ public class Loading : UIState
         }
 
         loadingUI.alpha = 0f;
-
         uiManager.ChangeState(EStateType.Playing);
     }
 }

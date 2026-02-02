@@ -14,10 +14,14 @@ public class EventManager : MonoBehaviour
     public static event Action<string> RequestStageUI;
 
 
-    public void RequestGameStart(string stageID) // UIState(Playering에서 호출)
+    public void RequestGameLoading(string stageID) // UIState(Playering에서 호출)
     {
         RequestGameState?.Invoke(GameManager.GameState.Loading); // (GameManager에서 구독)
         RequestStageID?.Invoke(stageID); // GameManager, ChangeSceneManager에서 구독
+    }
+    public void RequestGameRestart()
+    {
+        RequestGameState?.Invoke(GameManager.GameState.Playing);
     }
 
     public void RequestGamePause() // UIManager에서 호출

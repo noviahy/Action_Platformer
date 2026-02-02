@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private StageProgressManager stageProgressManager;
     [SerializeField] private TimeManager timeManager;
     private string currentStageID;
+    private bool onTimer = false;
 
     public GameState CurrentState { get; private set; }
     public enum GameState
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
         switch (next)
         {
             case GameState.Idle:
+                timeManager.StopTimer();
+                Time.timeScale = 1;
                 break;
             case GameState.Loading:
                 StartCoroutine(waitForLoadingUI());
@@ -41,7 +44,11 @@ public class GameManager : MonoBehaviour
 
             case GameState.Playing:
                 Time.timeScale = 1;
-                timeManager.StartTimer();
+                if (!onTimer)
+                {
+                    timeManager.StartTimer();
+                    onTimer = true;
+                }
                 break;
 
             case GameState.Pause:
@@ -79,6 +86,8 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator waitForLoadingUI()
     {
+        onTimer = false;
+        timeManager.setDefaultTImer();
         yield return new WaitForSeconds(3f);
         ChangeState(GameState.Playing);
     }

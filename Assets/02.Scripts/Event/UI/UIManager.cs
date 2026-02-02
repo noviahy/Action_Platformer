@@ -57,7 +57,6 @@ public class UIManager : MonoBehaviour
 
         previousState = prev;
         currentState = next;
-        Debug.Log(currentState.StateType);
         currentState.Enter();
     }
 
@@ -87,7 +86,7 @@ public class UIManager : MonoBehaviour
         {
             case EStateType.Loading:
                 eventManager.RefreshPlayingUI();
-                eventManager.RequestGameStart($"{SelectedWorld}-{SelectedStage}");
+                eventManager.RequestGameLoading($"{SelectedWorld}-{SelectedStage}");
                 break;
 
             case EStateType.Pause:
