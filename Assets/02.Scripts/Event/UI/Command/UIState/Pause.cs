@@ -7,7 +7,7 @@ public class Pause : UIState
     public override EStateType StateType => EStateType.Pause;
     public override void Enter()
     {
-        uiManager.RequestEvent();
+        uiManager.RequestEvent(); // GameState.Pause
         setVisible(true);
     }
     public override void Exit()

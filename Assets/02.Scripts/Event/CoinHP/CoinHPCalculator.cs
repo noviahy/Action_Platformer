@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// CoinHPManager
 public class CoinHPCalculator : MonoBehaviour
 {
     [SerializeField] private CoinHPProgressManager coinHPProgressManager;
@@ -8,10 +9,11 @@ public class CoinHPCalculator : MonoBehaviour
 
     private void Start()
     {
-        HP = coinHPProgressManager.HP;
+        // get Data from CoinHPProgressManager
+        HP = coinHPProgressManager.HP; 
         Coin = coinHPProgressManager.Coin;
     }
-    public void saveCoinHPData()
+    public void SetCoinHPData() // Set CoinHP data in CoinHPProgressManager
     {
         coinHPProgressManager.SetCoin(Coin);
         coinHPProgressManager.SetHP(HP);
@@ -23,4 +25,3 @@ public class CoinHPCalculator : MonoBehaviour
     public void _Damage(int dmg) {  HP -= dmg; }
     public void _ReStart(int defaultHP) { HP += defaultHP; }
 }
-// CoinHPManager에서만 호출

@@ -15,10 +15,13 @@ public class GameOver : UIState
     }
     public override void Exit()
     {
-        uiManager.RequestEvent();
+        uiManager.RequestEvent(); // GameState.Idle
+
+        // Release event
         EventManager.OnGameOverUI -= () => uiManager.ChangeState(EStateType.GameOver);
         EventManager.OnGameClearUI -= () => uiManager.ChangeState(EStateType.Clear);
         EventManager.GetReason -= gameOverReason;
+
         setVisible(false);
     }
 
@@ -29,6 +32,7 @@ public class GameOver : UIState
         gameOverUI.blocksRaycasts = value;
     }
 
+    // Get the reason from where the event was invoked (TimeManager, CoinHPManager)
     private void gameOverReason(string reason)
     {
         reasonText.text = reason;

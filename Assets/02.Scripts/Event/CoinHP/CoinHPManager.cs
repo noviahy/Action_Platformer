@@ -11,7 +11,7 @@ public class CoinHPManager : MonoBehaviour
     // GameManager에서만 호출되는 코드
     public void Awake()
     {
-        EventManager.RequestSaveData += SaveCoinHP;
+        EventManager.RequestSaveData += SetCoinHP;
         eventManager.RefreshPlayingUI();
     }
     public void ResetData() { calculator._ReStart(defaultHP); }
@@ -45,8 +45,8 @@ public class CoinHPManager : MonoBehaviour
         eventManager.RefreshPlayingUI();
     }
 
-    public void SaveCoinHP()
+    public void SetCoinHP()
     {
-        calculator.saveCoinHPData();
+        calculator.SetCoinHPData();
     }
 }

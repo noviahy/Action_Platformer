@@ -23,30 +23,29 @@ public class CoinHPProgressManager : MonoBehaviour
         }
         else
         {
-            coin = coinHPTemplates.Coin;
+            // Get data from SaveLoadManager
+            coin = coinHPTemplates.Coin; 
             hp = coinHPTemplates.HP;
         }
     }
 
-    // ===== 조회 =====
+    // ===== CoinHPCalculator =====
     public int Coin => coin;
     public int HP => hp;
 
-    // ===== 외부에서 값 변경 =====
-    public void SetCoin(int value)
+    // ===== Values modified externally =====
+    public void SetCoin(int value) // CoinHPManager
     {
         coin = value;
     }
-
-    public void SetHP(int value)
+    public void SetHP(int value) // CoinHPManager
     {
         hp = value;
     }
 
-    // ===== 저장 =====
-    public void Save()
+    public void Save() // GameManager
     {
-        SaveLoadManager.SaveCoinHP(new CoinHPSaveData
+        SaveLoadManager.SaveCoinHP(new CoinHPSaveData // Save CoinHPData on Computer
         {
             Coin = coin,
             HP = hp

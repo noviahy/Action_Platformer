@@ -11,7 +11,7 @@ public class MainMenu : UIState
     [SerializeField] private CanvasGroup buttons;
     private float value = 0.5f;
     public override EStateType StateType => EStateType.MainMenu;
-    public override bool IsMenuState => true;
+    public override bool IsMenuState => true; // Stack
     public override void Enter()
     {
         setVisible(mainMenuUI, true);
@@ -30,7 +30,7 @@ public class MainMenu : UIState
         group.interactable = value;
         group.blocksRaycasts = value;
     }
-    IEnumerator waitForButtons()
+    IEnumerator waitForButtons() // button Fade - In
     {
         float elapsed = 0f;
         while (elapsed < value)

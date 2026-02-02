@@ -13,29 +13,32 @@ public class Loading : UIState
 
     private float value = 1f;
     public override EStateType StateType => EStateType.Loading;
-    public override bool IsMenuState => false;
+    public override bool IsMenuState => false; // defalut Could be removed, but left as is
     public override void Enter()
     {
-        stageID.text = $"{uiManager.SelectedWorld}-{uiManager.SelectedStage}";
+        // Loading Text
+        stageID.text = $"{uiManager.SelectedWorld}-{uiManager.SelectedStage}"; 
         HP.text = $"X {uiManager.RequestHP()}";
 
-        uiManager.RequestEvent();
-        playingUIText.StartPlayingUI();
-        StartCoroutine(waitForLoadingUI());
+        uiManager.RequestEvent(); // GameState.Loading, give StageID to GameManager and ChangeSceneManager
+        playingUIText.StartPlayingUI(); // Start coroutine (Preload the PlayingUI)
+
+        StartCoroutine(waitForLoadingUI()); // Start Fade - OUt
         setVisible(true);
     }
     public override void Exit() { }
-    private void setVisible(bool value)
+    private void setVisible(bool value) // Just alpha 
     {
         playingUI.alpha = value ? 1f : 0f;
     }
 
-    IEnumerator waitForLoadingUI()
+    IEnumerator waitForLoadingUI() // Fade - Out
     {
         loadingUI.alpha = 1f;
         float elapsed = 0f;
-        yield return new WaitForSeconds(2f);
-        while (elapsed < value)
+        yield return new WaitForSeconds(2f); // Wait 2 seconds
+
+        while (elapsed < value) // start fade - out
         {
             elapsed += Time.deltaTime;
             loadingUI.alpha = Mathf.Lerp(1f, 0f, elapsed / value);
@@ -43,6 +46,6 @@ public class Loading : UIState
         }
 
         loadingUI.alpha = 0f;
-        uiManager.ChangeState(EStateType.Playing);
+        uiManager.ChangeState(EStateType.Playing); // UIState.Playing
     }
 }

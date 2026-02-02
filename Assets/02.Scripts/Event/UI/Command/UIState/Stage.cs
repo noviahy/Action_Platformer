@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Stage : UIState
 {
@@ -13,18 +12,18 @@ public class Stage : UIState
     private float value = 1;
     public override void Enter()
     {
-        if (uiManager.previousState.StateType != EStateType.World)
+        if (uiManager.previousState.StateType != EStateType.World) // When previous State is Pause, GameOver, Clear
         {
-            eventManager.RequestChangeScene();
+            eventManager.RequestChangeScene(); // Change scene to UIScene
         }
-        uiManager.RequestEvent();
-        uiManager.RefreshStageBT();
-        stageWindow.setDefaultWindowData();
+        uiManager.RequestEvent(); // GameState.Idle
+        uiManager.RefreshStageBT(); // StageButton isEnabled
+        stageWindow.setDefaultWindowData(); // Set StageUIWindow
 
         setVisible(stageUI, true);
         setVisible(buttons, false);
 
-        StartCoroutine(waitForStageButtons());
+        StartCoroutine(waitForStageButtons()); // Button fade - in
     }
     public override void Exit()
     {
@@ -37,7 +36,7 @@ public class Stage : UIState
         group.interactable = value;
         group.blocksRaycasts = value;
     }
-    IEnumerator waitForStageButtons()
+    IEnumerator waitForStageButtons() // Button Fade - In
     {
         float elapsed = 0f;
         while (elapsed < value)

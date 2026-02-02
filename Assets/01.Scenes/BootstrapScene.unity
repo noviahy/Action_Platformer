@@ -898,17 +898,15 @@ RectTransform:
   m_Children:
   - {fileID: 622142160}
   - {fileID: 1715600738}
-  - {fileID: 1395705454}
   - {fileID: 249444741}
-  - {fileID: 464979661}
   - {fileID: 1050155056}
-  - {fileID: 1761587327}
   - {fileID: 863369262}
   - {fileID: 1196329667}
   - {fileID: 1932269305}
   - {fileID: 1833485637}
   - {fileID: 78474678}
   - {fileID: 508974421}
+  - {fileID: 1954443104}
   m_Father: {fileID: 354253861}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2169,6 +2167,7 @@ MonoBehaviour:
   uiManager: {fileID: 220987044}
   eventManager: {fileID: 1814415547}
   stageUI: {fileID: 193724521}
+  buttons: {fileID: 1954443105}
   stageWindow: {fileID: 220987047}
 --- !u!1 &354253857
 GameObject:
@@ -2844,7 +2843,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 573586242}
-  m_Father: {fileID: 193724520}
+  m_Father: {fileID: 1954443104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8867,6 +8866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   eventManager: {fileID: 1814415547}
   stageProgressManager: {fileID: 1814415548}
+  coinHPProgressManager: {fileID: 425750941}
   timeManager: {fileID: 425750940}
 --- !u!1 &1276335178
 GameObject:
@@ -9366,7 +9366,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1886978321}
-  m_Father: {fileID: 193724520}
+  m_Father: {fileID: 1954443104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11996,7 +11996,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 512026445}
-  m_Father: {fileID: 193724520}
+  m_Father: {fileID: 1954443104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13552,6 +13552,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949111523}
   m_CullTransparentMesh: 1
+--- !u!1 &1954443103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1954443104}
+  - component: {fileID: 1954443105}
+  m_Layer: 5
+  m_Name: Buttons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1954443104
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954443103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1395705454}
+  - {fileID: 464979661}
+  - {fileID: 1761587327}
+  m_Father: {fileID: 193724520}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1954443105
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954443103}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1962625435
 GameObject:
   m_ObjectHideFlags: 0

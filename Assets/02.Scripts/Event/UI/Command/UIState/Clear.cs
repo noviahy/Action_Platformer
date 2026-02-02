@@ -9,15 +9,17 @@ public class Clear : UIState
     public override EStateType StateType => EStateType.Clear;
     public override void Enter()
     {
-        stageProgressManager.SetCleared($"{uiManager.SelectedWorld}-{uiManager.SelectedStage}", true, timeManager.Timer);
         setVisible(true);
     }
     public override void Exit()
     {
-        uiManager.RequestEvent();
-        uiManager.RefreshStageBT();
+        uiManager.RequestEvent(); // GameState.Idle
+        uiManager.RefreshStageBT();  // StageButton isEnabled
+                                     
+        // Release event
         EventManager.OnGameOverUI -= () => uiManager.ChangeState(EStateType.GameOver);
         EventManager.OnGameClearUI -= () => uiManager.ChangeState(EStateType.Clear);
+
         setVisible(false);
     }
 

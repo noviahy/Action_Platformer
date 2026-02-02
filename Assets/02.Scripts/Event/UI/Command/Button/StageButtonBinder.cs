@@ -1,24 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Stage Button active
+// UIManager
 public class StageButtonBinder : MonoBehaviour
 {
-    [SerializeField] private StageProgressManager progressManager;
     [SerializeField] private List<StageButton> stageButtons;
     [SerializeField] private UIManager uiManager;
+    private int number;
 
-    public void Refresh()
+    public void Refresh() // UIManager
     {
+        List<StageProgressData> worldData = uiManager.RequestStageDataList(); 
+        number = 0;
         foreach (var stageButton in stageButtons)
         {
-            var data = progressManager.GetStageData(uiManager.SelectedWorld + "-" + stageButton.StageID);
-
-            if (data == null)
-            {
-                stageButton.SetInteractable(false);
-                continue;
-            }
-            stageButton.SetInteractable(data.isOpened);
+            stageButton.SetInteractable(worldData[number].isOpened);
+            number++;
         }
     }
 }

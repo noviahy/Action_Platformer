@@ -1,6 +1,9 @@
 using System.IO;
 using UnityEngine;
 
+
+// Used in StageProgressManager and CoinHPProgressManager
+// change Data to json
 public static class SaveLoadManager
 {
     private static string path => Application.persistentDataPath + "/stageProgress.json";

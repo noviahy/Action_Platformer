@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// ChangeSceneManager
 public static class StageSceneTable
 {
     private static readonly Dictionary<string, string> stageToScene = new Dictionary<string, string>
@@ -17,7 +18,7 @@ public static class StageSceneTable
         {"3-3", "Stage_3_3"}
     };
 
-    public static string GetSceneName(string stageID)
+    public static string GetSceneName(string stageID) // ChangeSceneManager
     {
         if(!stageToScene.TryGetValue(stageID, out var scene))
         {

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Connect UIState Class + UIStateType
+// Used in UIManager to find Class using EStateType (Dictionary)
 public class CommandContainer : MonoBehaviour
 {
     [SerializeField] private List<StatePair> states;

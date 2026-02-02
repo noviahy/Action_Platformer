@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// UIManager, GameManager, CoinHPManager
+// Send Data to SaveLoadManager
 public class StageProgressManager : MonoBehaviour
 {
     // 기본값 템플릿
@@ -56,25 +58,23 @@ public class StageProgressManager : MonoBehaviour
             stageDataDict[template.StageID] = data;
         }
     }
-    // 특정 월드 데이터 가져오기
-    public List<StageProgressData> GetWorldData(string worldID)
+    // Return World Data
+    public List<StageProgressData> GetWorldData(string worldID) // UIManager
     {
         List<StageProgressData> stageList = stageDataDict.Values
      .Where(stage => stage.StageID.Split('-')[0] == worldID)
      .ToList();
         return stageList;
     }
-
-
-    // 특정 스테이지 데이터 가져오기
-    public StageProgressData GetStageData(string stageID)
+    // Return Stage Data
+    public StageProgressData GetStageData(string stageID) // UIManager
     {
         stageDataDict.TryGetValue(stageID, out var data);
         return data;
     }
 
-    // stageClear시 호출 (GameManager에서) 
-    public void SetCleared(string stageID, bool cleared, float time)
+    // Set Stage Data and open next stage
+    public void SetCleared(string stageID, bool cleared, float time) // GameManager (GameState.Clear)
     {
         if (stageDataDict.TryGetValue(stageID, out var data))
         {
@@ -87,24 +87,21 @@ public class StageProgressManager : MonoBehaviour
             }
         }
     }
-    // CollectedCoin에서 호출
-    public void SetCollectedCoin(string stageID, bool collected)
+    // when get CollectionCoin
+    public void SetCollectedCoin(string stageID, bool collected) // CollectedCoin
     {
         if (stageDataDict.TryGetValue(stageID, out var data))
         {
             data.CollectedCoin = collected;
         }
     }
-    // 모든 스테이지 저장
-    public void SaveAll()
+    // Save All Stage Data
+    public void SaveAll() // GameManager (GameState.Clear)
     {
         SaveLoadManager.Save(new List<StageProgressData>(stageDataDict.Values).ToArray());
     }
 
-
-
-
-    // SetClear에서 호출
+    // private
     private void setBestTime(string stageID, float time)
     {
         if (stageDataDict.TryGetValue(stageID, out var data))

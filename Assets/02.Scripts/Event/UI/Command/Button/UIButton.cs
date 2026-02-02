@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// 모든 Button에 직접 넣기
+// All Button Code
 public class UIButton : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
@@ -8,32 +8,30 @@ public class UIButton : MonoBehaviour
     [SerializeField] private string worldID;
     [SerializeField] private string stageID;
     [SerializeField] private StageWindow stageWindow;
-    public void OnClick()
+    public void OnClick() // Default Button Event
     {
         uiManager.ChangeState(stateType);
     }
-    // 현재 Stage 설정
-    public void OnClickWorld()
+    public void OnClickWorld() // World Button
     {
-        if (worldID != "")
+        // used this code to go Pause -> World, But changeed it to OnClick()
+        if (worldID != "") // Use String (Doesn't use)
         {
-            uiManager.SetWorldNum(worldID);
+            uiManager.SetWorldNum(worldID); // Change worldID in UIManager
         }
         uiManager.ChangeState(stateType); 
     }
-    // 현재 Stage 설정
-    public void OnClickStage()
+    public void OnClickStage() // StageButton (Doesn't Change State)
     {
-        uiManager.SetStageNum(stageID);
-        stageWindow.SetWindowData();
+        uiManager.SetStageNum(stageID); // Save StageID in UIManager
+        stageWindow.SetWindowData(); // Change StageWindow
     }
-    // 뒤로가기
-    public void OnClickBack()
+    public void OnClickBack() // Back Button
     {
-        uiManager.GoBackState();
+        uiManager.GoBackState(); 
     }
 
-    public void OnClickExit()
+    public void OnClickExit() // Quit Game Button
     {
         Application.Quit();
     }

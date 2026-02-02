@@ -2,7 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Xml.Schema;
+
+// UIState.Stage, StageButton
 public class StageWindow : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
@@ -17,7 +18,8 @@ public class StageWindow : MonoBehaviour
     [SerializeField] private Image lifeImage;
     [SerializeField] private Image coinImage;
     [SerializeField] private Image collectionCoin;
-    public void setDefaultWindowData()
+
+    public void setDefaultWindowData() // UIState.Stage
     {
         stage1.text = uiManager.SelectedWorld + "-1";
         stage2.text = uiManager.SelectedWorld + "-2";
@@ -25,20 +27,20 @@ public class StageWindow : MonoBehaviour
         life.text = $"X {uiManager.RequestHP()}";
         coin.text = $"X {uiManager.RequestCoin()}";
 
-        if (uiManager.previousState.StateType == EStateType.Pause)
+        if (uiManager.previousState.StateType == EStateType.Pause) // Already have a seleted stage
         {
             SetWindowData();
             return;
         }
 
-        List<StageProgressData> stageList = uiManager.RequestStageDataList();
+        List<StageProgressData> stageList = uiManager.RequestStageDataList(); // Get WorldData List from UIManager
 
-        for (int i = stageList.Count - 1; i > 0; i--)
+        for (int i = stageList.Count - 1; i > 0; i--) // Outputs the highest unlocked stage
         {
             if (stageList[i].isOpened)
             {
-                string[] parts = stageList[i].StageID.Split('-');
-                uiManager.SetStageNum(parts[1]);
+                string[] parts = stageList[i].StageID.Split('-'); // abandon world ID
+                uiManager.SetStageNum(parts[1]); // Get stage ID
                 SetWindowData();
                 return;
             }
@@ -47,13 +49,14 @@ public class StageWindow : MonoBehaviour
         uiManager.SetStageNum("1");
         SetWindowData();
     }
-    public void SetWindowData()
-    {
+    public void SetWindowData() // UIButton (When World Button Clicked)
+    { 
+        // Get stage data form UIManager (using UIManager's SelectedWorld SelectedStage)
         StageProgressData stageData = uiManager.RequestStageData();
 
-        selectedStage.text = uiManager.SelectedWorld + "-" + uiManager.SelectedStage;
+        selectedStage.text = stageData.StageID; // Set stageWindow StageID
 
-        float totalSeconds = stageData.BestTime;
+        float totalSeconds = stageData.BestTime; 
 
         int minutes = (int)(totalSeconds / 60);
         int seconds = (int)(totalSeconds % 60);
@@ -61,8 +64,8 @@ public class StageWindow : MonoBehaviour
 
         bestTime.text = $"{minutes:00}:{seconds:00}:{milliseconds:00}";
 
-        // startButton 활성화 여부
-        startButton.interactable = stageData.isOpened;
+        
+        startButton.interactable = stageData.isOpened; // Decide startButton activate
 
     }
 }

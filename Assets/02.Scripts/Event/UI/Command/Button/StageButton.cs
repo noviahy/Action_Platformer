@@ -1,18 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// StageButtonBinder
 public class StageButton : MonoBehaviour
 {
-    // 여기서 설정해 주는 stageID는 GameState와 선택에 영향 없음
-    // 활성화 비활성화 + Stage Text에만 사용하는 ID
+    // The stageID set here does not affect the GameState or selection
+    // This ID is used only for enabling/disabling and stage text
     [SerializeField] private string stageID;
     [SerializeField] private Button button;
 
-    // private를 public같이 사용
+    // private -> public
     public string StageID => stageID;
 
-    public void SetInteractable(bool value)
+    public void SetInteractable(bool value) // StageButtonBinder
     {
-        button.interactable = value;
+        button.interactable = value;  // StageButton interactable
     }
 }

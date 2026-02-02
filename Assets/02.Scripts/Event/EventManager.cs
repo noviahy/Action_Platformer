@@ -24,28 +24,28 @@ public class EventManager : MonoBehaviour
         RequestGameState?.Invoke(GameManager.GameState.Playing);
     }
 
-    public void RequestGamePause() // UIManager에서 호출
+    public void RequestGamePause() // UIManager
     {
         RequestGameState?.Invoke(GameManager.GameState.Pause);
     }
-    public void RequestGameOver(string reason) // TimeManager + CoinHPManager에서 호출
+    public void RequestGameOver(string reason) // Called from TimeManager + CoinHPManager
     {
-        OnGameOverUI?.Invoke(); //  UIState(Clear, GameOver에서 구독/취소)
+        OnGameOverUI?.Invoke(); //  UIState(Clear, GameOver)
         RequestGameState?.Invoke(GameManager.GameState.GameOver);
-        GetReason?.Invoke(reason);
+        GetReason?.Invoke(reason); // GameOver.Enter()
     }
-    public void RequestClear() // GameManger에서 호출
+    public void RequestClear() // GameManager (GameState.Clear)
     {
-        OnGameClearUI?.Invoke(); // UIState(Clear, GameOver에서 구독/취소)
+        OnGameClearUI?.Invoke(); // UIState(Clear, GameOver)
     }
-    public void RequestIdle()
+    public void RequestIdle() // Stage.Enter() , GameOver(Clear).Exit() -> Prevent data loss
     {
         RequestGameState?.Invoke(GameManager.GameState.Idle);
 
     }
-    public void RequestSaveDatas()
+    public void RequestSetCoinHPDatas() // GameManager (GameState.Clear && Idle)
     {
-        RequestSaveData?.Invoke(); // (취소 안 함)CoinHPManager에서 구독
+        RequestSaveData?.Invoke(); // CoinHPManager
     }
 
     public void RefreshPlayingUI() // CoinHPmanager에서 호출
@@ -53,8 +53,8 @@ public class EventManager : MonoBehaviour
         RefreshPlayingData?.Invoke(); // PalyingUI에서 구독 (해제 안 함)
     }
 
-    public void RequestChangeScene()
+    public void RequestChangeScene() // UIState.Stage,StartUI
     {
-        RequestStageUI?.Invoke("UIScene");
+        RequestStageUI?.Invoke("UIScene"); // StageSceneManager
     }
 }
