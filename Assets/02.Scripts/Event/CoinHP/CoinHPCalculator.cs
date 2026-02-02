@@ -6,7 +6,7 @@ public class CoinHPCalculator : MonoBehaviour
     public int HP { get; private set; }
     public int Coin { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
         HP = coinHPProgressManager.HP;
         Coin = coinHPProgressManager.Coin;

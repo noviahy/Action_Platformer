@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour
         GameOver,
         Clear
     }
-    private void Awake()
+    private void Start()
     {
         ChangeState(GameState.Idle);
+        EventManager.RequestGameState += ChangeState;
+        EventManager.RequestStageID += RequestStageID;
     }
 
     public void ChangeState(GameState next) // UIManager, GameManager
@@ -32,18 +34,13 @@ public class GameManager : MonoBehaviour
         switch (next)
         {
             case GameState.Idle:
-                EventManager.RequestGameState -= ChangeState;
                 break;
             case GameState.Loading:
-                EventManager.RequestGameState += ChangeState;
-                EventManager.RequestStageID += RequestStageID;
-                Debug.Log("GameState: " + CurrentState.ToString());
                 StartCoroutine(waitForLoadingUI());
                 break;
 
             case GameState.Playing:
                 Time.timeScale = 1;
-
                 timeManager.StartTimer();
                 break;
 

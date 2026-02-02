@@ -9,14 +9,14 @@ public class EventManager : MonoBehaviour
     public static event Action RequestSaveData;
     public static event Action RefreshPlayingData;
     public static event Action<GameState> RequestGameState;
+    public static event Action<string> GetReason;
     public static event Action<string> RequestStageID;
     public static event Action<string> RequestStageUI;
-    
+
 
     public void RequestGameStart(string stageID) // UIState(Playering에서 호출)
     {
         RequestGameState?.Invoke(GameManager.GameState.Loading); // (GameManager에서 구독)
-
         RequestStageID?.Invoke(stageID); // GameManager, ChangeSceneManager에서 구독
     }
 
@@ -24,10 +24,11 @@ public class EventManager : MonoBehaviour
     {
         RequestGameState?.Invoke(GameManager.GameState.Pause);
     }
-    public void RequestGameOver() // TimeManager + CoinHPManager에서 호출
+    public void RequestGameOver(string reason) // TimeManager + CoinHPManager에서 호출
     {
         OnGameOverUI?.Invoke(); //  UIState(Clear, GameOver에서 구독/취소)
         RequestGameState?.Invoke(GameManager.GameState.GameOver);
+        GetReason?.Invoke(reason);
     }
     public void RequestClear() // GameManger에서 호출
     {
@@ -36,6 +37,10 @@ public class EventManager : MonoBehaviour
     public void RequestIdle()
     {
         RequestGameState?.Invoke(GameManager.GameState.Idle);
+
+    }
+    public void RequestSaveDatas()
+    {
         RequestSaveData?.Invoke(); // (취소 안 함)CoinHPManager에서 구독
     }
 

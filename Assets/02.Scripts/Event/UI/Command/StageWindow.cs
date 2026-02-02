@@ -27,7 +27,6 @@ public class StageWindow : MonoBehaviour
 
         if (uiManager.previousState.StateType == EStateType.Pause)
         {
-            
             SetWindowData();
             return;
         }

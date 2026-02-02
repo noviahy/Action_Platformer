@@ -19,12 +19,11 @@ public class PlayingUI : MonoBehaviour
 
     private void refreshCoinHPText()
     {
-        life.text = uiManager.RequestHP().ToString();
-        coin.text = uiManager.RequestCoin().ToString();
+        life.text = $"{uiManager.RequestHP()}";
+        coin.text = $"{uiManager.RequestCoin()}";
     }
     public void StartPlayingUI()
     {
-        
         StartCoroutine(PlayingUIText());
     }
     public void StopPlayingUI()
@@ -36,9 +35,7 @@ public class PlayingUI : MonoBehaviour
     {
         while (true)
         {
-            timer.text = timeManager.LeftTime.ToString();
-            Debug.Log(timer.text);
-
+            timer.text = Mathf.FloorToInt(timeManager.LeftTime).ToString();
             yield return null;
         }
     }

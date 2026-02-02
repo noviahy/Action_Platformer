@@ -7,30 +7,39 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private float DefaultTimeLimit;
     public float Timer { get; private set; }
-    public float? LeftTime { get; private set; }
+    public float LeftTime { get; private set; }
 
+    private void Start()
+    {
+        LeftTime = DefaultTimeLimit;
+    }
     public void StartTimer()
     {
-        StartCoroutine(startTimer());
+        LeftTime = DefaultTimeLimit;
+        StartCoroutine(TimerStart());
     }
     public void StopTimer()
     {
-        StopCoroutine(startTimer());
+        StopCoroutine(TimerStart());
+        LeftTime = DefaultTimeLimit;
     }
 
-    IEnumerator startTimer()
+    IEnumerator TimerStart()
     {
-        if (LeftTime <= 0f)
+        while (true)
         {
-            LeftTime = 0;
-            eventManager.RequestGameOver();
-            yield break;
-        }
+            if (LeftTime <= 0f)
+            {
+                LeftTime = 0;
+                eventManager.RequestGameOver("Time Over");
+                LeftTime = DefaultTimeLimit;
+                yield break;
+            }
 
-        Debug.Log(DefaultTimeLimit);
-        Timer += Time.deltaTime;
-        LeftTime = DefaultTimeLimit - Timer;
-        
-        yield return null;
+            Timer += Time.deltaTime;
+            LeftTime = DefaultTimeLimit - Timer;
+
+            yield return null;
+        }
     }
 }

@@ -33,7 +33,8 @@ public class CoinHPManager : MonoBehaviour
 
         if (calculator.HP == 0)
         {
-            eventManager.RequestGameOver(); // EventManager 이벤트
+            eventManager.RequestGameOver("You Died"); // EventManager 이벤트
+            ResetData();
         }
     }
 

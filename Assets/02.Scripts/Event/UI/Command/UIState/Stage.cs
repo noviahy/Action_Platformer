@@ -9,10 +9,11 @@ public class Stage : UIState
     public override EStateType StateType => EStateType.Stage;
     public override void Enter()
     {
-        if (uiManager.previousState.StateType == EStateType.Pause)
+        if (uiManager.previousState.StateType != EStateType.World)
         {
             eventManager.RequestChangeScene();
         }
+        uiManager.RequestEvent();
         uiManager.RefreshStageBT();
         stageWindow.setDefaultWindowData();
         

@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CoinHPCalculator coinHPCalculator;
     private Stack<UIState> goBackStack = new Stack<UIState>();
     private UIState currentState;
-    public UIState previousState{ get; private set; }
+    public UIState previousState { get; private set; }
     public string SelectedWorld { get; private set; }
     public string SelectedStage { get; private set; }
 
@@ -24,35 +24,40 @@ public class UIManager : MonoBehaviour
         if (!commandContainer.commandDict.TryGetValue(nextState, out var next))
         {
             Debug.LogError($"UIstate not found: {nextState}");
+            return;
         }
 
+        // 시작 시 한 번만 사용
         if (next.StateType == EStateType.StartUI)
         {
             currentState = next;
             next.Exit();
             return;
         }
-        if(currentState.StateType == EStateType.StartUI)
+        if (currentState.StateType == EStateType.StartUI)
         {
             currentState = next;
             currentState.Enter();
             return;
         }
-        
-        if (currentState == next) return;
-        
-        if (currentState.StateType == EStateType.Setting)
+
+        // 반복
+        if (currentState == next)
         {
-            previousState = currentState;
+            Debug.LogError($"previousState == currentState: {nextState}");
+            return;
         }
-        else if (currentState.IsMenuState)
+
+        if (currentState.IsMenuState)
         {
             goBackStack.Push(currentState);
         }
+        var prev = currentState;
         currentState?.Exit();
 
-        previousState = currentState;
+        previousState = prev;
         currentState = next;
+        Debug.Log(currentState.StateType);
         currentState.Enter();
     }
 
@@ -78,18 +83,20 @@ public class UIManager : MonoBehaviour
     }
     public void RequestEvent()
     {
-        switch (currentState)
+        switch (currentState.StateType)
         {
-            case Loading:
+            case EStateType.Loading:
+                eventManager.RefreshPlayingUI();
                 eventManager.RequestGameStart($"{SelectedWorld}-{SelectedStage}");
                 break;
 
-            case Pause:
+            case EStateType.Pause:
                 eventManager.RequestGamePause();
                 break;
 
-            case GameOver:
-            case Clear:
+            case EStateType.GameOver:
+            case EStateType.Clear:
+            case EStateType.Stage:
                 eventManager.RequestIdle();
                 break;
 
@@ -99,7 +106,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // 데이터 관련
+    // 데이터 관련 -> 나중에 코드를 나누던가 해야겠음
     public void RefreshStageBT()
     {
         stageButtonBinder.Refresh();
