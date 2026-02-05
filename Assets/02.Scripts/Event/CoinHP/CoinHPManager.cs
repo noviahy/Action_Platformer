@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// PlayerTrigger, Coin
 public class CoinHPManager : MonoBehaviour
 {
     [SerializeField] private EventManager eventManager;
@@ -8,25 +9,22 @@ public class CoinHPManager : MonoBehaviour
     [SerializeField] private int needCoin;
     [SerializeField] private int coinAmount;
     [SerializeField] private int dmg;
-    // GameManager에서만 호출되는 코드
-    public void Awake()
+    private void Awake()
     {
         EventManager.RequestSaveData += SetCoinHP;
         eventManager.RefreshPlayingUI();
     }
-    public void ResetData() { calculator._ReStart(defaultHP); }
-    public void AddCoin() 
+    public void AddCoin() // Coin
     {
         calculator._AddCoin(coinAmount);
         eventManager.RefreshPlayingUI();
 
         if (calculator.Coin >= needCoin)
         {
-            ChangeCoinToHP();
+            changeCoinToHP();
         }
     }
-
-    public void Damage() 
+    public void Damage() // PlayerTrigger
     {
         calculator._Damage(dmg);
         eventManager.RefreshPlayingUI();
@@ -34,19 +32,18 @@ public class CoinHPManager : MonoBehaviour
         if (calculator.HP == 0)
         {
             eventManager.RequestGameOver("You Died"); // EventManager 이벤트
-            ResetData();
+            resetData();
         }
     }
-
-    public void ChangeCoinToHP()
+    public void SetCoinHP()
+    {
+        calculator.SetCoinHPData();
+    }
+    private void resetData() { calculator._ReStart(defaultHP); }
+    private void changeCoinToHP()
     {
         calculator._SubCoin(needCoin);
         calculator._AddHP(1);
         eventManager.RefreshPlayingUI();
-    }
-
-    public void SetCoinHP()
-    {
-        calculator.SetCoinHPData();
     }
 }

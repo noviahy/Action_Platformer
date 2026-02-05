@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Coin : MonoBehaviour, IItem
+public class Coin : MonoBehaviour
 {
     [SerializeField] private CoinHPManager coinHPManager;
     // ¸ÔÈ÷¸é »ç¶óÁü
@@ -11,9 +11,5 @@ public class Coin : MonoBehaviour, IItem
             coinHPManager.AddCoin();
             gameObject.SetActive(false);
         }
-    }
-    public void Despawn()
-    {
-        Destroy(gameObject);
     }
 }

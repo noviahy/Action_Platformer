@@ -1302,7 +1302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80e568e67d9b574ca94042129af7cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageButtonBinder
-  progressManager: {fileID: 1814415548}
   stageButtons:
   - {fileID: 1395705459}
   - {fileID: 464979666}
@@ -12395,6 +12394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df6b6f747fb9134c96eae6e6ee5c794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  player: {fileID: 0}
 --- !u!114 &1814415547
 MonoBehaviour:
   m_ObjectHideFlags: 0

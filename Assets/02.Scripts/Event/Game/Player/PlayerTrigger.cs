@@ -4,6 +4,7 @@ public class PlayerTrigger : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     [SerializeField] CoinHPManager coinHPManager;
+    [SerializeField] Player player;
 
     public void CollisionPlayer(Collider other)
     {
@@ -19,7 +20,7 @@ public class PlayerTrigger : MonoBehaviour
 
         if (other.CompareTag("bomb"))
         {
-
+            player.GetBoom();
         }
     }
 }

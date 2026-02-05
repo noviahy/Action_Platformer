@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CollectionCoin : MonoBehaviour, IItem
+public class CollectionCoin : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     private void OnTriggerEnter(Collider other)

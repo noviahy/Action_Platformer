@@ -1,7 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 
 public class GameManager : MonoBehaviour
 {
@@ -83,6 +80,7 @@ public class GameManager : MonoBehaviour
     public void SaveCollectionCoin() // CollectionCoin.cs -> OnTriggerEnter with Player
     {
         stageProgressManager.SetCollectedCoin(currentStageID, true);
+        stageProgressManager.SaveAll(); // Save all Data on computer
     }
 
     // private

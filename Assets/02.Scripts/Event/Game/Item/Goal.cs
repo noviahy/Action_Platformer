@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Goal : MonoBehaviour, IItem
+public class Goal : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     private void OnTriggerEnter(Collider other)
@@ -9,9 +9,5 @@ public class Goal : MonoBehaviour, IItem
         {
             gameManager.ChangeState(GameManager.GameState.Clear);
         }
-    }
-    public void Despawn()
-    {
-        Destroy(gameObject);
     }
 }
