@@ -4,7 +4,7 @@ public class Bomb : MonoBehaviour
 {
     [SerializeField] private GameObject bomb;
     [SerializeField] private Explosion explosion;
-    public void Attack()
+    public void Start()
     {
         StartCoroutine(CountDown());
     }

@@ -1,27 +1,23 @@
 using UnityEngine;
 using static Player;
 
-public class BombAttack : MonoBehaviour, IAttackStratgy
+public class BombAttack : IAttackStratgy
 {
-    [SerializeField] GameObject Bomb;
-    [SerializeField] Player player;
-    [SerializeField] float throwPower;
+    private Player player;
+    private float throwPower;
 
     private GameObject obj;
     private Rigidbody2D rb;
-    private void Start()
+    public void Init(Player playerCode, GameObject bombPrefab, float power)
     {
-        obj = Instantiate(
-        Bomb,
-        player.BombSoket.position,
-        Quaternion.identity,
-        player.BombSoket
-    );
+        player = playerCode;
+        throwPower = power;
+        obj = bombPrefab;
         rb = obj.GetComponent<Rigidbody2D>();
     }
     public void Attack(EAttackType attackType)
     {
-        Bomb.transform.SetParent(null);
+        obj.transform.SetParent(null);
 
         if (attackType == EAttackType.PutBomb)
         {
@@ -30,7 +26,7 @@ public class BombAttack : MonoBehaviour, IAttackStratgy
             return;
         }
 
-        if (attackType == EAttackType.ThrowBomb)
+        if (attackType == EAttackType.Default)
         {
             rb.simulated = true;
 

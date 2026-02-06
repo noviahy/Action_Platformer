@@ -18,7 +18,7 @@ public class Explosion : MonoBehaviour
 
     private void showEffect()
     {
-        if (explosionFX != null) return;
+        if (explosionFX == null) return;
 
         ParticleSystem fx =
     Instantiate(explosionFX, transform.position, Quaternion.identity);
@@ -43,7 +43,7 @@ public class Explosion : MonoBehaviour
     }
 
     // 에디터에서 범위 확인용
-    private void OnDrawGizmosSelected()
+    public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);

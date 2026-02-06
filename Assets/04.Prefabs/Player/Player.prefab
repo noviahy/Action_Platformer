@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7215587320428330928}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PutBombSoket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6594338064218572208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BombSoket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 4783264359240080172}
   - component: {fileID: 9102484762296752153}
   - component: {fileID: 4415638201296363147}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,9 +171,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   BombSoket: {fileID: 0}
   PutBombSoket: {fileID: 0}
+  inputManager: {fileID: 0}
   gameManager: {fileID: 0}
   playerTrigger: {fileID: 4415638201296363147}
-  playerGameObject: {fileID: 0}
+  bombPrefab: {fileID: 0}
+  throwForce: 0
+  jumpForce: 0
+  walkSpeed: 0
+  deshSpeed: 0
 --- !u!114 &4415638201296363147
 MonoBehaviour:
   m_ObjectHideFlags: 0
