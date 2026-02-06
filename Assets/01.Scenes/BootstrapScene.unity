@@ -12348,6 +12348,7 @@ GameObject:
   - component: {fileID: 1814415545}
   - component: {fileID: 1814415548}
   - component: {fileID: 1814415549}
+  - component: {fileID: 1814415550}
   m_Layer: 0
   m_Name: RuntimeSystems
   m_TagString: Untagged
@@ -12441,6 +12442,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8ecc9ca4a8f00488514ef158e78373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeSceneManager
+--- !u!114 &1814415550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814415542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df6b6f747fb9134c96eae6e6ee5c794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  player: {fileID: 0}
 --- !u!1 &1832633375
 GameObject:
   m_ObjectHideFlags: 0

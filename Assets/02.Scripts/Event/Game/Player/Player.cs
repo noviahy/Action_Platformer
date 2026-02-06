@@ -1,14 +1,15 @@
 using UnityEngine;
-
+using System.Collections;
 public class Player : MonoBehaviour
 {
     public Transform BombSoket;
     public Transform PutBombSoket;
 
     [SerializeField] private InputManager inputManager;
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerTrigger playerTrigger;
+    [SerializeField] private GroundCheck groundCheck;
     [SerializeField] private BombAttack bombAttack;
+    [SerializeField] private SwordAttack swordAttack;
     [SerializeField] private GameObject bombPrefab;
 
     [SerializeField] private float throwForce;
@@ -19,8 +20,17 @@ public class Player : MonoBehaviour
     private IAttackStratgy currentAttack;
     private IAttackStratgy defaultAttack;
 
-    private Collider2D col;
     private Rigidbody2D rb;
+
+    private bool requestDash = false;
+    private bool requestAttack = false;
+    private bool requestJump = false;
+
+    private bool lockDash = false;
+    private bool lockAttack = false;
+    private bool getBomb = false;
+    private bool jumpDash = false;
+    private bool lockWalk = false;
 
     public int Facing { get; private set; } = 1;
     public Vector3 PlayerLocation { get; private set; }
@@ -30,90 +40,70 @@ public class Player : MonoBehaviour
         Default,
         PutBomb
     }
-    public PlayerStateFlags Flags { get; private set; }
-
-    [System.Flags]
-    public enum PlayerStateFlags
-    {
-        None = 0,
-        Idle = 1 << 0,
-        Walk = 1 << 1,
-        Jump = 1 << 2,
-        Attack = 1 << 3,
-    }
-
-    public void AddFlags(PlayerStateFlags Flag)
-    {
-        Flags |= Flag;
-    }
-    public void RemoveFlags(PlayerStateFlags Flag)
-    {
-        Flags &= ~Flag;
-    }
-
     private void Start()
     {
         PlayerLocation = transform.position;
-        col = gameObject.GetComponent<Collider2D>();
-        rb = col.GetComponent<Rigidbody2D>();
-        AddFlags(PlayerStateFlags.Idle);
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        AttackType = EAttackType.Default;
+        currentAttack = swordAttack;
     }
+    private void OnEnable()
+    {
+        inputManager = InputManager.Instance;
+
+        if (InputManager.Instance != null)
+            InputManager.Instance.SetPlayer(this);
+    }
+
     private void FixedUpdate()
     {
-        if (inputManager.isDash)
-        {
-            Dash();
-        }
-        if (!inputManager.isDash)
-        {
-            rb.gravityScale = 1.0f;
-            if ((Flags & PlayerStateFlags.Walk) != 0)
-            {
-                Walk(Mathf.Sign(inputManager.moveX));
-            }
-            if ((Flags & PlayerStateFlags.Jump) != 0)
-            {
-                Jump();
-            }
-            if ((Flags & PlayerStateFlags.Attack) != 0)
-            {
-                Attack();
-            }
-        }
-        PlayerLocation = transform.position;
-    }
-    public void Walk(float moveX)
-    {
-        Facing = (int)moveX;
-        rb.linearVelocity = new Vector2(
-    Facing * walkSpeed,
-    rb.linearVelocity.y
-);
-        PlayerLocation = transform.position;
-    }
-    public void Jump()
-    {
+        if (InputManager.Instance == null) return;
 
-        rb.linearVelocity = Vector2.up * jumpForce;
         PlayerLocation = transform.position;
-    }
 
-    public void Dash()
-    {
-        rb.gravityScale = 0;
-        rb.linearVelocity = new Vector2(Facing * deshSpeed, rb.linearVelocity.y);
-    }
-    public void Attack()
-    {
-        currentAttack.Attack(AttackType);
-        if (currentAttack != defaultAttack)
+        if (groundCheck.IsGrounded)
         {
-            currentAttack = defaultAttack;
-            AttackType = EAttackType.Default;
+            jumpDash = false;
         }
+
+        if (!lockWalk)
+            walk(inputManager.moveX);
+
+        if (requestDash && !getBomb && !jumpDash)
+        {
+            requestDash = false;
+            if (lockDash || jumpDash) return;
+
+            lockDash = true;
+            if (!groundCheck.IsGrounded)
+                jumpDash = true;
+            lockWalk = true;
+            dash();
+            StartCoroutine(WaitForNextDesh());
+        }
+        if (requestAttack && !lockDash)
+        {
+            requestAttack = false;
+            if (lockAttack) return;
+
+            lockAttack = true;
+            attack();
+            StartCoroutine(WaitForNextAttack());
+        }
+        if (requestJump)
+        {
+            requestJump = false;
+            if (!groundCheck.IsGrounded) return;
+            jump();
+        }
+    }
+    public void ChangeAttackType()
+    {
+        AttackType = EAttackType.PutBomb;
     }
     public void GetBoom()
     {
+        getBomb = true;
         GameObject obj = Instantiate(
         bombPrefab,
         BombSoket.position,
@@ -123,10 +113,72 @@ public class Player : MonoBehaviour
         bombAttack.Init(this, obj, throwForce);
 
         currentAttack = bombAttack;
-        AttackType = EAttackType.PutBomb;
     }
-    private void OnTriggerEnter(Collider other)
+    public void RequestJump()
+    {
+        requestJump = true;
+    }
+    public void RequestDash()
+    {
+        requestDash = true;
+    }
+    public void RequestAttack()
+    {
+        requestAttack = true;
+    }
+    private void walk(float moveX)
+    {
+        if (moveX != 0)
+        {
+            Facing = (int)moveX;
+        }
+
+        rb.linearVelocity = new Vector2(
+    moveX * walkSpeed,
+    rb.linearVelocity.y
+);
+        PlayerLocation = transform.position;
+    }
+    private void jump()
+    {
+        rb.linearVelocity = Vector2.up * jumpForce;
+        PlayerLocation = transform.position;
+    }
+
+    private void dash()
+    {
+        rb.gravityScale = 0;
+        rb.linearVelocity = new Vector2(Facing * deshSpeed, 0);
+    }
+    private void attack()
+    {
+        currentAttack.Attack(AttackType);
+        getBomb = false;
+
+        if (currentAttack != defaultAttack)
+        {
+            currentAttack = defaultAttack;
+            AttackType = EAttackType.Default;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
     {
         playerTrigger.CollisionPlayer(other);
+    }
+    IEnumerator WaitForNextDesh()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        rb.gravityScale = 1f;
+        lockWalk = false;
+        yield return new WaitForSeconds(0.5f);
+        
+        lockDash = false;
+    }
+    IEnumerator WaitForNextAttack()
+    {
+        yield return new WaitForSeconds(0.5f);
+        lockAttack = false;
     }
 }

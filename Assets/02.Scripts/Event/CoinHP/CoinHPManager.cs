@@ -9,13 +9,20 @@ public class CoinHPManager : MonoBehaviour
     [SerializeField] private int needCoin;
     [SerializeField] private int coinAmount;
     [SerializeField] private int dmg;
+
+    public static CoinHPManager Instance { get; private set; }
     private void Awake()
     {
         EventManager.RequestSaveData += SetCoinHP;
         eventManager.RefreshPlayingUI();
     }
+    private void Start()
+    {
+        Instance = this;
+    }
     public void AddCoin() // Coin
     {
+
         calculator._AddCoin(coinAmount);
         eventManager.RefreshPlayingUI();
 

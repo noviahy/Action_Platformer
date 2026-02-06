@@ -1,7 +1,7 @@
 using UnityEngine;
 using static Player;
 
-public class Sword : IAttackStratgy
+public class SwordAttack : IAttackStratgy
 {
     public void Attack(EAttackType attackType)
     {

@@ -6,19 +6,25 @@ public class PlayerTrigger : MonoBehaviour
     [SerializeField] CoinHPManager coinHPManager;
     [SerializeField] Player player;
 
-    public void CollisionPlayer(Collider other)
+    private void Awake()
     {
-        if (other.CompareTag("monster"))
+        gameManager = GameManager.Instance;
+        coinHPManager = CoinHPManager.Instance;
+    }
+
+    public void CollisionPlayer(Collider2D other)
+    {
+        if (other.CompareTag("Monster"))
         {
             coinHPManager.Damage();
         }
 
-        if (other.CompareTag("explosion"))
+        if (other.CompareTag("Explosion"))
         {
             coinHPManager.Damage();
         }
 
-        if (other.CompareTag("bomb"))
+        if (other.CompareTag("Bomb"))
         {
             player.GetBoom();
         }

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private string currentStageID;
     private bool onTimer = false; // 이런건 나중에 timeManager에서 직접 바꾸게 만드는게 좋을 듯
 
+    public static GameManager Instance { get; private set; }
     public GameState CurrentState { get; private set; }
     public enum GameState
     {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.Idle);
         EventManager.RequestGameState += ChangeState; // ChangState in UIManager
         EventManager.RequestStageID += RequestStageID; // Get ID from UIManager
+        Instance = this;
     }
 
     public void ChangeState(GameState next) // UIManager, GameManager
