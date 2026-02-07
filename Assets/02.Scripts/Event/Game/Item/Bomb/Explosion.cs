@@ -41,11 +41,4 @@ public class Explosion : MonoBehaviour
             rb.AddForce(dir * force, ForceMode2D.Impulse);
         }
     }
-
-    // 에디터에서 범위 확인용
-    public void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
-    }
 }

@@ -3,9 +3,20 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     [SerializeField] private Explosion explosion;
-    public void Start()
+    private Coroutine coroutine;
+    private void Start()
     {
-        StartCoroutine(CountDown());
+        coroutine = StartCoroutine(CountDown());
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(other.gameObject.name);
+        if (other.CompareTag("Monster"))
+        {
+            StopCoroutine(coroutine);
+            explosion.Explode();
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator CountDown()

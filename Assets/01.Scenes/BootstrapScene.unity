@@ -12344,7 +12344,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1814415543}
   - component: {fileID: 1814415547}
-  - component: {fileID: 1814415546}
   - component: {fileID: 1814415545}
   - component: {fileID: 1814415548}
   - component: {fileID: 1814415549}
@@ -12383,21 +12382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f442d5e761a2c4c45a4eaf9b87892bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
---- !u!114 &1814415546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814415542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2df6b6f747fb9134c96eae6e6ee5c794, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  player: {fileID: 0}
-  uiManager: {fileID: 0}
-  gameManager: {fileID: 0}
 --- !u!114 &1814415547
 MonoBehaviour:
   m_ObjectHideFlags: 0

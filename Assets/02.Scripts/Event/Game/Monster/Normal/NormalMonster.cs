@@ -45,6 +45,7 @@ public class NormalMonster : MonoBehaviour
 
         if (other.CompareTag("Explosion"))
         {
+            isAttacked = true;
             monsterHP -= 2;
             StartCoroutine(KnockBackTime());
         }
@@ -52,7 +53,6 @@ public class NormalMonster : MonoBehaviour
 
     IEnumerator KnockBackTime()
     {
-        isAttacked = true;
         yield return new WaitForSeconds(nockBackTime);
         isAttacked = false;
     }

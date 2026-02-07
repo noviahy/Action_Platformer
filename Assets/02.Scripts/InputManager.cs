@@ -11,8 +11,6 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        if(gameManager == null)
-        Debug.Log("Gamemanager Null");
     }
 
     public void SetPlayer(Player newPlayer)
@@ -21,8 +19,8 @@ public class InputManager : MonoBehaviour
     }
     private void Update()
     {
-        // if (gameManager.CurrentState != GameManager.GameState.Playing) 
-        //    return;
+        if (gameManager.CurrentState != GameManager.GameState.Playing)
+            return;
 
         moveX = 0f;
         if (player == null) return;
@@ -32,7 +30,7 @@ public class InputManager : MonoBehaviour
 
         if (Keyboard.current.rightArrowKey.isPressed)
             moveX += 1f;
-         // Desh
+        // Desh
         if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
         {
             player.RequestDash();
