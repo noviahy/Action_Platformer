@@ -1,16 +1,22 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+/*
+NOTE:
+This Player logic is intentionally implemented with bool-based control.
+Refactoring to State Machine is planned for next project.
+*/
 public class Player : MonoBehaviour
 {
-    public Transform BombSoket;
     public Transform PutBombSoket;
+    [SerializeField] private Transform BombSoket;
 
     [SerializeField] private InputManager inputManager;
-    [SerializeField] private PlayerTrigger playerTrigger;
     [SerializeField] private GroundCheck groundCheck;
     [SerializeField] private BombAttack bombAttack;
     [SerializeField] private SwordAttack swordAttack;
+
     [SerializeField] private GameObject bombPrefab;
+    [SerializeField] private GameObject swordObject;
 
     [SerializeField] private float throwForce;
     [SerializeField] private float jumpForce;
@@ -30,7 +36,9 @@ public class Player : MonoBehaviour
     private bool lockAttack = false;
     private bool getBomb = false;
     private bool jumpDash = false;
-    private bool lockWalk = false;
+    private bool lockWalkJump = false;
+
+    private BoxCollider2D box;
 
     public int Facing { get; private set; } = 1;
     public Vector3 PlayerLocation { get; private set; }
@@ -45,14 +53,19 @@ public class Player : MonoBehaviour
         PlayerLocation = transform.position;
         rb = gameObject.GetComponent<Rigidbody2D>();
         AttackType = EAttackType.Default;
-        currentAttack = swordAttack;
+        bombAttack = new BombAttack();
     }
     private void OnEnable()
     {
         inputManager = InputManager.Instance;
+        box = swordObject.GetComponent<BoxCollider2D>();
 
         if (InputManager.Instance != null)
             InputManager.Instance.SetPlayer(this);
+
+        swordAttack.Init(swordObject, this);
+        defaultAttack = swordAttack;
+        currentAttack = defaultAttack;
     }
 
     private void FixedUpdate()
@@ -61,26 +74,27 @@ public class Player : MonoBehaviour
 
         PlayerLocation = transform.position;
 
-        if (groundCheck.IsGrounded)
+        if (groundCheck.IsGrounded && jumpDash)
         {
             jumpDash = false;
         }
-
-        if (!lockWalk)
+        // Walk
+        if (!lockWalkJump)
             walk(inputManager.moveX);
-
-        if (requestDash && !getBomb && !jumpDash)
+        // Dash
+        if (requestDash)
         {
             requestDash = false;
-            if (lockDash || jumpDash) return;
+            if (lockDash || getBomb || jumpDash) return;
 
             lockDash = true;
             if (!groundCheck.IsGrounded)
                 jumpDash = true;
-            lockWalk = true;
+            lockWalkJump = true;
             dash();
             StartCoroutine(WaitForNextDesh());
         }
+        // Attack
         if (requestAttack && !lockDash)
         {
             requestAttack = false;
@@ -90,16 +104,20 @@ public class Player : MonoBehaviour
             attack();
             StartCoroutine(WaitForNextAttack());
         }
+        // Jump
         if (requestJump)
         {
             requestJump = false;
-            if (!groundCheck.IsGrounded) return;
+            if (!groundCheck.IsGrounded || lockWalkJump) return;
             jump();
         }
     }
     public void ChangeAttackType()
     {
+        if (!getBomb) return;
+
         AttackType = EAttackType.PutBomb;
+        RequestAttack();
     }
     public void GetBoom()
     {
@@ -131,6 +149,12 @@ public class Player : MonoBehaviour
         if (moveX != 0)
         {
             Facing = (int)moveX;
+
+            Vector3 local = PutBombSoket.localPosition;
+            local.x = Mathf.Abs(local.x) * Facing;
+
+            PutBombSoket.localPosition = local;
+            swordObject.transform.localPosition = local;
         }
 
         rb.linearVelocity = new Vector2(
@@ -153,32 +177,33 @@ public class Player : MonoBehaviour
     private void attack()
     {
         currentAttack.Attack(AttackType);
-        getBomb = false;
 
         if (currentAttack != defaultAttack)
         {
             currentAttack = defaultAttack;
             AttackType = EAttackType.Default;
         }
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        playerTrigger.CollisionPlayer(other);
+        if (getBomb)
+        {
+            getBomb = false;
+            currentAttack = defaultAttack;
+        }
     }
     IEnumerator WaitForNextDesh()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
 
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         rb.gravityScale = 1f;
-        lockWalk = false;
+        lockWalkJump = false;
         yield return new WaitForSeconds(0.5f);
-        
+
         lockDash = false;
     }
     IEnumerator WaitForNextAttack()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
+        swordAttack.AttackFinish();
         lockAttack = false;
     }
 }

@@ -12396,6 +12396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
   player: {fileID: 0}
+  uiManager: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!114 &1814415547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12455,6 +12457,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
   player: {fileID: 0}
+  uiManager: {fileID: 220987044}
+  gameManager: {fileID: 1273780396}
 --- !u!1 &1832633375
 GameObject:
   m_ObjectHideFlags: 0

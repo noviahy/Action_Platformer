@@ -2,17 +2,15 @@ using UnityEngine;
 
 public class PlayerTrigger : MonoBehaviour
 {
-    [SerializeField] GameManager gameManager;
     [SerializeField] CoinHPManager coinHPManager;
     [SerializeField] Player player;
 
     private void Awake()
     {
-        gameManager = GameManager.Instance;
         coinHPManager = CoinHPManager.Instance;
     }
 
-    public void CollisionPlayer(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Monster"))
         {
@@ -24,7 +22,7 @@ public class PlayerTrigger : MonoBehaviour
             coinHPManager.Damage();
         }
 
-        if (other.CompareTag("Bomb"))
+        if (other.CompareTag("BombItem"))
         {
             player.GetBoom();
         }

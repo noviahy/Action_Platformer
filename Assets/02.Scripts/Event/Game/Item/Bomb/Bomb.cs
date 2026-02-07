@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 public class Bomb : MonoBehaviour
 {
-    [SerializeField] private GameObject bomb;
     [SerializeField] private Explosion explosion;
     public void Start()
     {

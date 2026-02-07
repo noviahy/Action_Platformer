@@ -14,25 +14,24 @@ public class BombAttack : IAttackStratgy
         throwPower = power;
         obj = bombPrefab;
         rb = obj.GetComponent<Rigidbody2D>();
+        rb.simulated = false;
     }
     public void Attack(EAttackType attackType)
     {
         obj.transform.SetParent(null);
+        rb.simulated = true;
 
         if (attackType == EAttackType.PutBomb)
         {
             obj.transform.position = player.PutBombSoket.position;
-            rb.simulated = false;
             return;
         }
 
         if (attackType == EAttackType.Default)
         {
-            rb.simulated = true;
-
             Vector2 dir = (
-         Vector2.right * player.Facing +
-         Vector2.up * 0.5f
+         Vector2.right * player.Facing * 1f +
+         Vector2.up * 0.7f
      ).normalized;
             rb.AddForce(dir * throwPower, ForceMode2D.Impulse);
         }

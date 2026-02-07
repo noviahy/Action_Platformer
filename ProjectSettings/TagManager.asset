@@ -7,6 +7,9 @@ TagManager:
   - Monster
   - Explosion
   - Bomb
+  - BombItem
+  - Sword
+  - Boss
   layers:
   - Default
   - TransparentFX

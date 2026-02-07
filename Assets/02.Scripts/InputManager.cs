@@ -4,15 +4,15 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField] private UIManager uiManager;
+    [SerializeField] private GameManager gameManager;
     public static InputManager Instance { get; private set; }
     public float moveX { get; private set; }
     private void Awake()
     {
-        
-    }
-    private void Start()
-    {
         Instance = this;
+        if(gameManager == null)
+        Debug.Log("Gamemanager Null");
     }
 
     public void SetPlayer(Player newPlayer)
@@ -21,6 +21,9 @@ public class InputManager : MonoBehaviour
     }
     private void Update()
     {
+        // if (gameManager.CurrentState != GameManager.GameState.Playing) 
+        //    return;
+
         moveX = 0f;
         if (player == null) return;
 
@@ -29,11 +32,9 @@ public class InputManager : MonoBehaviour
 
         if (Keyboard.current.rightArrowKey.isPressed)
             moveX += 1f;
-
          // Desh
         if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
         {
-            // Debug.Log("Dash Input");
             player.RequestDash();
         }
         // Attack
@@ -44,21 +45,16 @@ public class InputManager : MonoBehaviour
         if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
         {
             player.ChangeAttackType();
-            player.RequestAttack();
         }
         // Jump
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            // Debug.Log("Jump Input");
             player.RequestJump();
         }
-
-
+        // Back
         if (Keyboard.current.escapeKey.isPressed)
         {
-
+            uiManager.GoBackState();
         }
-
     }
-
 }

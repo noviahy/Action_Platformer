@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CommandContainer commandContainer;
     [SerializeField] private StageButtonBinder stageButtonBinder;
     [SerializeField] private CoinHPCalculator coinHPCalculator;
-    private Stack<UIState> goBackStack = new Stack<UIState>(); 
+    private Stack<UIState> goBackStack = new Stack<UIState>();
     private UIState currentState;
     public UIState previousState { get; private set; }
     public string SelectedWorld { get; private set; }
@@ -71,6 +71,12 @@ public class UIManager : MonoBehaviour
         if (currentState.StateType == EStateType.Pause) // CurrentState -> Pause
         {
             ChangeState(EStateType.Playing); // Just Playing
+            return;
+        }
+
+        if (currentState.StateType == EStateType.Playing)
+        {
+            ChangeState(EStateType.Pause);
             return;
         }
 
