@@ -1,6 +1,5 @@
 using UnityEngine;
 
-public interface IMonster : IStageObject
+public interface IMonster : IKnockbackHandler
 {
-
 }

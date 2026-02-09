@@ -22,7 +22,6 @@ public class CoinHPManager : MonoBehaviour
     }
     public void AddCoin() // Coin
     {
-
         calculator._AddCoin(coinAmount);
         eventManager.RefreshPlayingUI();
 
@@ -33,13 +32,12 @@ public class CoinHPManager : MonoBehaviour
     }
     public void Damage() // PlayerTrigger
     {
-        calculator._Damage(dmg);
         eventManager.RefreshPlayingUI();
 
-        if (calculator.HP == 0)
+        if (calculator.HP <= 0)
         {
-            eventManager.RequestGameOver("You Died"); // EventManager 이벤트
             resetData();
+            eventManager.RequestGameOver("You Died"); // EventManager 이벤트
         }
     }
     public void SetCoinHP()

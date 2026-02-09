@@ -14,10 +14,11 @@ public class Player : MonoBehaviour
     [SerializeField] private GroundCheck groundCheck;
     [SerializeField] private BombAttack bombAttack;
     [SerializeField] private SwordAttack swordAttack;
+    [SerializeField] private PlayerKnockbackHandler knockbackHandler;
 
     [SerializeField] private GameObject bombPrefab;
     [SerializeField] private GameObject swordObject;
-
+    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float throwForce;
     [SerializeField] private float jumpForce;
     [SerializeField] private float walkSpeed;
@@ -25,8 +26,6 @@ public class Player : MonoBehaviour
 
     private IAttackStratgy currentAttack;
     private IAttackStratgy defaultAttack;
-
-    private Rigidbody2D rb;
 
     private bool requestDash = false;
     private bool requestAttack = false;
@@ -37,8 +36,6 @@ public class Player : MonoBehaviour
     private bool getBomb = false;
     private bool jumpDash = false;
     private bool lockWalkJump = false;
-
-    private BoxCollider2D box;
 
     public int Facing { get; private set; } = 1;
     public Vector3 PlayerLocation { get; private set; }
@@ -51,14 +48,12 @@ public class Player : MonoBehaviour
     private void Start()
     {
         PlayerLocation = transform.position;
-        rb = gameObject.GetComponent<Rigidbody2D>();
         AttackType = EAttackType.Default;
         bombAttack = new BombAttack();
     }
     private void OnEnable()
     {
         inputManager = InputManager.Instance;
-        box = swordObject.GetComponent<BoxCollider2D>();
 
         if (InputManager.Instance != null)
             InputManager.Instance.SetPlayer(this);
@@ -67,10 +62,11 @@ public class Player : MonoBehaviour
         defaultAttack = swordAttack;
         currentAttack = defaultAttack;
     }
-
     private void FixedUpdate()
     {
         if (InputManager.Instance == null) return;
+
+        if (knockbackHandler.lockInput) return;
 
         PlayerLocation = transform.position;
 
@@ -121,6 +117,8 @@ public class Player : MonoBehaviour
     }
     public void GetBoom()
     {
+        if (getBomb) return;
+
         getBomb = true;
         GameObject obj = Instantiate(
         bombPrefab,
@@ -144,6 +142,7 @@ public class Player : MonoBehaviour
     {
         requestAttack = true;
     }
+    // private
     private void walk(float moveX)
     {
         if (moveX != 0)
@@ -168,7 +167,6 @@ public class Player : MonoBehaviour
         rb.linearVelocity = Vector2.up * jumpForce;
         PlayerLocation = transform.position;
     }
-
     private void dash()
     {
         rb.gravityScale = 0;
@@ -188,7 +186,7 @@ public class Player : MonoBehaviour
             getBomb = false;
             currentAttack = defaultAttack;
         }
-    }
+    }    
     IEnumerator WaitForNextDesh()
     {
         yield return new WaitForSeconds(0.2f);

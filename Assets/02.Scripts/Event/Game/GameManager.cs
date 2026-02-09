@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.GameOver:
+                Time.timeScale = 0;
                 timeManager.StopTimer(); // Stop TimeManager Coroutine
                 break;
 

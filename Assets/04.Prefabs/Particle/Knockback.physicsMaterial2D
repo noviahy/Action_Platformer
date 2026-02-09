@@ -6,9 +6,9 @@ PhysicsMaterial2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BounceBomb
+  m_Name: Knockback
   serializedVersion: 2
-  friction: 4
-  bounciness: 0.7
+  friction: 1
+  bounciness: 0
   m_FrictionCombine: 4
-  m_BounceCombine: 4
+  m_BounceCombine: 3

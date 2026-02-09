@@ -1,19 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
     [SerializeField] float radius = 3f;
-    [SerializeField] float force = 5f;
+    [SerializeField] float force = 4f;
     [SerializeField] LayerMask affectLayer;
 
     [SerializeField] ParticleSystem explosionFX;
+
+    public void Start()
+    {
+        Explode();
+    }
 
     public void Explode()
     {
         showEffect();
         doEsplosion();
-
-        Destroy(gameObject);
     }
 
     private void showEffect()
@@ -25,20 +29,23 @@ public class Explosion : MonoBehaviour
 
         fx.Play();
         Destroy(fx.gameObject, fx.main.duration);
+        Destroy(gameObject, fx.main.duration);
     }
 
     private void doEsplosion()
     {
         Collider2D[] hits =
     Physics2D.OverlapCircleAll(transform.position, radius, affectLayer);
-
+        
         foreach (var hit in hits)
         {
+            
             Rigidbody2D rb = hit.attachedRigidbody;
             if (rb == null) continue;
 
-            Vector2 dir = (rb.position - (Vector2)transform.position).normalized;
-            rb.AddForce(dir * force, ForceMode2D.Impulse);
+            var target = hit.GetComponent<IKnockbackHandler>();
+            if (target == null) continue;
+            target.GetKnockbackInfo(transform.position, force);
         }
     }
 }

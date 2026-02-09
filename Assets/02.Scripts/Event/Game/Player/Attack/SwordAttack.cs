@@ -3,7 +3,7 @@ using static Player;
 
 public class SwordAttack : MonoBehaviour, IAttackStratgy
 {
-    [SerializeField] private float defaultForce;
+    [SerializeField] private float nockBackForce;
     [SerializeField] private float bombForce;
     private Collider2D hitBoxCol;
     private SpriteRenderer sprite;
@@ -35,22 +35,19 @@ public class SwordAttack : MonoBehaviour, IAttackStratgy
         switch (other.tag) 
         {
             case "Monster":
-                applyForce(other, defaultForce);
+                var monster = other.GetComponent<IMonster>();
+                monster.GetKnockbackInfo(transform.position, nockBackForce);
                 break;
             case "Bomb":
-                applyForce(other, bombForce);
+                var bomb = other.GetComponent<Bomb>();
+                bomb.GetKnockbackInfo(transform.position, bombForce);
                 break;
+                /*
             case "Boss":
-                applyForce(other, 0);
+                var Boss = other.GetComponent<IBoss>();
+                monster.GetKnockbackInfo(transform.position, nockBackForce);
                 break;
+                */
         }
     }
-    private void applyForce(Collider2D other, float force)
-    {
-        Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
-        Vector2 dir = (Vector2.right * player.Facing).normalized;
-
-        rb.AddForce(dir * force, ForceMode2D.Impulse);
-    }
-
 }
