@@ -12,8 +12,6 @@ public class EventManager : MonoBehaviour
     public static event Action<string> GetReason;
     public static event Action<string> RequestStageID;
     public static event Action<string> RequestStageUI;
-
-
     public void RequestGameLoading(string stageID) // UIState(Playering에서 호출)
     {
         RequestGameState?.Invoke(GameManager.GameState.Loading); // (GameManager에서 구독)
@@ -23,7 +21,6 @@ public class EventManager : MonoBehaviour
     {
         RequestGameState?.Invoke(GameManager.GameState.Playing);
     }
-
     public void RequestGamePause() // UIManager
     {
         RequestGameState?.Invoke(GameManager.GameState.Pause);

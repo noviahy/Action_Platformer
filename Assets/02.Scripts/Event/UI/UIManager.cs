@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
         // Repeat
         if (currentState == next) // Prevent same State
         {
-            Debug.LogError($"previousState == currentState: {nextState}");
+            Debug.LogWarning($"previousState == currentState: {nextState}");
             return;
         }
 

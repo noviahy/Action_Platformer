@@ -4,11 +4,13 @@ using UnityEngine;
 public class CoinHPManager : MonoBehaviour
 {
     [SerializeField] private EventManager eventManager;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private CoinHPCalculator calculator;
     [SerializeField] private int defaultHP;
     [SerializeField] private int needCoin;
     [SerializeField] private int coinAmount;
     [SerializeField] private int dmg;
+    private bool isGameOver = false;
 
     public static CoinHPManager Instance { get; private set; }
     private void Awake()
@@ -32,13 +34,21 @@ public class CoinHPManager : MonoBehaviour
     }
     public void Damage() // PlayerTrigger
     {
+        calculator._Damage(dmg);
         eventManager.RefreshPlayingUI();
 
         if (calculator.HP <= 0)
         {
+            if (isGameOver)
+                return;
+            isGameOver = true;
             resetData();
             eventManager.RequestGameOver("You Died"); // EventManager ÀÌº¥Æ®
         }
+    }
+    public void ChangeGameOverState()
+    {
+        isGameOver = false;
     }
     public void SetCoinHP()
     {

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerKnockbackHandler : MonoBehaviour, IKnockbackHandler
 {
+    [SerializeField] CoinHPManager coinHPManager;
     [SerializeField] private float I_Time;
     [SerializeField] private float stopTime;
     [SerializeField] private Rigidbody2D rb;
@@ -13,7 +14,10 @@ public class PlayerKnockbackHandler : MonoBehaviour, IKnockbackHandler
     private Coroutine coroutine;
     public bool isEnable { get; private set; } = true;
     public bool lockInput { get; private set; } = false;
-
+    private void Awake()
+    {
+        coinHPManager = CoinHPManager.Instance;
+    }
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -34,8 +38,9 @@ public class PlayerKnockbackHandler : MonoBehaviour, IKnockbackHandler
     private void doNockBack()
     {
         if (coroutine != null) return;
-
+        coinHPManager.Damage();
         coroutine = StartCoroutine(WaitForNockBack());
+        
     }
 
     IEnumerator WaitForNockBack()

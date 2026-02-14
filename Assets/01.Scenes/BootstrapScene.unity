@@ -2452,6 +2452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinHPManager
   eventManager: {fileID: 1814415547}
+  gameManager: {fileID: 1273780396}
   calculator: {fileID: 425750939}
   defaultHP: 3
   needCoin: 10

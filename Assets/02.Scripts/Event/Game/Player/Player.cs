@@ -24,8 +24,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float walkSpeed;
     [SerializeField] private float deshSpeed;
 
+    private GameObject currentBomb;
+
     private IAttackStratgy currentAttack;
     private IAttackStratgy defaultAttack;
+
+    private float defaultGravity;
 
     private bool requestDash = false;
     private bool requestAttack = false;
@@ -33,7 +37,6 @@ public class Player : MonoBehaviour
 
     private bool lockDash = false;
     private bool lockAttack = false;
-    private bool getBomb = false;
     private bool jumpDash = false;
     private bool lockWalkJump = false;
 
@@ -50,6 +53,7 @@ public class Player : MonoBehaviour
         PlayerLocation = transform.position;
         AttackType = EAttackType.Default;
         bombAttack = new BombAttack();
+        defaultGravity = rb.gravityScale;
     }
     private void OnEnable()
     {
@@ -81,7 +85,7 @@ public class Player : MonoBehaviour
         if (requestDash)
         {
             requestDash = false;
-            if (lockDash || getBomb || jumpDash) return;
+            if (lockDash || jumpDash) return;
 
             lockDash = true;
             if (!groundCheck.IsGrounded)
@@ -110,23 +114,21 @@ public class Player : MonoBehaviour
     }
     public void ChangeAttackType()
     {
-        if (!getBomb) return;
-
+        if (currentBomb == null) return;
         AttackType = EAttackType.PutBomb;
         RequestAttack();
     }
     public void GetBoom()
     {
-        if (getBomb) return;
+        if (currentBomb != null) return;
 
-        getBomb = true;
-        GameObject obj = Instantiate(
+        currentBomb = Instantiate(
         bombPrefab,
         BombSoket.position,
         Quaternion.identity,
         BombSoket);
 
-        bombAttack.Init(this, obj, throwForce);
+        bombAttack.Init(this, currentBomb, throwForce);
 
         currentAttack = bombAttack;
     }
@@ -174,29 +176,49 @@ public class Player : MonoBehaviour
     }
     private void attack()
     {
+        if (AttackType == EAttackType.PutBomb && BombSoket.childCount == 0)
+        {
+            currentBomb = null;
+            currentAttack = defaultAttack;
+            AttackType = EAttackType.Default;
+            return;
+        }
+
+        if(BombSoket.childCount == 0)
+        {
+            currentAttack = defaultAttack;
+        }
+
         currentAttack.Attack(AttackType);
 
+        // putBomb
         if (currentAttack != defaultAttack)
         {
             currentAttack = defaultAttack;
             AttackType = EAttackType.Default;
         }
-        if (getBomb)
+        // throw
+        if (currentBomb != null)
         {
-            getBomb = false;
             currentAttack = defaultAttack;
+            currentBomb = null;
         }
-    }    
+    }
     IEnumerator WaitForNextDesh()
     {
         yield return new WaitForSeconds(0.2f);
 
-        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-        rb.gravityScale = 1f;
-        lockWalkJump = false;
-        yield return new WaitForSeconds(0.5f);
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            rb.gravityScale = defaultGravity;
+        }
 
+        lockWalkJump = false;
+
+        yield return new WaitForSeconds(0.5f);
         lockDash = false;
+        Debug.Log("out");
     }
     IEnumerator WaitForNextAttack()
     {

@@ -3,14 +3,16 @@ using static Player;
 
 public class BombAttack : IAttackStratgy
 {
-    private Player player;
+    [SerializeField] private Player player;
+    [SerializeField] PlayerAttack playerAttack;
     private float throwPower;
 
     private GameObject obj;
     private Rigidbody2D rb;
-    public void Init(Player playerCode, GameObject bombPrefab, float power)
+
+    public void Init(PlayerAttack attackCode, GameObject bombPrefab, float power)
     {
-        player = playerCode;
+        playerAttack = attackCode;
         throwPower = power;
         obj = bombPrefab;
         rb = obj.GetComponent<Rigidbody2D>();
@@ -26,7 +28,6 @@ public class BombAttack : IAttackStratgy
             obj.transform.position = player.PutBombSoket.position;
             return;
         }
-
         if (attackType == EAttackType.Default)
         {
             Vector2 dir = (
