@@ -1,5 +1,5 @@
 using UnityEngine;
-using static Player;
+using static PlayerAttack;
 
 public class SwordAttack : MonoBehaviour, IAttackStratgy
 {
@@ -7,18 +7,16 @@ public class SwordAttack : MonoBehaviour, IAttackStratgy
     [SerializeField] private float bombForce;
     private Collider2D hitBoxCol;
     private SpriteRenderer sprite;
-    private Player player;
     private void Start()
     {
         hitBoxCol.enabled = false;
         sprite.enabled = false;
     }
 
-    public void Init(GameObject gameObject, Player playerCode)
+    public void Init(GameObject gameObject)
     {
         hitBoxCol = gameObject.GetComponent<Collider2D>();
         sprite = gameObject.GetComponent<SpriteRenderer>();
-        player = playerCode;
     }
     public void Attack(EAttackType attackType)
     {

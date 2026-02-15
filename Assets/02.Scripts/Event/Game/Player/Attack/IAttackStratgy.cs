@@ -1,5 +1,5 @@
 using UnityEngine;
-using static Player;
+using static PlayerAttack;
 
 public interface IAttackStratgy
 {

@@ -42,7 +42,7 @@ public class InputManager : MonoBehaviour
         }
         if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
         {
-            player.ChangeAttackType();
+            player.RequestChangeAttackType();
         }
         // Jump
         if (Keyboard.current.spaceKey.wasPressedThisFrame)

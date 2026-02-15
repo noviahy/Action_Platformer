@@ -1,27 +1,26 @@
 using UnityEngine;
-using static Player;
+using static PlayerAttack;
 
 public class BombAttack : IAttackStratgy
 {
-    [SerializeField] private Player player;
-    [SerializeField] PlayerAttack playerAttack;
+    private Player player;
     private float throwPower;
 
     private GameObject obj;
-    private Rigidbody2D rb;
+    private Rigidbody2D rbBomb;
 
-    public void Init(PlayerAttack attackCode, GameObject bombPrefab, float power)
+    public void Init(Player playerCode,GameObject bombPrefab, float power)
     {
-        playerAttack = attackCode;
+        player = playerCode;
         throwPower = power;
         obj = bombPrefab;
-        rb = obj.GetComponent<Rigidbody2D>();
-        rb.simulated = false;
+        rbBomb = obj.GetComponent<Rigidbody2D>();
+        rbBomb.simulated = false;
     }
     public void Attack(EAttackType attackType)
     {
         obj.transform.SetParent(null);
-        rb.simulated = true;
+        rbBomb.simulated = true;
 
         if (attackType == EAttackType.PutBomb)
         {
@@ -31,10 +30,13 @@ public class BombAttack : IAttackStratgy
         if (attackType == EAttackType.Default)
         {
             Vector2 dir = (
-         Vector2.right * player.Facing * 1f +
+         Vector2.right * (int)player.Facing * 1f +
          Vector2.up * 0.7f
      ).normalized;
-            rb.AddForce(dir * throwPower, ForceMode2D.Impulse);
+            
+            Debug.Log("!");
+
+            rbBomb.AddForce(dir * throwPower, ForceMode2D.Impulse);
         }
     }
 }

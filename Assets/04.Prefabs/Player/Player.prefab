@@ -295,6 +295,8 @@ GameObject:
   - component: {fileID: 6133366276066703163}
   - component: {fileID: 4562074772274799292}
   - component: {fileID: 319706688330540608}
+  - component: {fileID: 3500633167986208251}
+  - component: {fileID: 4143820265997226626}
   - component: {fileID: 1704340439059411974}
   - component: {fileID: 2323723347760657597}
   m_Layer: 6
@@ -395,18 +397,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   PutBombSoket: {fileID: 7215587320428330928}
-  BombSoket: {fileID: 6594338064218572208}
   inputManager: {fileID: 0}
   groundCheck: {fileID: 8241878612535012875}
-  swordAttack: {fileID: 6133366276066703163}
   knockbackHandler: {fileID: 319706688330540608}
-  bombPrefab: {fileID: 8381367546293991430, guid: d20da1409f8317a4b8a958de6086fb63, type: 3}
-  swordObject: {fileID: 3521081015735313015}
-  rb: {fileID: 1704340439059411974}
-  throwForce: 8
-  jumpForce: 8
-  walkSpeed: 4
-  deshSpeed: 11
+  playerAttack: {fileID: 4143820265997226626}
+  playerMovement: {fileID: 3500633167986208251}
 --- !u!114 &6133366276066703163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23a66a410b1d324aa2dcaf8a1064ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordAttack
-  nockBackForce: 6
+  nockBackForce: 4
   bombForce: 10
 --- !u!114 &4562074772274799292
 MonoBehaviour:
@@ -433,8 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18334c57c40bfc24faaf021d1e65c529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerTrigger
-  coinHPManager: {fileID: 0}
-  player: {fileID: 9102484762296752153}
+  player: {fileID: 4143820265997226626}
   knockbackHandler: {fileID: 319706688330540608}
 --- !u!114 &319706688330540608
 MonoBehaviour:
@@ -448,9 +442,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81830f8ae2688441adf4b67fabda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerKnockbackHandler
+  coinHPManager: {fileID: 0}
   I_Time: 2
   stopTime: 0.4
   rb: {fileID: 1704340439059411974}
+--- !u!114 &3500633167986208251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8419052663954355227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c5f056db2c3c547abc8e67ff8a2cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  player: {fileID: 9102484762296752153}
+  swordObject: {fileID: 3521081015735313015}
+  rb: {fileID: 1704340439059411974}
+  groundCheck: {fileID: 8241878612535012875}
+  jumpForce: 8
+  walkSpeed: 3
+  deshSpeed: 10
+--- !u!114 &4143820265997226626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8419052663954355227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bbfad5125fb424a9fd25380a425468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
+  BombSoket: {fileID: 6594338064218572208}
+  bombPrefab: {fileID: 8381367546293991430, guid: d20da1409f8317a4b8a958de6086fb63, type: 3}
+  swordObject: {fileID: 3521081015735313015}
+  swordAttack: {fileID: 6133366276066703163}
+  player: {fileID: 9102484762296752153}
+  throwForce: 8
 --- !u!50 &1704340439059411974
 Rigidbody2D:
   serializedVersion: 5

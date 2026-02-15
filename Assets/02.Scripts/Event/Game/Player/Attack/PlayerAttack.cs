@@ -3,16 +3,19 @@ using System.Collections;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public Transform PutBombSoket;
     [SerializeField] private Transform BombSoket;
 
-    [SerializeField] private float throwForce;
     [SerializeField] private GameObject bombPrefab;
+    [SerializeField] private GameObject swordObject;
+
     [SerializeField] private SwordAttack swordAttack;
     [SerializeField] private BombAttack bombAttack;
     [SerializeField] private Player player;
 
+    [SerializeField] private float throwForce;
+
     private GameObject currentBomb;
+    private Coroutine coroutine;
     private IAttackStratgy currentAttack;
     private IAttackStratgy defaultAttack;
     public EAttackType AttackType { get; private set; }
@@ -23,9 +26,21 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Start()
     {
+        bombAttack = new BombAttack();
         AttackType = EAttackType.Default;
     }
-
+    private void OnEnable()
+    {
+        swordAttack.Init(swordObject);
+        defaultAttack = swordAttack;
+        currentAttack = defaultAttack;
+    }
+    public void ChangeAttackType()
+    {
+        if (currentBomb == null) return;
+        AttackType = EAttackType.PutBomb;
+        player.RequestAttack();
+    }
     public void GetBoom()
     {
         if (currentBomb != null) return;
@@ -36,13 +51,16 @@ public class PlayerAttack : MonoBehaviour
         Quaternion.identity,
         BombSoket);
 
-        bombAttack.Init(this, currentBomb, throwForce);
+        bombAttack.Init(player, currentBomb, throwForce);
 
         currentAttack = bombAttack;
     }
 
-    private void attack()
+    public void attack()
     {
+        if (coroutine != null)
+            return;
+
         if (AttackType == EAttackType.PutBomb && BombSoket.childCount == 0)
         {
             currentBomb = null;
@@ -56,7 +74,7 @@ public class PlayerAttack : MonoBehaviour
             currentAttack = defaultAttack;
         }
 
-        // currentAttack.Attack(AttackType);
+        RequestAttackRoutine();
 
         // putBomb
         if (currentAttack != defaultAttack)
@@ -71,10 +89,17 @@ public class PlayerAttack : MonoBehaviour
             currentBomb = null;
         }
     }
+    public void RequestAttackRoutine()
+    {
+        if (coroutine != null) return;
+
+        currentAttack.Attack(AttackType);
+        coroutine = StartCoroutine(WaitForNextAttack());
+    }
     IEnumerator WaitForNextAttack()
     {
         yield return new WaitForSeconds(0.3f);
         swordAttack.AttackFinish();
-        // player.lockAttack = false;
+        coroutine = null;
     }
 }
