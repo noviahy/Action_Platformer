@@ -30,12 +30,10 @@ public class BombAttack : IAttackStratgy
         if (attackType == EAttackType.Default)
         {
             Vector2 dir = (
-         Vector2.right * (int)player.Facing * 1f +
+         Vector2.right * player.Facing * 1f +
          Vector2.up * 0.7f
      ).normalized;
             
-            Debug.Log("!");
-
             rbBomb.AddForce(dir * throwPower, ForceMode2D.Impulse);
         }
     }

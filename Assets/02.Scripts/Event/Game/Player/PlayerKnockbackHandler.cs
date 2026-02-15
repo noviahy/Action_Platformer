@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerKnockbackHandler : MonoBehaviour, IKnockbackHandler
 {
     [SerializeField] CoinHPManager coinHPManager;
+    [SerializeField] GroundCheck groundCheck;
     [SerializeField] private float I_Time;
     [SerializeField] private float stopTime;
     [SerializeField] private Rigidbody2D rb;
@@ -40,7 +41,6 @@ public class PlayerKnockbackHandler : MonoBehaviour, IKnockbackHandler
         if (coroutine != null) return;
         coinHPManager.Damage();
         coroutine = StartCoroutine(WaitForNockBack());
-        
     }
 
     IEnumerator WaitForNockBack()
@@ -57,8 +57,8 @@ public class PlayerKnockbackHandler : MonoBehaviour, IKnockbackHandler
         rb.AddForce(nockBackdir * nockBackForce, ForceMode2D.Impulse);
 
         float elapsed = 0f;
-
-        yield return new WaitForSeconds(0.5f);
+        while (!groundCheck.IsGrounded)
+            yield return null;
 
         lockInput = false;
         while (elapsed < I_Time)

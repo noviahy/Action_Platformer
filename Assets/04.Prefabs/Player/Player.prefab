@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23a66a410b1d324aa2dcaf8a1064ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordAttack
-  nockBackForce: 4
+  nockBackForce: 2
   bombForce: 10
 --- !u!114 &4562074772274799292
 MonoBehaviour:
@@ -443,6 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerKnockbackHandler
   coinHPManager: {fileID: 0}
+  groundCheck: {fileID: 8241878612535012875}
   I_Time: 2
   stopTime: 0.4
   rb: {fileID: 1704340439059411974}
@@ -463,7 +464,7 @@ MonoBehaviour:
   rb: {fileID: 1704340439059411974}
   groundCheck: {fileID: 8241878612535012875}
   jumpForce: 8
-  walkSpeed: 3
+  walkSpeed: 4
   deshSpeed: 10
 --- !u!114 &4143820265997226626
 MonoBehaviour:
@@ -482,7 +483,7 @@ MonoBehaviour:
   swordObject: {fileID: 3521081015735313015}
   swordAttack: {fileID: 6133366276066703163}
   player: {fileID: 9102484762296752153}
-  throwForce: 8
+  throwForce: 10
 --- !u!50 &1704340439059411974
 Rigidbody2D:
   serializedVersion: 5

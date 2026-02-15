@@ -3,15 +3,21 @@ using UnityEngine;
 
 public class NormalMonster : MonoBehaviour, IMonster
 {
+    [SerializeField] Player player;
     [SerializeField] int monsterHP;
     [SerializeField] int moveX;
     [SerializeField] float walkSpeed;
     [SerializeField] float force;
+    [SerializeField] float activeDis;
 
     private GameManager gameManager;
     private Rigidbody2D rb;
 
     private Vector2 knockbackDir;
+
+    private Vector2 diff;
+    private bool isActive;
+
     private float knockbackForce;
     private float knockbackTime;
 
@@ -22,12 +28,27 @@ public class NormalMonster : MonoBehaviour, IMonster
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameManager.Instance;
     }
+    private void Update()
+    {
+        if (gameManager.CurrentState != GameManager.GameState.Playing)
+            return;
+
+        diff = player.transform.position - transform.position;
+
+        if (diff.sqrMagnitude < activeDis * activeDis)
+            isActive = true;
+        else if (diff.sqrMagnitude > activeDis * activeDis)
+            isActive = false;
+    }
+
     private void FixedUpdate()
     {
         if (gameManager.CurrentState != GameManager.GameState.Playing)
             return;
 
-        if (monsterHP <= 0)
+        if (!isActive) return;
+
+        if (monsterHP <= 0 && gameObject.activeSelf)
         {
             gameObject.SetActive(false);
         }
@@ -89,6 +110,8 @@ public class NormalMonster : MonoBehaviour, IMonster
         float angle = 30f * Mathf.Deg2Rad;
 
         Vector2 dir = new Vector2(knockbackDir.x * Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+
+        knockbackDir = dir;
     }
     private void doknockback()
     {

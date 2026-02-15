@@ -42,8 +42,10 @@ public class Player : MonoBehaviour
         // Walk
         if (!lockWalkJump)
         {
-            Facing = inputManager.moveX;
-            playerMovement.walk(Facing);
+            if (inputManager.moveX != 0)
+                Facing = inputManager.moveX;
+
+            playerMovement.walk(inputManager.moveX);
         }
         // Dash
         if (requestDash)
@@ -52,7 +54,7 @@ public class Player : MonoBehaviour
             if (lockDash || jumpDash) return;
 
             lockDash = true;
-            
+
             if (!groundCheck.IsGrounded)
                 jumpDash = true;
 
