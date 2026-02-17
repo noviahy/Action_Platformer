@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6745713720025983257}
   - component: {fileID: 7421603149525607781}
   - component: {fileID: 7939308362593007459}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +92,8 @@ GameObject:
   - component: {fileID: 3429834624589332232}
   - component: {fileID: 3076684197025149293}
   - component: {fileID: 6453546667334677002}
+  - component: {fileID: 7522322058168063529}
+  - component: {fileID: -1603630104996515780}
   - component: {fileID: -277058602332337740}
   - component: {fileID: -6950857688463078458}
   m_Layer: 8
@@ -190,17 +192,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RunMonster
   player: {fileID: 0}
   groundCheck: {fileID: 7421603149525607781}
-  monsterHP: 8
-  moveX: -1
-  force: 8
-  runForce: 13
-  jumpForce: 5
+  knockbackHandler: {fileID: 7522322058168063529}
+  runMonAI: {fileID: -1603630104996515780}
+  jumpForce: 3
   activeDis: 15
   runDis: 5
-  runSpeed: 4
+  runSpeed: 3
   walkSpeed: 1.5
   deceleration: 100
-  knockbackTime: 0.3
+--- !u!114 &7522322058168063529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285926757008663401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6fb63c2c7d1454abfd01b5dd853b33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunMonKnockbackHandler
+  runMonster: {fileID: 6453546667334677002}
+  monsterHP: 8
+  force: 8
+  runForce: 10
+--- !u!114 &-1603630104996515780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285926757008663401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93de497b4173af5499091793dd044263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunMonAI
+  runMonster: {fileID: 6453546667334677002}
 --- !u!61 &-277058602332337740
 BoxCollider2D:
   m_ObjectHideFlags: 0

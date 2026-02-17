@@ -7,16 +7,17 @@ public class SwordAttack : MonoBehaviour, IAttackStratgy
     [SerializeField] private float bombForce;
     private Collider2D hitBoxCol;
     private SpriteRenderer sprite;
+    private Vector2 pivot;
     private void Start()
     {
         hitBoxCol.enabled = false;
         sprite.enabled = false;
     }
-
     public void Init(GameObject gameObject)
     {
         hitBoxCol = gameObject.GetComponent<Collider2D>();
         sprite = gameObject.GetComponent<SpriteRenderer>();
+        pivot = hitBoxCol.bounds.min;
     }
     public void Attack(EAttackType attackType)
     {
@@ -34,11 +35,11 @@ public class SwordAttack : MonoBehaviour, IAttackStratgy
         {
             case "Monster":
                 var monster = other.GetComponent<IMonster>();
-                monster.GetKnockbackInfo(transform.position, nockBackForce);
+                monster.GetKnockbackInfo(pivot, nockBackForce);
                 break;
             case "Bomb":
                 var bomb = other.GetComponent<Bomb>();
-                bomb.GetKnockbackInfo(transform.position, bombForce);
+                bomb.GetKnockbackInfo(pivot, bombForce);
                 break;
                 /*
             case "Boss":

@@ -5,6 +5,7 @@ public class WallMonster : MonoBehaviour, IMonster
 {
     [SerializeField] Player player;
     [SerializeField] GameObject firePrefab;
+    [SerializeField] GameObject head;
     [SerializeField] int monsterHP;
 
     [SerializeField] float force;
@@ -27,7 +28,7 @@ public class WallMonster : MonoBehaviour, IMonster
         if (gameManager.CurrentState != GameManager.GameState.Playing)
             return;
 
-        shootDir = (player.transform.position - transform.position);
+        shootDir = player.transform.position - transform.position;
 
         float distSqr = shootDir.sqrMagnitude;
 
@@ -57,7 +58,7 @@ public class WallMonster : MonoBehaviour, IMonster
 
         float rotationSpeed = 30f;
 
-        transform.rotation = Quaternion.RotateTowards(
+        head.transform.rotation = Quaternion.RotateTowards(
     transform.rotation,
     targetRotation,
     rotationSpeed * Time.deltaTime

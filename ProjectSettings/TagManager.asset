@@ -10,6 +10,7 @@ TagManager:
   - BombItem
   - Sword
   - Boss
+  - FireBall
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Player
   - Sword
   - Monster
-  - 
+  - FireBall
   - 
   - 
   - 

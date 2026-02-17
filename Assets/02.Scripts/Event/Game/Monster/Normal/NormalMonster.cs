@@ -96,14 +96,14 @@ public class NormalMonster : MonoBehaviour, IMonster
         }
     }
 
-    public void GetKnockbackInfo(Vector2 hitPoint, float force)
+    public void GetKnockbackInfo(Vector2 hitPoint, float knockback)
     {
         float dirX = transform.position.x - hitPoint.x > 0 ? 1f : -1f;
 
         Vector2 dir = new Vector2(dirX, 0).normalized;
 
         knockbackDir = dir;
-        knockbackForce = force;
+        knockbackForce = knockback;
     }
     private void getVectorExplosion()
     {
