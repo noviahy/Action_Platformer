@@ -8,20 +8,12 @@ public class FireBall : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private Vector2 direction;
-    private int playerLayer;
-    private int monsterLayer;
-    private int fireBallLayer;
-    private void Start()
-    {
-        playerLayer = LayerMask.NameToLayer("Player");
-        monsterLayer = LayerMask.NameToLayer("Monster");
-    }
+    private bool isReflected = false;
     public void Init(Vector2 diff, Player playerCode)
     {
         rb = GetComponent<Rigidbody2D>();
         player = playerCode;
         direction = diff;
-        fireBallLayer = LayerMask.NameToLayer("FireBall");
         sprite = GetComponent<SpriteRenderer>();
     }
     private void FixedUpdate()
@@ -39,6 +31,8 @@ public class FireBall : MonoBehaviour
         }
         if (collision.collider.CompareTag("Monster"))
         {
+            if (!isReflected)
+                return;
             var monster = collision.collider.GetComponent<PlayerKnockbackHandler>();
             monster.GetKnockbackInfo(transform.position, force);
             Destroy(gameObject);
@@ -50,8 +44,7 @@ public class FireBall : MonoBehaviour
         if (other.CompareTag("Sword"))
         {
             direction = new Vector2(player.Facing > 0 ? 1f : -1f, 0f);
-            Physics2D.IgnoreLayerCollision(fireBallLayer, monsterLayer, true);
-            Physics2D.IgnoreLayerCollision(fireBallLayer, playerLayer, false);
+            isReflected = true;
             sprite.color = Color.blue;
         }
         else

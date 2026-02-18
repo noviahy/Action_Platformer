@@ -75,8 +75,15 @@ public class NormalMonster : MonoBehaviour, IMonster
         {
             moveX *= -1;
         }
-    }
 
+        if (collision.collider.CompareTag("FireBall"))
+        {
+            knockbackTime = 0.3f;
+            monsterHP -= 1;
+
+            doKnockback();
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Sword"))
@@ -84,7 +91,7 @@ public class NormalMonster : MonoBehaviour, IMonster
             isAttacked = true;
             knockbackTime = 0.2f;
             monsterHP -= 1;
-            doknockback();
+            doKnockback();
         }
         if (other.CompareTag("Explosion"))
         {
@@ -92,10 +99,9 @@ public class NormalMonster : MonoBehaviour, IMonster
             isAttacked = true;
             monsterHP -= 2;
             getVectorExplosion();
-            doknockback();
+            doKnockback();
         }
     }
-
     public void GetKnockbackInfo(Vector2 hitPoint, float knockback)
     {
         float dirX = transform.position.x - hitPoint.x > 0 ? 1f : -1f;
@@ -113,7 +119,7 @@ public class NormalMonster : MonoBehaviour, IMonster
 
         knockbackDir = dir;
     }
-    private void doknockback()
+    private void doKnockback()
     {
         StartCoroutine(Knockback());
     }

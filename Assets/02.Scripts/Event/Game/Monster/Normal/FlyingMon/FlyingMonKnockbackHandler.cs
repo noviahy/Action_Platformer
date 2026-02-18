@@ -1,11 +1,10 @@
 using UnityEngine;
 using System.Collections;
-public class RunMonKnockbackHandler : MonoBehaviour, IMonster
+public class FlyingMonKnockbackHandler : MonoBehaviour, IMonster
 {
-    [SerializeField] RunMonster runMonster;
+    [SerializeField] FlyingMonster flyingMonster;
     [SerializeField] int monsterHP;
     [SerializeField] float force;
-    [SerializeField] float runForce;
 
     private Vector2 knockbackDir;
 
@@ -13,44 +12,29 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
 
     private float knockbackForce;
     private float knockbackTime;
-    private Coroutine coroutine;
+    public Coroutine knockbackCoroutine { get; private set; }
+    public Coroutine crashCorountine { get; private set; }
     public int HP { get; private set; }
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         HP = monsterHP;
-        coroutine = null;
     }
     public void GetKnockbackInfo(Vector2 hitPoint, float knockback)
     {
-        float dirX = transform.position.x - hitPoint.x > 0 ? 1f : -1f;
-
-        Vector2 dir = new Vector2(dirX, 0).normalized;
+        Vector2 dir = ((Vector2)transform.position - hitPoint).normalized;
 
         knockbackDir = dir;
         knockbackForce = knockback;
-    }
-    private void getVectorExplosion()
-    {
-        float angle = 30f * Mathf.Deg2Rad;
-
-        Vector2 dir = new Vector2(knockbackDir.x * Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
-
-        knockbackDir = dir;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
             var player = collision.collider.GetComponent<PlayerKnockbackHandler>();
-            if (runMonster.CurrentState == RunMonster.MonsterState.Run)
-            {
-                player.GetKnockbackInfo(transform.position, runForce);
-                return;
-            }
             player.GetKnockbackInfo(transform.position, force);
+            DoCrash();
         }
-
         if (collision.collider.CompareTag("FireBall"))
         {
             knockbackTime = 0.3f;
@@ -64,7 +48,7 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
     {
         if (other.CompareTag("Sword"))
         {
-            knockbackTime = 0.4f;
+            knockbackTime = 0.2f;
             monsterHP -= 1;
             HP = monsterHP;
 
@@ -75,26 +59,40 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
             knockbackTime = 1.5f;
             monsterHP -= 2;
             HP = monsterHP;
-            getVectorExplosion();
             doKnockback();
         }
-    }    
+    }
     private void doKnockback()
     {
-        if (coroutine != null) return;
+        if (knockbackCoroutine != null) return;
 
-        runMonster.ChangeMonState(RunMonster.MonsterState.Knockback);
-        coroutine = StartCoroutine(Knockback());
+        flyingMonster.ChangeState(FlyingMonster.FlyingMonState.Knockback);
+        knockbackCoroutine = StartCoroutine(Knockback());
+    }
+    public void DoCrash()
+    {
+        if(crashCorountine != null) 
+            return;
+        flyingMonster.ChangeState(FlyingMonster.FlyingMonState.Stop);
+        crashCorountine = StartCoroutine(WaitForMove());
+    }
+    IEnumerator WaitForMove()
+    {
+        yield return new WaitForSeconds(2f);
+        crashCorountine = null;
+        flyingMonster.ChangeState(FlyingMonster.FlyingMonState.Flying);
     }
     IEnumerator Knockback()
     {
         rb.linearVelocity = Vector2.zero;
-        
+
+        rb.gravityScale = 1f;
         rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(knockbackTime);
+        rb.gravityScale = 0f;
 
-        runMonster.ChangeMonState(RunMonster.MonsterState.Idle);
-        coroutine = null;
+        knockbackCoroutine = null;
+        flyingMonster.ChangeState(FlyingMonster.FlyingMonState.Flying);
     }
 }

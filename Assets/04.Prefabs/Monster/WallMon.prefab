@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &904255761352317016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7517903426226842939}
+  m_Layer: 8
+  m_Name: FireBallSoket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7517903426226842939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904255761352317016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.7, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2618006219789432097}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4274415971409787019
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2618006219789432097}
   - component: {fileID: 801140368945020835}
-  - component: {fileID: 5647032769951910005}
+  - component: {fileID: 8227427258411539863}
+  - component: {fileID: 8620535306466062267}
   m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
@@ -32,6 +64,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 30986218817802069}
+  - {fileID: 7517903426226842939}
   m_Father: {fileID: 3083048742068004723}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &801140368945020835
@@ -93,7 +126,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!58 &5647032769951910005
+--- !u!114 &8227427258411539863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274415971409787019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98d9ffd1a31db041b958138bc2a1772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Rotation
+  firePrefab: {fileID: 9156563412673038976, guid: bcf475d56465d9745be4e5ce2f5b8feb, type: 3}
+  fireBallSoket: {fileID: 904255761352317016}
+  player: {fileID: 0}
+  activeDis: 5
+--- !u!58 &8620535306466062267
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3612521314239395050}
   - component: {fileID: 5164294618870405942}
-  - component: {fileID: 89731555969388022}
+  - component: {fileID: 5167796293891669776}
   m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
@@ -221,7 +270,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!61 &89731555969388022
+--- !u!61 &5167796293891669776
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,7 +343,7 @@ Transform:
   m_GameObject: {fileID: 6411933740314957316}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.46766, y: 2.59547, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -342,11 +391,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WallMonster
   player: {fileID: 0}
-  firePrefab: {fileID: 9156563412673038976, guid: bcf475d56465d9745be4e5ce2f5b8feb, type: 3}
-  head: {fileID: 4274415971409787019}
+  rotation: {fileID: 8227427258411539863}
   monsterHP: 1
   force: 5
-  activeDis: 10
 --- !u!1 &8492346343272957310
 GameObject:
   m_ObjectHideFlags: 0
