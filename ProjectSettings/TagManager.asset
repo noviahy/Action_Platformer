@@ -11,6 +11,8 @@ TagManager:
   - Sword
   - Boss
   - FireBall
+  - DamageObs
+  - BreakWall
   layers:
   - Default
   - TransparentFX
@@ -22,8 +24,8 @@ TagManager:
   - Sword
   - Monster
   - FireBall
-  - 
-  - 
+  - Obstacle
+  - Item
   - 
   - 
   - 
@@ -45,8 +47,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BombItem
+    uniqueID: 3138078555
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   m_RenderingLayers:
   - Default
+  - BombItem

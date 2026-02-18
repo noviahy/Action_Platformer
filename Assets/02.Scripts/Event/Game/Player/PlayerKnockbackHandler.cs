@@ -26,6 +26,8 @@ public class PlayerKnockbackHandler : MonoBehaviour, IKnockbackHandler
     }
     public void GetKnockbackInfo(Vector2 hitPoint, float force)
     {
+        if (!isEnable)
+            return;
         float dirX = transform.position.x - hitPoint.x > 0 ? 1f : -1f;
         float angle = 35f * Mathf.Deg2Rad;
 

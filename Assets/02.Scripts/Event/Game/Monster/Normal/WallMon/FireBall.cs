@@ -25,6 +25,8 @@ public class FireBall : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
+            if (isReflected)
+                return;
             var player = collision.collider.GetComponent<PlayerKnockbackHandler>();
             player.GetKnockbackInfo(transform.position, force);
             Destroy(gameObject);

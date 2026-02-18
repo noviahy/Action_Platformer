@@ -57,7 +57,7 @@ public class FlyingMonster : MonoBehaviour
         {
             isActive = true;
             ChangeState(FlyingMonState.Flying);
-            targetPoint = player.transform.position + Vector3.up * 2f;
+            targetPoint = player.transform.position + Vector3.up * 1.5f;
         }
         else
         {
@@ -92,6 +92,7 @@ public class FlyingMonster : MonoBehaviour
                 break;
             case FlyingMonState.Stop:
                 rb.linearVelocity = Vector2.zero;
+                targetPoint = new Vector2(transform.position.x, rb.linearVelocity.y);
                 break;
             case FlyingMonState.Knockback:
                 break;

@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void jump()
     {
-        rb.linearVelocity = Vector2.up * jumpForce;
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
     public void dash()
     {

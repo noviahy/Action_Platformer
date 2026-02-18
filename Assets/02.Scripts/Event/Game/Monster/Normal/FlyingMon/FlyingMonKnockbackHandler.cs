@@ -48,7 +48,7 @@ public class FlyingMonKnockbackHandler : MonoBehaviour, IMonster
     {
         if (other.CompareTag("Sword"))
         {
-            knockbackTime = 0.2f;
+            knockbackTime = 0.1f;
             monsterHP -= 1;
             HP = monsterHP;
 

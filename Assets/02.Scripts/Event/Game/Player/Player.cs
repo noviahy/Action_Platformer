@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerKnockbackHandler knockbackHandler;
     [SerializeField] private PlayerAttack playerAttack;
     [SerializeField] private PlayerMovement playerMovement;
+    private CoinHPManager coinHPManager;
 
     private bool requestDash = false;
     private bool requestAttack = false;
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         inputManager = InputManager.Instance;
+        coinHPManager = CoinHPManager.Instance;
 
         if (InputManager.Instance != null)
             InputManager.Instance.SetPlayer(this);
@@ -74,6 +76,10 @@ public class Player : MonoBehaviour
             if (!groundCheck.IsGrounded || lockWalkJump) return;
             playerMovement.jump();
         }
+    }
+    public void RequestDead()
+    {
+        coinHPManager.Dead();
     }
     public void RequestChangeAttackType()
     {

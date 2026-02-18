@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
@@ -39,10 +38,14 @@ public class Explosion : MonoBehaviour
         
         foreach (var hit in hits)
         {
-            
             Rigidbody2D rb = hit.attachedRigidbody;
             if (rb == null) continue;
 
+            if (hit.CompareTag("BreakWall"))
+            {
+                var wall = hit.GetComponent<BombBreakableWall>();
+                wall.BreakWall();
+            }
             var target = hit.GetComponent<IKnockbackHandler>();
             if (target == null) continue;
             target.GetKnockbackInfo(transform.position, force);

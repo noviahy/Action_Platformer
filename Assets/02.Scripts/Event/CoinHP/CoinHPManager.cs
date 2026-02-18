@@ -42,9 +42,20 @@ public class CoinHPManager : MonoBehaviour
             if (isGameOver)
                 return;
             isGameOver = true;
-            resetData();
             eventManager.RequestGameOver("You Died"); // EventManager 이벤트
+            resetData();
         }
+    }
+    public void Dead()
+    {
+        calculator._Damage(calculator.HP);
+        eventManager.RefreshPlayingUI();
+
+        if (isGameOver)
+            return;
+        isGameOver = true;
+        eventManager.RequestGameOver("You Died"); // EventManager 이벤트
+        resetData();
     }
     public void ChangeGameOverState()
     {
