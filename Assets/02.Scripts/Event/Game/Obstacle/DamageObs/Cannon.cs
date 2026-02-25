@@ -1,16 +1,50 @@
+using System.Collections;
 using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] Player player;
+    [SerializeField] GameObject cannonBallPrefab;
+    [SerializeField] GameObject spawnSoket;
+    [SerializeField] float fireInterval;
+    [SerializeField] float nextStartInterval;
+    [SerializeField] float activeDis;
+    [SerializeField] ParticleSystem explodeParticel;
+    private GameManager gameManager;
+    private Vector2 diff;
+    private Coroutine coroutine;
+    private void Start()
     {
-        
+        gameManager = GameManager.Instance;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (gameManager.CurrentState != GameManager.GameState.Playing)
+            return;
+
+        diff = player.transform.position - transform.position;
+
+        if (diff.sqrMagnitude < activeDis * activeDis && coroutine == null)
+        {
+            coroutine = StartCoroutine(SpawnCannonBall());
+        }
+    }
+    public void RequestDestroy()
+    {
+        Instantiate(explodeParticel, transform.position, Quaternion.identity);
+        gameObject.SetActive(false);
+    }
+    IEnumerator SpawnCannonBall()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            var ball = Instantiate(cannonBallPrefab, spawnSoket.transform.position, Quaternion.identity);
+            CannonBall ballCode = ball.GetComponent<CannonBall>();
+            ballCode.Init(player);
+            yield return new WaitForSeconds(fireInterval);
+        }
+        yield return new WaitForSeconds(nextStartInterval);
+        coroutine = null;
     }
 }

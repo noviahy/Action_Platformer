@@ -15,7 +15,7 @@ public class BombItem : MonoBehaviour
     {
         if (!isActive) return;
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player") || other.gameObject.layer == LayerMask.NameToLayer("Sword"))
+        if (other.CompareTag("Player") || other.CompareTag("Sword"))
         {
             gameObject.SetActive(false);
         }

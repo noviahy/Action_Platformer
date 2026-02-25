@@ -6,11 +6,17 @@ public class GroundCheck : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        IsGrounded = true;
+        if (col.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            IsGrounded = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
-        IsGrounded = false;
+        if (col.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            IsGrounded = false;
+        }
     }
 }

@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector2(
-    moveX * walkSpeed,
+    moveX * walkSpeed + player.acceleration,
     rb.linearVelocity.y
 );
     }

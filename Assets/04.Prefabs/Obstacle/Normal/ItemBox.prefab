@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6721018070813336772}
   - component: {fileID: 640419939810593007}
   - component: {fileID: 7533348775178690999}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: ItemBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1156888741
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 3087452183656313319}
   - component: {fileID: 4821565536613170985}
   - component: {fileID: 6364044042556785345}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: CollisionBox
   m_TagString: BreakWall
   m_Icon: {fileID: 0}

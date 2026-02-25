@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float acceleration;
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        
+        if (collision.collider.CompareTag("Player"))
+        {
+            var player = collision.gameObject.GetComponent<Player>();
+            player.RequestSetAcceleration(acceleration);
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        
+        if (collision.collider.CompareTag("Player"))
+        {
+            var player = collision.gameObject.GetComponent<Player>();
+            player.RequestNoAcceleration();
+        }
     }
 }

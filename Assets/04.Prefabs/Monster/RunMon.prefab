@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6745713720025983257}
   - component: {fileID: 7421603149525607781}
   - component: {fileID: 7939308362593007459}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: -1603630104996515780}
   - component: {fileID: -277058602332337740}
   - component: {fileID: -6950857688463078458}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: RunMon
   m_TagString: Monster
   m_Icon: {fileID: 0}

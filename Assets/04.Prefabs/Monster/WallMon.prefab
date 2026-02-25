@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7517903426226842939}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: FireBallSoket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 801140368945020835}
   - component: {fileID: 8227427258411539863}
   - component: {fileID: 8620535306466062267}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 3612521314239395050}
   - component: {fileID: 5164294618870405942}
   - component: {fileID: 5167796293891669776}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 3083048742068004723}
   - component: {fileID: 1066957761439878917}
   - component: {fileID: -2887524500998311557}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: WallMon
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 30986218817802069}
   - component: {fileID: 7487644559029807160}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

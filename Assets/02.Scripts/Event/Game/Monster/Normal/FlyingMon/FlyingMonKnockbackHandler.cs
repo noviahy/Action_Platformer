@@ -29,12 +29,6 @@ public class FlyingMonKnockbackHandler : MonoBehaviour, IMonster
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
-        {
-            var player = collision.collider.GetComponent<PlayerKnockbackHandler>();
-            player.GetKnockbackInfo(transform.position, force);
-            DoCrash();
-        }
         if (collision.collider.CompareTag("FireBall"))
         {
             knockbackTime = 0.3f;
@@ -46,6 +40,13 @@ public class FlyingMonKnockbackHandler : MonoBehaviour, IMonster
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Player"))
+        {
+            var player = other.GetComponent<PlayerKnockbackHandler>();
+            player.GetKnockbackInfo(transform.position, force);
+            DoCrash();
+        }
+
         if (other.CompareTag("Sword"))
         {
             knockbackTime = 0.1f;

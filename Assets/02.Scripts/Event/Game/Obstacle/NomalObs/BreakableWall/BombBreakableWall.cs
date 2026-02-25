@@ -3,10 +3,13 @@ using UnityEngine;
 public class BombBreakableWall : MonoBehaviour
 {
     [SerializeField] GameObject wreckPrefab;
-    public void BreakWall()
-    {
-        GameObject wreck = Instantiate(wreckPrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Explosion"))
+        {
+            GameObject wreck = Instantiate(wreckPrefab, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
+        }
+    }
 }

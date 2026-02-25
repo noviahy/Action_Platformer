@@ -7,7 +7,7 @@ public class RotationObstacle : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float force;
     [SerializeField] private int clockWise;
-    private int randomTime;
+    private float randomTime;
     private bool canRotate = false;
     private void Start()
     {
@@ -29,7 +29,7 @@ public class RotationObstacle : MonoBehaviour
     }
     private void getRandomValue()
     {
-        randomTime = Random.Range(0, 6);
+        randomTime = Random.Range(0.2f, 2f);
         StartCoroutine(RandomStart());
     }
     private void OnTriggerEnter2D(Collider2D other)

@@ -13,19 +13,22 @@ TagManager:
   - FireBall
   - DamageObs
   - BreakWall
+  - Cannon
+  - CannonBall
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
   - Player
-  - Sword
   - Monster
-  - FireBall
-  - Obstacle
-  - Item
+  - Projectile
+  - Ground
+  - Trigger
+  - 
   - 
   - 
   - 

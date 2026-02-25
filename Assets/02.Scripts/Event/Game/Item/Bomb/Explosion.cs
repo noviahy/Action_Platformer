@@ -41,11 +41,6 @@ public class Explosion : MonoBehaviour
             Rigidbody2D rb = hit.attachedRigidbody;
             if (rb == null) continue;
 
-            if (hit.CompareTag("BreakWall"))
-            {
-                var wall = hit.GetComponent<BombBreakableWall>();
-                wall.BreakWall();
-            }
             var target = hit.GetComponent<IKnockbackHandler>();
             if (target == null) continue;
             target.GetKnockbackInfo(transform.position, force);

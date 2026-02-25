@@ -21,7 +21,7 @@ public class Bomb : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.CompareTag("Monster"))
+        if (other.collider.CompareTag("Monster") || other.collider.CompareTag("FireBall"))
         {
             StopCoroutine(coroutine);
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);

@@ -64,13 +64,6 @@ public class NormalMonster : MonoBehaviour, IMonster
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (collision.collider.CompareTag("Player"))
-        {
-            var player = collision.collider.GetComponent<PlayerKnockbackHandler>();
-            player.GetKnockbackInfo(transform.position, force);
-        }
-
         if (collision.collider.CompareTag("Monster"))
         {
             moveX *= -1;
@@ -86,6 +79,13 @@ public class NormalMonster : MonoBehaviour, IMonster
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.name);
+        if (other.CompareTag("Player"))
+        {
+            var player = other.GetComponent<PlayerKnockbackHandler>();
+            player.GetKnockbackInfo(transform.position, force);
+        }
+
         if (other.CompareTag("Sword"))
         {
             isAttacked = true;

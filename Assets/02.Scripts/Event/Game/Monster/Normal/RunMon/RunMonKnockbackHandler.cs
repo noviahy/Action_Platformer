@@ -40,16 +40,6 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
-        {
-            var player = collision.collider.GetComponent<PlayerKnockbackHandler>();
-            if (runMonster.CurrentState == RunMonster.MonsterState.Run)
-            {
-                player.GetKnockbackInfo(transform.position, runForce);
-                return;
-            }
-            player.GetKnockbackInfo(transform.position, force);
-        }
 
         if (collision.collider.CompareTag("FireBall"))
         {
@@ -62,6 +52,17 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Player"))
+        {
+            var player = other.GetComponent<PlayerKnockbackHandler>();
+            if (runMonster.CurrentState == RunMonster.MonsterState.Run)
+            {
+                player.GetKnockbackInfo(transform.position, runForce);
+                return;
+            }
+            player.GetKnockbackInfo(transform.position, force);
+        }
+
         if (other.CompareTag("Sword"))
         {
             knockbackTime = 0.4f;

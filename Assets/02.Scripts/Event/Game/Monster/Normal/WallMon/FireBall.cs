@@ -7,6 +7,7 @@ public class FireBall : MonoBehaviour
     private Player player;
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
+    private Collider2D col;
     private Vector2 direction;
     private bool isReflected = false;
     public void Init(Vector2 diff, Player playerCode)
@@ -15,6 +16,7 @@ public class FireBall : MonoBehaviour
         player = playerCode;
         direction = diff;
         sprite = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
     }
     private void FixedUpdate()
     {
@@ -26,7 +28,10 @@ public class FireBall : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             if (isReflected)
-                return;
+            {
+                    Physics2D.IgnoreCollision(col, collision.collider, true);
+                    return;
+            }
             var player = collision.collider.GetComponent<PlayerKnockbackHandler>();
             player.GetKnockbackInfo(transform.position, force);
             Destroy(gameObject);
@@ -34,11 +39,16 @@ public class FireBall : MonoBehaviour
         if (collision.collider.CompareTag("Monster"))
         {
             if (!isReflected)
+            {
+                Physics2D.IgnoreCollision(col, collision.collider, true);
                 return;
+            }
+            Physics2D.IgnoreCollision(col, collision.collider, false);
             var monster = collision.collider.GetComponent<PlayerKnockbackHandler>();
             monster.GetKnockbackInfo(transform.position, force);
             Destroy(gameObject);
         }
+
         Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -48,10 +58,6 @@ public class FireBall : MonoBehaviour
             direction = new Vector2(player.Facing > 0 ? 1f : -1f, 0f);
             isReflected = true;
             sprite.color = Color.blue;
-        }
-        else
-        {
-            Destroy(gameObject);
         }
     }
 }

@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     private CoinHPManager coinHPManager;
 
+
     private bool requestDash = false;
     private bool requestAttack = false;
     private bool requestJump = false;
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour
     private bool jumpDash = false;
     private bool lockWalkJump = false;
     public float Facing { get; private set; } = 1;
+    public float acceleration {  get; private set; } = 0;
+
     private void OnEnable()
     {
         inputManager = InputManager.Instance;
@@ -76,6 +79,14 @@ public class Player : MonoBehaviour
             if (!groundCheck.IsGrounded || lockWalkJump) return;
             playerMovement.jump();
         }
+    }
+    public void RequestSetAcceleration(float speed)
+    {
+        acceleration = speed;
+    }
+    public void RequestNoAcceleration()
+    {
+        acceleration = 0;
     }
     public void RequestDead()
     {

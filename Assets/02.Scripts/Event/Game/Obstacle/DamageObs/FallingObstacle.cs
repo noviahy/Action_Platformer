@@ -1,40 +1,65 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
-using static FlyingMonster;
 
 public class FallingObstacle : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] private float fallGravity;
     [SerializeField] private float activeDis;
-    private LayerMask playerLayer;
-    private LayerMask groundLayer;
+    [SerializeField] private float upSpead;
     private Rigidbody2D rb;
+    private Vector2 defaultPoint;
+    private Coroutine coroutine;
     private void Start()
     {
        rb = GetComponent<Rigidbody2D>();
-        playerLayer = LayerMask.NameToLayer("Player");
-        groundLayer = LayerMask.NameToLayer("Ground");
+        defaultPoint = transform.position;
     }
 
     private void FixedUpdate()
     {
         float diffX = Mathf.Abs(player.transform.position.x - transform.position.x);
 
-        if (diffX < activeDis * activeDis)
+        if (diffX < activeDis)
         {
+            if (coroutine != null)
+            {
+                StopCoroutine(coroutine);
+                coroutine = null;
+            }
             rb.gravityScale = fallGravity;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == playerLayer)
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            coroutine = StartCoroutine(ReturnToPoint());
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
             var player = collision.gameObject.GetComponent<Player>();
             player.RequestDead();
         }
-        if(collision.gameObject.layer == groundLayer)
+    }
+    IEnumerator ReturnToPoint()
+    {
+        float time = 0f;
+
+        Vector2 ground = transform.position;
+
+        while (time <= 1f)
         {
-            Destroy(gameObject);
+            float speed = Mathf.Lerp(ground.y, defaultPoint.y, time);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, speed);
+
+            time += Time.deltaTime;
+            yield return null;
         }
+        coroutine = null;
     }
 }

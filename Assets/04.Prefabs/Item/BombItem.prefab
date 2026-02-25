@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2869291228753546975}
   - component: {fileID: 6307935801700841089}
   - component: {fileID: 7703490789090549181}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: BombItem
   m_TagString: BombItem
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1156888741
   m_SortingLayer: -1
-  m_SortingOrder: -10
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
