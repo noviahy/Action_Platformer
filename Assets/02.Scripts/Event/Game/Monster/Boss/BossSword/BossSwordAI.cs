@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class BossSwordAI : MonoBehaviour
 {
+    [SerializeField] BossSword boss;
+    [SerializeField] BossSwordPattern bossPattern;
+    public int PatternNum {  get; private set; }
     public float IdelTime { get; private set; }
+    public float WalkTime { get; private set; }
 
-    public void GetIdelTime()
+    public float GetIdelTime()
     {
-        IdelTime = Random.Range(0.5f, 1f);
+         return IdelTime = Random.Range(0.5f, 1f);
     }
-
-
+    public float GetWalkTime()
+    {
+        return WalkTime = Random.Range(1f, 3f);
+    }
 }

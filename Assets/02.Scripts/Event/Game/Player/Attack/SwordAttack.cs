@@ -41,12 +41,6 @@ public class SwordAttack : MonoBehaviour, IAttackStratgy
                 var bomb = other.GetComponent<Bomb>();
                 bomb.GetKnockbackInfo(pivot, bombForce);
                 break;
-                /*
-            case "Boss":
-                var Boss = other.GetComponent<IBoss>();
-                monster.GetKnockbackInfo(transform.position, nockBackForce);
-                break;
-                */
         }
     }
 }
