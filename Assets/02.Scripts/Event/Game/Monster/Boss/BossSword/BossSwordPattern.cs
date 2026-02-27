@@ -5,20 +5,26 @@ using UnityEngine;
 public class BossSwordPattern : MonoBehaviour
 {
     [SerializeField] BossSword boss;
-    [SerializeField] BossSwordAI bossAI;
+    [SerializeField] BossSwordTimer bossTimer;
+    [SerializeField] BossSwordCollision collisionHandler;
+
     [SerializeField] private Collider2D rushHitBox;
+    [SerializeField] private Collider2D slashHitBox;
     [SerializeField] private Collider2D defaultHitBox;
     [SerializeField] private float jumpForce;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float rushSpeed;
+
     private Coroutine coroutine;
     private Dictionary<BossSword.BossState, Func<IEnumerator>> actionMap;
     private Rigidbody2D rb;
+    private float target;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rushHitBox.enabled =false;
-        defaultHitBox.enabled =false;
+        rushHitBox.enabled = false;
+        slashHitBox.enabled = false;
+        defaultHitBox.enabled = false;
 
         actionMap = new Dictionary<BossSword.BossState, Func<IEnumerator>>()
         {
@@ -42,7 +48,10 @@ public class BossSwordPattern : MonoBehaviour
     }
     private void jump()
     {
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        float angle = 30f * Mathf.Deg2Rad;
+        Vector2 dir = new Vector2(boss.moveX * Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+
+        rb.AddForce(dir * jumpForce, ForceMode2D.Impulse);
     }
     private void walk()
     {
@@ -50,46 +59,94 @@ public class BossSwordPattern : MonoBehaviour
     }
     private void rush()
     {
-        while (rb.linearVelocity.x < boss.rushPoint.x)
-        {
-            rb.linearVelocity = new Vector2(boss.moveX * rushSpeed, rb.linearVelocity.y);
-        }
+        rb.linearVelocity = new Vector2(boss.moveX * rushSpeed, rb.linearVelocity.y);
     }
     IEnumerator DoIdle()
     {
-        bossAI.GetIdelTime();
-        yield return new WaitForSeconds(bossAI.GetIdelTime());
+        idle();
+        yield return new WaitForSeconds(bossTimer.GetIdelTime());
+
+        coroutine = null;
+        boss.GetNextPattern();
     }
     IEnumerator DoWalk()
     {
-        walk();
-        yield return bossAI.WalkTime;
+        idle();
+        float timer = 0;
+        float walkTime = bossTimer.GetWalkTime();
+        while (timer <= walkTime)
+        {
+            walk();
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        idle();
+        yield return new WaitForSeconds(1f);
+        coroutine = null;
+        boss.GetNextPattern();
     }
     IEnumerator DoJump()
     {
+        idle();
         jump();
-        yield return bossAI.IdelTime;
+
+        yield return new WaitForSeconds(1f);
+        coroutine = null;
+        boss.GetNextPattern();
     }
     IEnumerator DoRush() // 빠르게 돌진
     {
-        rush();
-        yield return null;
+        idle();
+        target = boss.rushPoint.x;
+        while (Mathf.Abs(rb.transform.position.x - target) > 0.3f)
+        {
+            rush();
+            yield return null;
+        }
+
+        idle();
+        yield return new WaitForSeconds(1f);
+        coroutine = null;
+        boss.GetNextPattern();
     }
     IEnumerator DoDefaultAttack()
     {
-        bossAI.GetIdelTime();
-        yield return bossAI.IdelTime;
+        idle();
+        defaultHitBox.enabled = true;
+        yield return new WaitForSeconds(2f);
+        defaultHitBox.enabled = false;
+
+        idle();
+        yield return new WaitForSeconds(1f);
+        coroutine = null;
+        boss.GetNextPattern();
     }
     IEnumerator DoSlash() // 짧게 베기
     {
+        idle();
         for (int i = 0; i < 3; i++)
         {
-            defaultHitBox.enabled = true;
-            walk();
-            yield return new WaitForSeconds(0.4f);
-            defaultHitBox.enabled = false;
-            idle();
-            yield return new WaitForSeconds(0.1f);
+            float time = 0;
+            slashHitBox.enabled = true;
+            while (time <= 1f)
+            {
+                walk();
+                time += Time.deltaTime;
+                yield return null;
+            }
+            time = 0;
+            slashHitBox.enabled = false;
+            while (time <= 0.5f)
+            {
+                idle();
+                time += Time.deltaTime;
+                yield return null;
+            }
         }
+        idle();
+        yield return new WaitForSeconds(1f);
+        coroutine = null;
+        boss.GetNextPattern();
     }
 }

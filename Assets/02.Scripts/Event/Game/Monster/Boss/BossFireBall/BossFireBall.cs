@@ -1,13 +1,10 @@
 using UnityEngine;
 
-public class BossSword : MonoBehaviour
+public class BossFireBall : MonoBehaviour
 {
     [SerializeField] private Player player;
-    [SerializeField] private BossSwordTimer bossTimer;
-    [SerializeField] private BossSwordPattern pattern;
-    [SerializeField] private float rushDis;
-    [SerializeField] private float slashDis;
-    [SerializeField] private float addDis;
+    [SerializeField] private BossFireBallTimer bossTimer;
+    [SerializeField] private BossFireBallPattern pattern;
     [SerializeField] private GameObject activePoint;
 
     private float diff;
@@ -22,9 +19,9 @@ public class BossSword : MonoBehaviour
         Idle,
         Walk,
         Jump,
-        Rush,
         DefaultAttack,
-        Slash,
+        PillarAttack,
+        LandomAttack,
     }
     public BossState CurrentState { get; private set; }
 
@@ -36,7 +33,6 @@ public class BossSword : MonoBehaviour
     {
         diff = player.transform.position.x - transform.position.x;
         moveX = diff > 0 ? 1 : -1;
-        rushPoint = (Vector2)player.transform.position + Vector2.right * moveX * addDis;
 
         if (!isActive)
         {
@@ -50,22 +46,9 @@ public class BossSword : MonoBehaviour
         weights[0] = Mathf.Lerp(20, 20, t); // °¡±î¿ò, ¸Ø
         weights[1] = Mathf.Lerp(10, 20, t);
         weights[2] = Mathf.Lerp(10, 20, t);
-        weights[3] = Mathf.Lerp(0, 40, t);
-        weights[4] = Mathf.Lerp(20, 30, t);
-        weights[5] = Mathf.Lerp(20, 30, t);
-
-        if (diff >= rushDis)
-        {
-            weights[4] = 70;
-        }
-        if (diff >= slashDis)
-        {
-            weights[3] = 0;
-        }
-        if (diff < slashDis)
-        {
-            weights[5] = 0;
-        }
+        weights[3] = Mathf.Lerp(30, 20, t);
+        weights[4] = Mathf.Lerp(40, 20, t);
+        weights[5] = Mathf.Lerp(40, 20, t);
     }
     private BossState GetRandomAction()
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossSwordAI : MonoBehaviour
+public class BossSwordTimer : MonoBehaviour
 {
     [SerializeField] BossSword boss;
     [SerializeField] BossSwordPattern bossPattern;
