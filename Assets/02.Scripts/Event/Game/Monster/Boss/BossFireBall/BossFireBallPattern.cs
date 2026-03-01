@@ -8,7 +8,7 @@ public class BossFireBallPattern : MonoBehaviour
 
     [SerializeField] BossFireBall boss;
     [SerializeField] BossFireBallTimer bossTimer;
-    [SerializeField] BossFireBallCollision collisionHandler;
+    [SerializeField] BossCollision collisionHandler;
 
     [SerializeField] Transform[] pillarPoints;
     [SerializeField] Transform[] fireBallSokets;
@@ -86,7 +86,8 @@ public class BossFireBallPattern : MonoBehaviour
 
         float force = UnityEngine.Random.Range(lavaMinForce, lavaMaxForce);
         var lava = Instantiate(lavaPrefab, randomSokets.position, Quaternion.identity);
-        lava.Init(dir, force);
+        var lavaCode = lava.GetComponent<Lava>();
+        lavaCode.Init(dir, force);
     }
     IEnumerator DoIdle()
     {
@@ -116,10 +117,17 @@ public class BossFireBallPattern : MonoBehaviour
     IEnumerator DoJump()
     {
         idle();
-        jump();
-        while (!collisionHandler.isGround)
+        int jumpTime = (int)bossTimer.GetJumpTime();
+        for (int i = 0; i < jumpTime; i++)
         {
-            yield return null;
+            jump();
+            // 땅에서 떨어질 때까지 기다림
+            while (collisionHandler.isGround)
+                yield return null;
+
+            // 다시 착지할 때까지 기다림
+            while (!collisionHandler.isGround)
+                yield return null;
         }
 
         yield return new WaitForSeconds(1f);

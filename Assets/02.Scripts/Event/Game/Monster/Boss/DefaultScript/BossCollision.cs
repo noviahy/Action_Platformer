@@ -1,15 +1,20 @@
 using UnityEngine;
 
-public class BossFireBallCollision : MonoBehaviour
+public class BossCollision : MonoBehaviour
 {
     [SerializeField] private float force;
     [SerializeField] private int BossHP;
     public bool isGround { get; private set; }
+    public bool isCeiling { get; private set; }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Ground"))
         {
             isGround = true;
+        }
+        if (collision.collider.CompareTag("Ceiling"))
+        {
+            isCeiling = true;
         }
         if (collision.collider.CompareTag("FireBall"))
         {
@@ -21,6 +26,10 @@ public class BossFireBallCollision : MonoBehaviour
         if (collision.collider.CompareTag("Ground"))
         {
             isGround = false;
+        }
+        if (collision.collider.CompareTag("Ceiling"))
+        {
+            isCeiling = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,5 +48,4 @@ public class BossFireBallCollision : MonoBehaviour
             BossHP -= 2;
         }
     }
-
 }

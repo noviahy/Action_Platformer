@@ -1,42 +1,49 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class BossSwordPattern : MonoBehaviour
-{
-    [SerializeField] BossSword boss;
-    [SerializeField] BossSwordTimer bossTimer;
-    [SerializeField] BossCollision collisionHandler;
+using System.Collections;
 
-    [SerializeField] private Collider2D rushHitBox;
+public class BossCannonPattern : MonoBehaviour
+{
+    [SerializeField] BossCannon boss;
+    [SerializeField] BossCannonTimer bossTimer;
+    [SerializeField] BossCollision collisionHandler;
+    [SerializeField] private Explosion explosion;
+
+    [SerializeField] private Collider2D defaultScoket;
     [SerializeField] private Collider2D slashHitBox;
     [SerializeField] private Collider2D defaultHitBox;
+
+    [SerializeField] private Transform bulletPoket;
+    [SerializeField] private Transform cannonPoket;
+
+    [SerializeField] private GameObject guideCannonPrefab;
+    [SerializeField] private GameObject bulletPrefab;
+
     [SerializeField] private float jumpForce;
     [SerializeField] private float walkSpeed;
-    [SerializeField] private float rushSpeed;
+    [SerializeField] private float pingPongSpeed;
 
     private Coroutine coroutine;
-    private Dictionary<BossSword.BossState, Func<IEnumerator>> actionMap;
+    private Dictionary<BossCannon.BossState, Func<IEnumerator>> actionMap;
     private Rigidbody2D rb;
-    private float target;
+    private Vector2 targetDir;
+    private Vector2 dir;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rushHitBox.enabled = false;
-        slashHitBox.enabled = false;
-        defaultHitBox.enabled = false;
 
-        actionMap = new Dictionary<BossSword.BossState, Func<IEnumerator>>()
+        actionMap = new Dictionary<BossCannon.BossState, Func<IEnumerator>>()
         {
-        { BossSword.BossState.Idle, DoIdle },
-        { BossSword.BossState.Walk, DoWalk },
-        { BossSword.BossState.Jump, DoJump },
-        { BossSword.BossState.Rush, DoRush},
-        { BossSword.BossState.DefaultAttack, DoDefaultAttack },
-        { BossSword.BossState.Slash, DoSlash}
+        { BossCannon.BossState.Idle, DoIdle },
+        { BossCannon.BossState.Walk, DoWalk },
+        { BossCannon.BossState.Jump, DoJump },
+        { BossCannon.BossState.DefaultAttack, DoDefaultAttack},
+        { BossCannon.BossState.GuidedAttack, DoGuidedAttack },
+        { BossCannon.BossState.PingPongAttack, DoPingPongAttack}
         };
     }
-    public void RequestAction(BossSword.BossState state)
+    public void RequestAction(BossCannon.BossState state)
     {
         if (coroutine != null)
             return;
@@ -57,10 +64,21 @@ public class BossSwordPattern : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(boss.moveX * walkSpeed, rb.linearVelocity.y);
     }
-    private void rush()
+
+    private void pingPong()
     {
-        rb.linearVelocity = new Vector2(boss.moveX * rushSpeed, rb.linearVelocity.y);
+        float x = UnityEngine.Random.Range(-0.3f, 0.3f);
+
+        if (collisionHandler.isGround)
+        {
+            targetDir = new Vector2(x, 1).normalized;
+        }
+        else if (collisionHandler.isCeiling)
+        {
+            targetDir = new Vector2(x, -1).normalized;
+        }
     }
+
     IEnumerator DoIdle()
     {
         idle();
@@ -95,55 +113,45 @@ public class BossSwordPattern : MonoBehaviour
         coroutine = null;
         boss.GetNextPattern();
     }
-    IEnumerator DoRush() // 빠르게 돌진
-    {
-        idle();
-        target = boss.rushPoint.x;
-        while (Mathf.Abs(rb.transform.position.x - target) > 0.3f)
-        {
-            rush();
-            yield return null;
-        }
-
-        idle();
-        yield return new WaitForSeconds(1f);
-        coroutine = null;
-        boss.GetNextPattern();
-    }
     IEnumerator DoDefaultAttack()
     {
         idle();
-        defaultHitBox.enabled = true;
-        yield return new WaitForSeconds(2f);
-        defaultHitBox.enabled = false;
+
+        for (int i = 0; i < 3; i++)
+        {
+            var bullet = Instantiate(bulletPrefab, bulletPoket.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.3f);
+        }
 
         idle();
         yield return new WaitForSeconds(1f);
         coroutine = null;
         boss.GetNextPattern();
     }
-    IEnumerator DoSlash() // 짧게 베기
+    IEnumerator DoGuidedAttack()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            var cannon = Instantiate(guideCannonPrefab, cannonPoket.position, Quaternion.identity);
+            GuideCannon cannonCode = cannon.GetComponent<GuideCannon>();
+        }
+
+        idle();
+        yield return new WaitForSeconds(1f);
+        coroutine = null;
+        boss.GetNextPattern();
+    }
+    IEnumerator DoPingPongAttack()
     {
         idle();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 6; i++)
         {
-            float time = 0;
-            slashHitBox.enabled = true;
-            while (time <= 1f)
-            {
-                walk();
-                time += Time.deltaTime;
-                yield return null;
-            }
-            time = 0;
-            slashHitBox.enabled = false;
-            while (time <= 0.5f)
-            {
-                idle();
-                time += Time.deltaTime;
-                yield return null;
-            }
+            yield return new WaitUntil(() =>
+    collisionHandler.isGround || collisionHandler.isCeiling);
+            pingPong();
+            yield return null;
         }
+
         idle();
         yield return new WaitForSeconds(1f);
         coroutine = null;
