@@ -16,6 +16,7 @@ TagManager:
   - Cannon
   - CannonBall
   - MovingPlatform
+  - Dead
   layers:
   - Default
   - TransparentFX

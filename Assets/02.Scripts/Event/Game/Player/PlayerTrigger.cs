@@ -3,7 +3,8 @@ using System.Collections;
 
 public class PlayerTrigger : MonoBehaviour
 {
-    [SerializeField] PlayerAttack player;
+    [SerializeField] Player player;
+    [SerializeField] PlayerAttack attack;
     [SerializeField] PlayerKnockbackHandler knockbackHandler;
     [SerializeField] private float stopTime;
     private Coroutine coroutine;
@@ -11,13 +12,17 @@ public class PlayerTrigger : MonoBehaviour
     {
         if (other.CompareTag("BombItem"))
         {
-            player.GetBoom();
+            attack.GetBoom();
         }
         if (other.CompareTag("Sword"))
         {
             if (coroutine != null)
                 return;
             coroutine = StartCoroutine(DoParrying());
+        }
+        if (other.CompareTag("Dead"))
+        {
+            player.RequestDead();
         }
     }
 

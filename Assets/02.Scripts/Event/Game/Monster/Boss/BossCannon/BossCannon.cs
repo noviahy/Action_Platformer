@@ -27,6 +27,7 @@ public class BossCannon : MonoBehaviour
     private void Start()
     {
         weights = new float[System.Enum.GetValues(typeof(BossState)).Length];
+        pattern.Init(player);
     }
     private void Update()
     {

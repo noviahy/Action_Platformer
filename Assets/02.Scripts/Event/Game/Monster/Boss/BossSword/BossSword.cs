@@ -9,9 +9,13 @@ public class BossSword : MonoBehaviour
     [SerializeField] private float slashDis;
     [SerializeField] private float addDis;
     [SerializeField] private GameObject activePoint;
+    [SerializeField] private Bar bar;
+    [SerializeField] private int bossHP;
 
     private float diff;
     private float[] weights;
+    public int BossHP;
+
     public bool isActive { get; private set; } = false;
     public int moveX { get; private set; }
     public Vector2 rushPoint { get; private set; }
@@ -31,6 +35,7 @@ public class BossSword : MonoBehaviour
     private void Start()
     {
         weights = new float[System.Enum.GetValues(typeof(BossState)).Length];
+        BossHP = bossHP;
     }
     private void Update()
     {
@@ -41,7 +46,10 @@ public class BossSword : MonoBehaviour
         if (!isActive)
         {
             if (player.transform.position.x <= activePoint.transform.position.x)
+            {
                 isActive = true;
+                RequestBarActive();
+            }
             else
                 return;
         }
@@ -100,5 +108,10 @@ public class BossSword : MonoBehaviour
         CurrentState = GetRandomAction();
         pattern.RequestAction(CurrentState);
     }
+    public void RequestBarActive()
+    {
+        bar.RequestActive(isActive);
+    }
+
 
 }

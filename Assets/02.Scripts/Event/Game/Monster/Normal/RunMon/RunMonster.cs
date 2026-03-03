@@ -134,7 +134,6 @@ public class RunMonster : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(targetSpeed, rb.linearVelocity.y);
         }
-
     }
     private void getRandomValue()
     {

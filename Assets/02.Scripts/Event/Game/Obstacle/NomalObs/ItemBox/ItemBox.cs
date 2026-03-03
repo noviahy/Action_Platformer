@@ -5,8 +5,10 @@ public class ItemBox : MonoBehaviour
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private SpriteRenderer boxRenderer;
     [SerializeField] private GameObject itemBox;
+    [SerializeField] private int bombNum =1;
     private SpriteRenderer boxColor;
     private bool isActive = true;
+    private int num = 0;
     private void Start()
     {
         boxColor = boxRenderer;
@@ -15,9 +17,11 @@ public class ItemBox : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
+            num++;
             if (!isActive) return;
-            isActive = false;
-
+            if (num == bombNum)
+                isActive = false;
+            
             var item = Instantiate(itemPrefab, itemBox.transform.position, Quaternion.identity);
             var itemCode = item.GetComponent<BombItem>();
 

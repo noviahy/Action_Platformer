@@ -24,6 +24,7 @@ public class BossCannonPattern : MonoBehaviour
     [SerializeField] private float walkSpeed;
     [SerializeField] private float pingPongSpeed;
 
+    private Player player;
     private Coroutine coroutine;
     private Dictionary<BossCannon.BossState, Func<IEnumerator>> actionMap;
     private Rigidbody2D rb;
@@ -42,6 +43,10 @@ public class BossCannonPattern : MonoBehaviour
         { BossCannon.BossState.GuidedAttack, DoGuidedAttack },
         { BossCannon.BossState.PingPongAttack, DoPingPongAttack}
         };
+    }
+    public void Init(Player code)
+    {
+        player = code;
     }
     public void RequestAction(BossCannon.BossState state)
     {
@@ -134,6 +139,7 @@ public class BossCannonPattern : MonoBehaviour
         {
             var cannon = Instantiate(guideCannonPrefab, cannonPoket.position, Quaternion.identity);
             GuideCannon cannonCode = cannon.GetComponent<GuideCannon>();
+            cannonCode.Init(player);
         }
 
         idle();

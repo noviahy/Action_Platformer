@@ -1,5 +1,86 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2491640385921919907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6745713720025983257}
+  - component: {fileID: 7421603149525607781}
+  - component: {fileID: 7939308362593007459}
+  m_Layer: 7
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6745713720025983257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2491640385921919907}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.17, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3429834624589332232}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7421603149525607781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2491640385921919907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae34c434cc122b9458b8f5ff1bfe5f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundCheck
+--- !u!58 &7939308362593007459
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2491640385921919907}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!1 &4285926757008663401
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,15 +91,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3429834624589332232}
   - component: {fileID: 3076684197025149293}
+  - component: {fileID: 6453546667334677002}
+  - component: {fileID: -5931833649803816748}
+  - component: {fileID: -1603630104996515780}
   - component: {fileID: -277058602332337740}
   - component: {fileID: -6950857688463078458}
-  - component: {fileID: 6752880941826931220}
-  - component: {fileID: -1215858229841906105}
-  - component: {fileID: -4070953117640279445}
-  - component: {fileID: -4745865729764831023}
   m_Layer: 7
-  m_Name: BossSword
-  m_TagString: Boss
+  m_Name: RunExplodeMon
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,9 +113,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.73, y: -2.12, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6745713720025983257}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3076684197025149293
@@ -97,6 +178,57 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &6453546667334677002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285926757008663401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac77ad48fdbf2542a4c216b47c5137e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunMonster
+  player: {fileID: 0}
+  groundCheck: {fileID: 7421603149525607781}
+  knockbackHandler: {fileID: 0}
+  runMonAI: {fileID: -1603630104996515780}
+  jumpForce: 3
+  activeDis: 15
+  runDis: 5
+  runSpeed: 3
+  walkSpeed: 1.5
+  deceleration: 100
+--- !u!114 &-5931833649803816748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285926757008663401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9259a3711681ca147a8968b5a211072d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunExplodeMonster
+  runMonster: {fileID: 6453546667334677002}
+  monsterHP: 8
+  runForce: 10
+  explosion: {fileID: 3408428061076517154, guid: 2c2687c02be3e644a8bdc2473b3cb7cf, type: 3}
+--- !u!114 &-1603630104996515780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285926757008663401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93de497b4173af5499091793dd044263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunMonAI
+  runMonster: {fileID: 6453546667334677002}
 --- !u!61 &-277058602332337740
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -170,71 +302,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6752880941826931220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4285926757008663401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc634c16963ef0b46875f4425da1d5b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSword
-  player: {fileID: 0}
-  bossTimer: {fileID: 0}
-  pattern: {fileID: 0}
-  rushDis: 0
-  slashDis: 0
-  addDis: 0
-  activePoint: {fileID: 0}
---- !u!114 &-1215858229841906105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4285926757008663401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3891aec7b0504bc4188aaab1ad40388c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSwordPattern
-  boss: {fileID: 0}
-  bossTimer: {fileID: 0}
-  collisionHandler: {fileID: 0}
-  rushHitBox: {fileID: 0}
-  slashHitBox: {fileID: 0}
-  defaultHitBox: {fileID: 0}
-  jumpForce: 0
-  walkSpeed: 0
-  rushSpeed: 0
---- !u!114 &-4070953117640279445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4285926757008663401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b29407ae23c40a4083561da04ee209d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSwordTimer
-  boss: {fileID: 0}
-  bossPattern: {fileID: 0}
---- !u!114 &-4745865729764831023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4285926757008663401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d99bfe9b5e02c7741ac2c3e74d2fedf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSwordCollision
-  force: 0
-  BossHP: 0

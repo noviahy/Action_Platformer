@@ -388,8 +388,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18334c57c40bfc24faaf021d1e65c529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerTrigger
-  player: {fileID: 4143820265997226626}
+  player: {fileID: 9102484762296752153}
+  attack: {fileID: 4143820265997226626}
   knockbackHandler: {fileID: 319706688330540608}
+  stopTime: 0
 --- !u!1 &6898252671034896059
 GameObject:
   m_ObjectHideFlags: 0
