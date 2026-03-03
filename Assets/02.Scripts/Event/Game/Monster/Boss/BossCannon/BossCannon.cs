@@ -1,12 +1,16 @@
 using UnityEngine;
-
-public class BossCannon : MonoBehaviour
+using System.Collections;
+public class BossCannon : MonoBehaviour, IBoss
 {
     [SerializeField] private Player player;
     [SerializeField] private BossCannonTimer bossTimer;
     [SerializeField] private BossCannonPattern pattern;
     [SerializeField] private GameObject activePoint;
+    [SerializeField] private int BossHP;
+    [SerializeField] private Bar bar;
 
+    private Coroutine coroutine;
+    private SpriteRenderer sprite;
     private float diff;
     private float[] weights;
     public bool isActive { get; private set; } = false;
@@ -34,13 +38,30 @@ public class BossCannon : MonoBehaviour
         diff = player.transform.position.x - transform.position.x;
         moveX = diff > 0 ? 1 : -1;
 
+        if (BossHP <= 0)
+        {
+            if (isActive)
+            {
+                isActive = false;
+                RequestBarActive();
+                StartCoroutine(StartDeadMotion());
+            }
+            return;
+        }
+
         if (!isActive)
         {
             if (player.transform.position.x <= activePoint.transform.position.x)
+            {
                 isActive = true;
+                coroutine = StartCoroutine(StartHowling());
+                RequestBarActive();
+            }
             else
                 return;
         }
+        if (coroutine != null)
+            return;
 
         float t = Mathf.Clamp01(Mathf.Abs(diff) / 15f);
         weights[0] = Mathf.Lerp(20, 20, t); // °¡±î¿ò, ¸Ø
@@ -82,5 +103,30 @@ public class BossCannon : MonoBehaviour
     {
         CurrentState = GetRandomAction();
         pattern.RequestAction(CurrentState);
+    }
+    public void RequestDamage(int dmg)
+    {
+        BossHP -= dmg;
+    }
+    private void RequestBarActive()
+    {
+        bar.RequestActive(isActive);
+    }
+    IEnumerator StartDeadMotion()
+    {
+        float time = 0;
+        float duration = 1.5f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            sprite.color = new Color(1, 1, 1, 1 - time / duration);
+            yield return null;
+        }
+    }
+    IEnumerator StartHowling()
+    {
+        yield return new WaitForSeconds(1.5f);
+        coroutine = null;
     }
 }

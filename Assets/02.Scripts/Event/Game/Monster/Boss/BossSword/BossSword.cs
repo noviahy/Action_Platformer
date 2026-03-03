@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-public class BossSword : MonoBehaviour
+public class BossSword : MonoBehaviour, IBoss
 {
     [SerializeField] private Player player;
     [SerializeField] private BossSwordTimer bossTimer;
@@ -10,11 +11,12 @@ public class BossSword : MonoBehaviour
     [SerializeField] private float addDis;
     [SerializeField] private GameObject activePoint;
     [SerializeField] private Bar bar;
-    [SerializeField] private int bossHP;
+    [SerializeField] private int BossHP;
+    [SerializeField] private SpriteRenderer sprite;
 
+    private Coroutine coroutine;
     private float diff;
     private float[] weights;
-    public int BossHP;
 
     public bool isActive { get; private set; } = false;
     public int moveX { get; private set; }
@@ -35,7 +37,7 @@ public class BossSword : MonoBehaviour
     private void Start()
     {
         weights = new float[System.Enum.GetValues(typeof(BossState)).Length];
-        BossHP = bossHP;
+        sprite = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
@@ -43,16 +45,30 @@ public class BossSword : MonoBehaviour
         moveX = diff > 0 ? 1 : -1;
         rushPoint = (Vector2)player.transform.position + Vector2.right * moveX * addDis;
 
+        if (BossHP <= 0)
+        {
+            if (isActive)
+            {
+                isActive = false;
+                RequestBarActive();
+                StartCoroutine(StartDeadMotion());
+            }
+            return;
+        }
+
         if (!isActive)
         {
             if (player.transform.position.x <= activePoint.transform.position.x)
             {
                 isActive = true;
+                coroutine = StartCoroutine(StartHowling());
                 RequestBarActive();
             }
             else
                 return;
         }
+        if (coroutine != null)
+            return;
 
         float t = Mathf.Clamp01(Mathf.Abs(diff) / 15f);
         weights[0] = Mathf.Lerp(20, 20, t); // °¡±î¿ò, ¸Ø
@@ -108,10 +124,31 @@ public class BossSword : MonoBehaviour
         CurrentState = GetRandomAction();
         pattern.RequestAction(CurrentState);
     }
-    public void RequestBarActive()
+    private void RequestBarActive()
     {
         bar.RequestActive(isActive);
     }
 
+    public void RequestDamage(int dmg)
+    {
+        BossHP -= dmg;
+    }
+    IEnumerator StartHowling()
+    {
+        yield return new WaitForSeconds(1.5f);
+        coroutine = null;
+    }
+    IEnumerator StartDeadMotion()
+    {
+        float time = 0;
+        float duration = 1.5f;
 
+        while (time < duration)
+        {
+
+            time += Time.deltaTime;
+            sprite.color = new Color(1, 1, 1, 1 - time / duration);
+            yield return null;
+        }
+    }
 }

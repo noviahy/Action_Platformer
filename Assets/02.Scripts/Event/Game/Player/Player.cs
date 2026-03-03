@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 /*
 NOTE:
@@ -13,9 +14,10 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerKnockbackHandler knockbackHandler;
     [SerializeField] private PlayerAttack playerAttack;
     [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private Transform activePoint;
     private CoinHPManager coinHPManager;
 
-
+    private bool isBossActive = false;
     private bool requestDash = false;
     private bool requestAttack = false;
     private bool requestJump = false;
@@ -37,6 +39,12 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         if (InputManager.Instance == null) return;
+
+        if (transform.position.x - activePoint.position.x < 0.3f && !isBossActive)
+        {
+            isBossActive = true;
+
+        }
 
         if (knockbackHandler.lockInput) return;
 

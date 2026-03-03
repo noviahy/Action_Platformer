@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class ItemBox : MonoBehaviour
 {
     [SerializeField] private GameObject itemPrefab;
@@ -7,6 +7,7 @@ public class ItemBox : MonoBehaviour
     [SerializeField] private GameObject itemBox;
     [SerializeField] private int bombNum =1;
     private SpriteRenderer boxColor;
+    private Coroutine coroutine;
     private bool isActive = true;
     private int num = 0;
     private void Start()
@@ -20,14 +21,25 @@ public class ItemBox : MonoBehaviour
             num++;
             if (!isActive) return;
             if (num == bombNum)
+            {
                 isActive = false;
+                boxColor.color = Color.gray;
+            }
+
+            if (coroutine != null)
+                return;
+            coroutine = StartCoroutine(WaitForNextSpawn());
             
             var item = Instantiate(itemPrefab, itemBox.transform.position, Quaternion.identity);
             var itemCode = item.GetComponent<BombItem>();
 
             itemCode.RequestSpawnItem();
-            boxColor.color = Color.gray;
 
         }
+    }
+    IEnumerator WaitForNextSpawn()
+    {
+        yield return new WaitForSeconds(1f);
+        coroutine = null;
     }
 }

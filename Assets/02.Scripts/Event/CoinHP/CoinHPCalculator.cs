@@ -22,6 +22,7 @@ public class CoinHPCalculator : MonoBehaviour
     public void _AddCoin(int amount) { Coin += amount; }
     public void _SubCoin(int amount) { Coin -= amount; }
     public void _AddHP(int amount) { HP += amount; }
+    public void _GetHeart(int amount) { HP += amount; }
     public void _Damage(int dmg) {  HP -= dmg; }
     public void _ReStart(int defaultHP) { HP = defaultHP; }
 }

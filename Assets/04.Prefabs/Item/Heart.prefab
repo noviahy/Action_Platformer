@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3942613562602833763}
   - component: {fileID: 8016649037451054938}
-  - component: {fileID: 6330355089313700525}
+  - component: {fileID: 7766701390315564694}
   m_Layer: 10
-  m_Name: Life
+  m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.4198113, b: 0.78542596, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &6330355089313700525
+--- !u!114 &7766701390315564694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +101,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6568549389592117038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b065cb08499b5843b157f6b831bd3a4, type: 3}
+  m_Script: {fileID: 11500000, guid: a9e03a169c530fe4f922e0b7615db4ec, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Coin
-  coinHPManager: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::Heart

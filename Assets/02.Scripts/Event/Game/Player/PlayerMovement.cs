@@ -49,6 +49,10 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector2(player.Facing * deshSpeed, 0);
         coroutine = StartCoroutine(WaitForNextDesh());
     }
+    public void RequestStop()
+    {
+        StartCoroutine(WaitForHowling());
+    }
     IEnumerator WaitForNextDesh()
     {
         yield return new WaitForSeconds(0.2f);
@@ -64,5 +68,10 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         coroutine = null;
         player.UnlockDash();
+    }
+    IEnumerator WaitForHowling()
+    {
+        rb.linearVelocity = Vector2.zero;
+        yield return new WaitForSeconds(1.5f);
     }
 }

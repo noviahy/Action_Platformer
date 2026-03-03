@@ -15,8 +15,8 @@ public class CameraFollow2D : MonoBehaviour
 
         Vector3 targetPos = new Vector3(player.position.x, player.position.y, transform.position.z);
 
-        targetPos.x = Mathf.Max(targetPos.x, 0, maxX);
-        targetPos.y = Mathf.Max(targetPos.y, 0, maxY);
+        targetPos.x = Mathf.Clamp(targetPos.x, 0, maxX);
+        targetPos.y = Mathf.Clamp(targetPos.y, 0, maxY);
 
         transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity, smoothTime);
     }

@@ -46,6 +46,10 @@ public class CoinHPManager : MonoBehaviour
             resetData();
         }
     }
+    public void GetHP()
+    {
+        calculator._GetHeart(1);
+    }
     public void Dead()
     {
         calculator._Damage(calculator.HP);

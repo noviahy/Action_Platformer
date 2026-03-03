@@ -3,6 +3,10 @@ using UnityEngine;
 public class CollectionCoin : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("player"))

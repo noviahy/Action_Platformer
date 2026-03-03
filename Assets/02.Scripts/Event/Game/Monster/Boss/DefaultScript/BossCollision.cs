@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossCollision : MonoBehaviour
 {
     [SerializeField] private float force;
-    [SerializeField] private BossSword boss;
+    [SerializeField] private IBoss boss;
     public bool isGround { get; private set; }
     public bool isCeiling { get; private set; }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -18,7 +18,7 @@ public class BossCollision : MonoBehaviour
         }
         if (collision.collider.CompareTag("FireBall"))
         {
-            boss.BossHP -= 1;
+            boss.RequestDamage(1);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -41,11 +41,11 @@ public class BossCollision : MonoBehaviour
         }
         if (collision.CompareTag("Sword"))
         {
-            BossHP -= 1;
+            boss.RequestDamage(1);
         }
         if (collision.CompareTag("Explosion"))
         {
-            BossHP -= 2;
+            boss.RequestDamage(2);
         }
     }
 }
