@@ -4,6 +4,7 @@ using System.Collections;
 public class RunExplodeMonster : MonoBehaviour
 {
     [SerializeField] RunMonster runMonster;
+    [SerializeField] RunMonKnockbackHandler knockbackHandler;
     [SerializeField] int monsterHP;
     [SerializeField] float runForce;
     [SerializeField] Explosion explosion;
@@ -73,6 +74,7 @@ public class RunExplodeMonster : MonoBehaviour
             monsterHP -= 2;
             HP = monsterHP;
             getVectorExplosion();
+            knockbackHandler.RequestWaveDead();
             doKnockback();
         }
     }

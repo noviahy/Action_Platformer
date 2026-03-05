@@ -78,6 +78,7 @@ public class FlyingMonster : MonoBehaviour
 
         if (knockbackHandler.HP <= 0)
         {
+            knockbackHandler.RequestWaveDead();
             gameObject.SetActive(false);
             return;
         }

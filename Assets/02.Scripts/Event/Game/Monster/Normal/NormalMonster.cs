@@ -10,6 +10,7 @@ public class NormalMonster : MonoBehaviour, IMonster
     [SerializeField] float force;
     [SerializeField] float activeDis;
 
+    private WaveManager wave;
     private GameManager gameManager;
     private Rigidbody2D rb;
 
@@ -50,13 +51,20 @@ public class NormalMonster : MonoBehaviour, IMonster
 
         if (monsterHP <= 0 && gameObject.activeSelf)
         {
+            if (wave != null)
+            {
+                wave.OnMonsterDead();
+            }
             gameObject.SetActive(false);
         }
 
         if (isAttacked) return;
         Walk();
     }
-
+    public void Init(WaveManager waveManager)
+    {
+        wave = waveManager;
+    }
     private void Walk()
     {
         rb.linearVelocity = new Vector2(moveX * walkSpeed, rb.linearVelocity.y);

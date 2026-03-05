@@ -7,6 +7,7 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
     [SerializeField] float force;
     [SerializeField] float runForce;
 
+    private WaveManager wave;
     private Vector2 knockbackDir;
 
     private Rigidbody2D rb;
@@ -20,6 +21,15 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
         rb = GetComponent<Rigidbody2D>();
         HP = monsterHP;
         coroutine = null;
+    }
+    public void Init(WaveManager waveManager)
+    {
+        wave = waveManager;
+    }
+    public void RequestWaveDead()
+    {
+        if(wave == null) return;
+        wave.OnMonsterDead();
     }
     public void GetKnockbackInfo(Vector2 hitPoint, float knockback)
     {

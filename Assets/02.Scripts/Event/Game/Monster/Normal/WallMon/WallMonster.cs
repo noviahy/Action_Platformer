@@ -8,6 +8,7 @@ public class WallMonster : MonoBehaviour, IMonster
 
     [SerializeField] float force;
     private GameManager gameManager;
+    private WaveManager wave;
 
     private void Start()
     {
@@ -20,6 +21,10 @@ public class WallMonster : MonoBehaviour, IMonster
 
         if (monsterHP <= 0)
         {
+            if (wave != null)
+            {
+                wave.OnMonsterDead();
+            }
             gameObject.SetActive(false);
             return;
         }
@@ -28,6 +33,10 @@ public class WallMonster : MonoBehaviour, IMonster
 
         rotation.followPlayer();
         rotation.RequestCoroutine();
+    }
+    public void Init(WaveManager waveManager)
+    {
+        wave = waveManager;
     }
     public void GetKnockbackInfo(Vector2 hitPoint, float knockback)
     {
