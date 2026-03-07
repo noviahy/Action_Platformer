@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 778671535233801522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -289,3 +289,4 @@ MonoBehaviour:
   itemPrefab: {fileID: 8381367546293991430, guid: a906ec506b3f38d44896ac0145e7ccfd, type: 3}
   boxRenderer: {fileID: 6721018070813336772}
   itemBox: {fileID: 778671535233801522}
+  bombNum: 1

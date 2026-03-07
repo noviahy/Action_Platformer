@@ -24,8 +24,9 @@ public class FallingObstacle : MonoBehaviour
             return;
 
         float diffX = Mathf.Abs(player.transform.position.x - transform.position.x);
+        float diffY = player.transform.position.y - transform.position.y;
 
-        if (diffX < activeDis)
+        if (diffX < activeDis && diffY < 0)
                 rb.gravityScale = fallGravity;
     }
     private void OnCollisionEnter2D(Collision2D collision)

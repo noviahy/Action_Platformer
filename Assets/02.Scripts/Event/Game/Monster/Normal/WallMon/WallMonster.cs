@@ -60,12 +60,6 @@ public class WallMonster : MonoBehaviour, IMonster
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            var player = other.GetComponentInParent<PlayerKnockbackHandler>();
-            player.GetKnockbackInfo(transform.position, force);
-        }
-
         if (other.CompareTag("Sword"))
         {
             monsterHP -= 1;

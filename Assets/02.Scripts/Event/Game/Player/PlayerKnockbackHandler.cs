@@ -29,7 +29,7 @@ public class PlayerKnockbackHandler : MonoBehaviour, IKnockbackHandler
         if (!isEnable)
             return;
         float dirX = transform.position.x - hitPoint.x > 0 ? 1f : -1f;
-        float angle = 35f * Mathf.Deg2Rad;
+        float angle = 60f * Mathf.Deg2Rad;
 
         Vector2 dir = new Vector2(dirX * Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
 

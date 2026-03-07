@@ -53,7 +53,7 @@ public class FlyingMonster : MonoBehaviour
         if (CurrentState == FlyingMonState.Stop || CurrentState == FlyingMonState.Knockback)
             return;
 
-        if (distSqr < activeDis * activeDis)
+        if (distSqr < activeDis * activeDis && diff.y < 0)
         {
             isActive = true;
             ChangeState(FlyingMonState.Flying);

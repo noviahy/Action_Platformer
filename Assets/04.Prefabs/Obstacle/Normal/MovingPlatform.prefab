@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6717182596897649778}
   - component: {fileID: 4020954466314404680}
   - component: {fileID: 7070932346973075758}
+  - component: {fileID: 8166348893087937361}
   m_Layer: 9
   m_Name: MovingPlatform
   m_TagString: Untagged
@@ -124,7 +125,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -151,3 +152,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b47ee9cf3eade4fa191933fc343aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovingPlatform
+  acceleration: 0
+--- !u!252 &8166348893087937361
+SurfaceEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563580729550286171}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Speed: 1
+  m_SpeedVariation: 0
+  m_ForceScale: 0.1
+  m_UseContactForce: 0
+  m_UseFriction: 1
+  m_UseBounce: 1

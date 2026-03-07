@@ -3,6 +3,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     private CoinHPManager coinHPManager;
+    private bool isCollected = false;
 
     private void Start()
     {
@@ -11,9 +12,12 @@ public class Coin : MonoBehaviour
     // ¸ÔÈ÷¸é »ç¶óÁü
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.name);
+        if (isCollected)
+            return;
+
         if (other.CompareTag("Player"))
         {
+            isCollected = true;
             coinHPManager.AddCoin();
             gameObject.SetActive(false);
         }

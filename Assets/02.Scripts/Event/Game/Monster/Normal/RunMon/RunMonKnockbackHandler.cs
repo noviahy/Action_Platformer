@@ -2,19 +2,16 @@ using UnityEngine;
 using System.Collections;
 public class RunMonKnockbackHandler : MonoBehaviour, IMonster
 {
-    [SerializeField] RunMonster runMonster;
-    [SerializeField] int monsterHP;
-    [SerializeField] float force;
-    [SerializeField] float runForce;
+    [SerializeField] protected RunMonster runMonster;
+    [SerializeField] protected int monsterHP;
 
-    private WaveManager wave;
-    private Vector2 knockbackDir;
+    protected WaveManager wave;
+    protected Vector2 knockbackDir;
+    protected Rigidbody2D rb;
 
-    private Rigidbody2D rb;
-
-    private float knockbackForce;
-    private float knockbackTime;
-    private Coroutine coroutine;
+    protected float knockbackForce;
+    protected float knockbackTime;
+    protected Coroutine coroutine;
     public int HP { get; private set; }
     private void Start()
     {
@@ -62,17 +59,6 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            var player = other.GetComponentInParent<PlayerKnockbackHandler>();
-            if (runMonster.CurrentState == RunMonster.MonsterState.Run)
-            {
-                player.GetKnockbackInfo(transform.position, runForce);
-                return;
-            }
-            player.GetKnockbackInfo(transform.position, force);
-        }
-
         if (other.CompareTag("Sword"))
         {
             knockbackTime = 0.4f;

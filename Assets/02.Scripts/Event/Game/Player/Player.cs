@@ -50,6 +50,34 @@ public class Player : MonoBehaviour
         if (groundCheck.IsGrounded && jumpDash)
         {
             jumpDash = false;
+        } 
+        // Dash
+        if (requestDash)
+        {
+            requestDash = false;
+            if (!lockDash && !jumpDash)
+            {
+                lockDash = true;
+
+                if (!groundCheck.IsGrounded)
+                    jumpDash = true;
+
+                lockWalkJump = true;
+                playerMovement.dash();
+            }
+        }  
+        // Jump
+        if (requestJump)
+        {
+            requestJump = false;
+            if (!groundCheck.IsGrounded || lockWalkJump) return;
+            playerMovement.jump();
+        }
+        // Attack
+        if (requestAttack && !lockDash)
+        {
+            requestAttack = false;
+            playerAttack.attack();
         }
         // Walk
         if (!lockWalkJump)
@@ -58,33 +86,6 @@ public class Player : MonoBehaviour
                 Facing = inputManager.moveX;
 
             playerMovement.walk(inputManager.moveX);
-        }
-        // Dash
-        if (requestDash)
-        {
-            requestDash = false;
-            if (lockDash || jumpDash) return;
-
-            lockDash = true;
-
-            if (!groundCheck.IsGrounded)
-                jumpDash = true;
-
-            lockWalkJump = true;
-            playerMovement.dash();
-        }
-        // Attack
-        if (requestAttack && !lockDash)
-        {
-            requestAttack = false;
-            playerAttack.attack();
-        }
-        // Jump
-        if (requestJump)
-        {
-            requestJump = false;
-            if (!groundCheck.IsGrounded || lockWalkJump) return;
-            playerMovement.jump();
         }
     }
     public void RequestSetAcceleration(float speed)

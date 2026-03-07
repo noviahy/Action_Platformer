@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         defaultGravity = rb.gravityScale;
-
     }
     public void walk(float moveX)
     {

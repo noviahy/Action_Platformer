@@ -7,7 +7,6 @@ public class NormalMonster : MonoBehaviour, IMonster
     [SerializeField] int monsterHP;
     [SerializeField] int moveX;
     [SerializeField] float walkSpeed;
-    [SerializeField] float force;
     [SerializeField] float activeDis;
 
     private WaveManager wave;

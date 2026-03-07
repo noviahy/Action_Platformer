@@ -34,7 +34,7 @@ public class SwordAttack : MonoBehaviour, IAttackStratgy
         switch (other.tag) 
         {
             case "Monster":
-                var monster = other.GetComponent<IMonster>();
+                var monster = other.GetComponentInParent<IMonster>();
                 monster.GetKnockbackInfo(pivot, nockBackForce);
                 break;
             case "Bomb":

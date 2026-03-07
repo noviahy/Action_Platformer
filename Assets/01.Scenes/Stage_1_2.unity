@@ -343,6 +343,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7070932346973075758, guid: 6fae5e32e9ba115478676df194610349, type: 3}
+      propertyPath: acceleration
+      value: -3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -766,6 +770,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon
@@ -1842,6 +1850,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7070932346973075758, guid: 6fae5e32e9ba115478676df194610349, type: 3}
+      propertyPath: acceleration
+      value: -3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2132,7 +2144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 709010804619979649, guid: f353d26a1e42b3a43b04fe5311f4a35c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.86
+      value: -4.71
       objectReference: {fileID: 0}
     - target: {fileID: 709010804619979649, guid: f353d26a1e42b3a43b04fe5311f4a35c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2190,7 +2202,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3429834624589332232, guid: f3e7c491352e2e745a17c16fce9f86c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.896757
+      value: 23.89
       objectReference: {fileID: 0}
     - target: {fileID: 3429834624589332232, guid: f3e7c491352e2e745a17c16fce9f86c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2232,6 +2244,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RunMon
       objectReference: {fileID: 0}
+    - target: {fileID: 6453546667334677002, guid: f3e7c491352e2e745a17c16fce9f86c3, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2290,6 +2306,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon (2)
@@ -2389,6 +2409,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon (3)
@@ -3330,6 +3354,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7070932346973075758, guid: 6fae5e32e9ba115478676df194610349, type: 3}
+      propertyPath: acceleration
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3410,6 +3438,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 153727901}
     m_Modifications:
+    - target: {fileID: -2887524500998311557, guid: df8d04445380ccd4d87792262fea3160, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 30986218817802069, guid: df8d04445380ccd4d87792262fea3160, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1
@@ -3458,6 +3490,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallMon
       objectReference: {fileID: 0}
+    - target: {fileID: 8227427258411539863, guid: df8d04445380ccd4d87792262fea3160, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3654,6 +3690,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon (1)
@@ -3982,6 +4022,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7070932346973075758, guid: 6fae5e32e9ba115478676df194610349, type: 3}
+      propertyPath: acceleration
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4040,6 +4084,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon (1)
@@ -4427,13 +4475,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: FallingObs
       objectReference: {fileID: 0}
+    - target: {fileID: 8134309105621961436, guid: 23f04ecf0826c79488eaf303a36eee3f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 8801771175777142839, guid: 23f04ecf0826c79488eaf303a36eee3f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8801771175777142839, guid: 23f04ecf0826c79488eaf303a36eee3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.516273
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 8801771175777142839, guid: 23f04ecf0826c79488eaf303a36eee3f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5462,6 +5514,10 @@ PrefabInstance:
       value: MovingPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 623571897645380244, guid: 6fae5e32e9ba115478676df194610349, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 623571897645380244, guid: 6fae5e32e9ba115478676df194610349, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.02411
       objectReference: {fileID: 0}
@@ -5500,6 +5556,10 @@ PrefabInstance:
     - target: {fileID: 623571897645380244, guid: 6fae5e32e9ba115478676df194610349, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070932346973075758, guid: 6fae5e32e9ba115478676df194610349, type: 3}
+      propertyPath: acceleration
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5723,10 +5783,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec6bacfc6ef54a498bdcda8246f8367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow2D
-  player: {fileID: 0}
-  smoothTime: 0
-  maxX: 0
-  maxY: 0
+  player: {fileID: 1568523179}
+  smoothTime: 0.5
+  maxX: 80
+  maxY: 25
 --- !u!1001 &1568523177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5788,6 +5848,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174da6e09e2d07249b294b41102bb50e, type: 3}
+--- !u!114 &1568523178 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9102484762296752153, guid: 174da6e09e2d07249b294b41102bb50e, type: 3}
+  m_PrefabInstance: {fileID: 1568523177}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce4b323cce2dcf4ebb0b90159697962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!4 &1568523179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3610038624347660995, guid: 174da6e09e2d07249b294b41102bb50e, type: 3}
@@ -5903,6 +5974,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon
@@ -6089,6 +6164,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 153727901}
     m_Modifications:
+    - target: {fileID: -2887524500998311557, guid: df8d04445380ccd4d87792262fea3160, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 3083048742068004723, guid: df8d04445380ccd4d87792262fea3160, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.016272
@@ -6133,6 +6212,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallMon
       objectReference: {fileID: 0}
+    - target: {fileID: 8227427258411539863, guid: df8d04445380ccd4d87792262fea3160, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6603,9 +6686,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: FallingObs (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8134309105621961436, guid: 23f04ecf0826c79488eaf303a36eee3f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 8801771175777142839, guid: 23f04ecf0826c79488eaf303a36eee3f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8801771175777142839, guid: 23f04ecf0826c79488eaf303a36eee3f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6671,11 +6758,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4214958839786592271, guid: ed20bb79cbb5d6444bebd357230f1ee9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.286274
+      value: 37.91
       objectReference: {fileID: 0}
     - target: {fileID: 4214958839786592271, guid: ed20bb79cbb5d6444bebd357230f1ee9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.29
+      value: 1.87
       objectReference: {fileID: 0}
     - target: {fileID: 4214958839786592271, guid: ed20bb79cbb5d6444bebd357230f1ee9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7172,9 +7259,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 153727901}
     m_Modifications:
+    - target: {fileID: 2670546793273728056, guid: d836bc82e358f4c4db7118593afd8f31, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1568523178}
     - target: {fileID: 3429834624589332232, guid: d836bc82e358f4c4db7118593afd8f31, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.46343
+      value: 19.22
       objectReference: {fileID: 0}
     - target: {fileID: 3429834624589332232, guid: d836bc82e358f4c4db7118593afd8f31, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7296,6 +7387,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1351600908}
     m_Modifications:
+    - target: {fileID: 2685867370146318021, guid: 0357e5ca45f556840aa96720f694d08b, type: 3}
+      propertyPath: bounceForce
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4194967870151218430, guid: 0357e5ca45f556840aa96720f694d08b, type: 3}
       propertyPath: m_Name
       value: Trampoline (7)
