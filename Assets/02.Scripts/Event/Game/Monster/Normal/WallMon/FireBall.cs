@@ -29,10 +29,10 @@ public class FireBall : MonoBehaviour
         {
             if (isReflected)
             {
-                    Physics2D.IgnoreCollision(col, collision.collider, true);
-                    return;
+                Physics2D.IgnoreCollision(col, collision.collider, true);
+                return;
             }
-            var player = collision.collider.GetComponent<PlayerKnockbackHandler>();
+            var player = collision.collider.GetComponentInParent<PlayerKnockbackHandler>();
             player.GetKnockbackInfo(transform.position, force);
             Destroy(gameObject);
         }
@@ -44,7 +44,7 @@ public class FireBall : MonoBehaviour
                 return;
             }
             Physics2D.IgnoreCollision(col, collision.collider, false);
-            var monster = collision.collider.GetComponent<PlayerKnockbackHandler>();
+            var monster = collision.collider.GetComponentInParent<PlayerKnockbackHandler>();
             monster.GetKnockbackInfo(transform.position, force);
             Destroy(gameObject);
         }

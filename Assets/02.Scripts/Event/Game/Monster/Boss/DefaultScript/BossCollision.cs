@@ -36,7 +36,7 @@ public class BossCollision : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            var player = collision.GetComponent<PlayerKnockbackHandler>();
+            var player = collision.GetComponentInParent<PlayerKnockbackHandler>();
             player.GetKnockbackInfo(transform.position, force);
         }
         if (collision.CompareTag("Sword"))

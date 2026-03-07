@@ -9,9 +9,10 @@ public class Coin : MonoBehaviour
        coinHPManager = CoinHPManager.Instance;
     }
     // ¸ÔÈ÷¸é »ç¶óÁü
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("player"))
+        Debug.Log(other.name);
+        if (other.CompareTag("Player"))
         {
             coinHPManager.AddCoin();
             gameObject.SetActive(false);

@@ -8,6 +8,7 @@ public class ItemBox : MonoBehaviour
     [SerializeField] private int bombNum =1;
     private SpriteRenderer boxColor;
     private Coroutine coroutine;
+    private GameObject item;
     private bool isActive = true;
     private int num = 0;
     private void Start()
@@ -26,11 +27,11 @@ public class ItemBox : MonoBehaviour
                 boxColor.color = Color.gray;
             }
 
-            if (coroutine != null)
+            if (coroutine != null || item != null)
                 return;
             coroutine = StartCoroutine(WaitForNextSpawn());
             
-            var item = Instantiate(itemPrefab, itemBox.transform.position, Quaternion.identity);
+            item = Instantiate(itemPrefab, itemBox.transform.position, Quaternion.identity);
             var itemCode = item.GetComponent<BombItem>();
 
             itemCode.RequestSpawnItem();

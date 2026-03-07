@@ -17,6 +17,7 @@ TagManager:
   - CannonBall
   - MovingPlatform
   - Dead
+  - FallingObs
   layers:
   - Default
   - TransparentFX

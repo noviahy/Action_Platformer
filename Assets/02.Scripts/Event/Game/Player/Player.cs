@@ -40,10 +40,9 @@ public class Player : MonoBehaviour
     {
         if (InputManager.Instance == null) return;
 
-        if (transform.position.x - activePoint.position.x < 0.3f && !isBossActive)
+        if (activePoint != null && !isBossActive && transform.position.x - activePoint.position.x < 0.3f)
         {
             isBossActive = true;
-
         }
 
         if (knockbackHandler.lockInput) return;

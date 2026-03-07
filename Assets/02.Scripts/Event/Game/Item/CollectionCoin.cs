@@ -7,9 +7,9 @@ public class CollectionCoin : MonoBehaviour
     {
         gameManager = GameManager.Instance;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("player"))
+        if (other.CompareTag("Player"))
         {
             gameObject.SetActive(false);
             gameManager.SaveCollectionCoin();

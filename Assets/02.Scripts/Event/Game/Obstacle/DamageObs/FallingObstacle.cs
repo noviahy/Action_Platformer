@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FallingObstacle : MonoBehaviour
@@ -10,7 +9,9 @@ public class FallingObstacle : MonoBehaviour
     [SerializeField] private float upSpead;
     private Rigidbody2D rb;
     private Vector2 defaultPoint;
-    private Coroutine coroutine;
+
+    private bool isFalling = false;
+    private bool isReturning = false;
     private void Start()
     {
        rb = GetComponent<Rigidbody2D>();
@@ -19,47 +20,46 @@ public class FallingObstacle : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isFalling || isReturning)
+            return;
+
         float diffX = Mathf.Abs(player.transform.position.x - transform.position.x);
 
         if (diffX < activeDis)
-        {
-            if (coroutine != null)
-            {
-                StopCoroutine(coroutine);
-                coroutine = null;
-            }
-            rb.gravityScale = fallGravity;
-        }
+                rb.gravityScale = fallGravity;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(!isFalling)
+            return;
+
         if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            coroutine = StartCoroutine(ReturnToPoint());
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            var player = collision.gameObject.GetComponent<Player>();
-            player.RequestDead();
+            StartCoroutine(ReturnToPoint());
         }
     }
     IEnumerator ReturnToPoint()
     {
+        isReturning = true;
+
         float time = 0f;
 
         Vector2 ground = transform.position;
+        rb.gravityScale = 0f;
 
         while (time <= 1f)
         {
-            float speed = Mathf.Lerp(ground.y, defaultPoint.y, time);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, speed);
+            float y = Mathf.Lerp(ground.y, defaultPoint.y, time);
+
+            transform.position = new Vector2(transform.position.x, y);
 
             time += Time.deltaTime;
             yield return null;
         }
-        coroutine = null;
+
+        transform.position = defaultPoint;
+
+        isFalling = false;
+        isReturning = false;
     }
 }

@@ -8,10 +8,13 @@ public class Rotation : MonoBehaviour
     [SerializeField] GameObject fireBallSoket;
     [SerializeField] Player player;
     [SerializeField] float activeDis;
+    [SerializeField] float attactDis;
 
     private GameManager gameManager;
     private Vector2 shootDir;
     private Coroutine coroutine;
+    
+    public bool isAttack { get; private set; } = false;
     public bool isActive { get; private set; } = false;
 
     private void Start()
@@ -29,6 +32,7 @@ public class Rotation : MonoBehaviour
         float distSqr = shootDir.sqrMagnitude;
 
         isActive = distSqr < activeDis * activeDis;
+        isAttack = distSqr < attactDis * attactDis;
     }
 
     public void followPlayer()

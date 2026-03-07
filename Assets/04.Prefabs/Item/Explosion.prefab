@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84372c299a3e8964795bc3cac4639f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Explosion
-  radius: 2
+  radius: 3
   force: 8
   affectLayer:
     serializedVersion: 2

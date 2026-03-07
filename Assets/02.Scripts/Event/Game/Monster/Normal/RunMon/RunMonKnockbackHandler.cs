@@ -64,7 +64,7 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
     {
         if (other.CompareTag("Player"))
         {
-            var player = other.GetComponent<PlayerKnockbackHandler>();
+            var player = other.GetComponentInParent<PlayerKnockbackHandler>();
             if (runMonster.CurrentState == RunMonster.MonsterState.Run)
             {
                 player.GetKnockbackInfo(transform.position, runForce);

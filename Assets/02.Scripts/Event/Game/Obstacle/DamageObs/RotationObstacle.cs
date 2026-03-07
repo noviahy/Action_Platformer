@@ -39,7 +39,7 @@ public class RotationObstacle : MonoBehaviour
         {
             Vector2 closestPoint = GetComponent<Collider2D>().ClosestPoint(other.transform.position);
 
-            var player = other.GetComponent<PlayerKnockbackHandler>();
+            var player = other.GetComponentInParent<PlayerKnockbackHandler>();
 
             if (player != null)
                 player.GetKnockbackInfo(closestPoint, force);

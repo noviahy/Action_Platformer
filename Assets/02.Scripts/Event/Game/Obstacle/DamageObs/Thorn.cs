@@ -7,7 +7,7 @@ public class Thorn : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            var player = collision.collider.GetComponent<PlayerKnockbackHandler>();
+            var player = collision.collider.GetComponentInParent<PlayerKnockbackHandler>();
 
             player.GetKnockbackInfo(transform.position, force);
         }

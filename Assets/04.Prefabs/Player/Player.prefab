@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 2693456237950733601}
   m_Layer: 6
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 797846175716995848}
   m_Layer: 6
   m_Name: TriggerCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,7 +391,7 @@ MonoBehaviour:
   player: {fileID: 9102484762296752153}
   attack: {fileID: 4143820265997226626}
   knockbackHandler: {fileID: 319706688330540608}
-  stopTime: 0
+  stopTime: 1.5
 --- !u!1 &6898252671034896059
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +488,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.96, y: -2.54, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6594338064218572208}
@@ -624,7 +624,7 @@ MonoBehaviour:
   swordObject: {fileID: 3521081015735313015}
   rb: {fileID: 1704340439059411974}
   groundCheck: {fileID: 8241878612535012875}
-  jumpForce: 8
+  jumpForce: 10
   walkSpeed: 4
   deshSpeed: 10
 --- !u!114 &4143820265997226626

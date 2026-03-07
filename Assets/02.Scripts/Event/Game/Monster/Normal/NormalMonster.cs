@@ -26,7 +26,7 @@ public class NormalMonster : MonoBehaviour, IMonster
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponentInParent<Rigidbody2D>();
         gameManager = GameManager.Instance;
     }
     private void Update()
@@ -87,13 +87,6 @@ public class NormalMonster : MonoBehaviour, IMonster
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.name);
-        if (other.CompareTag("Player"))
-        {
-            var player = other.GetComponent<PlayerKnockbackHandler>();
-            player.GetKnockbackInfo(transform.position, force);
-        }
-
         if (other.CompareTag("Sword"))
         {
             isAttacked = true;
@@ -103,6 +96,7 @@ public class NormalMonster : MonoBehaviour, IMonster
         }
         if (other.CompareTag("Explosion"))
         {
+            Debug.Log(other.name);
             knockbackTime = 1.5f;
             isAttacked = true;
             monsterHP -= 2;

@@ -29,9 +29,11 @@ public class WallMonster : MonoBehaviour, IMonster
             return;
         }
 
-        if (!rotation.isActive) return;
+        if (rotation.isActive)
+            rotation.followPlayer();
 
-        rotation.followPlayer();
+        if (!rotation.isAttack) return;
+
         rotation.RequestCoroutine();
     }
     public void Init(WaveManager waveManager)
@@ -60,7 +62,7 @@ public class WallMonster : MonoBehaviour, IMonster
     {
         if (other.CompareTag("Player"))
         {
-            var player = other.GetComponent<PlayerKnockbackHandler>();
+            var player = other.GetComponentInParent<PlayerKnockbackHandler>();
             player.GetKnockbackInfo(transform.position, force);
         }
 

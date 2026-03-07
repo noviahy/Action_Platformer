@@ -24,6 +24,10 @@ public class PlayerTrigger : MonoBehaviour
         {
             player.RequestDead();
         }
+        if (other.CompareTag("FallingObs"))
+        {
+            player.RequestDead();
+        }
     }
 
     IEnumerator DoParrying()
