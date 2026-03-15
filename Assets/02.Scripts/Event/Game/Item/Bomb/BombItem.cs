@@ -4,7 +4,12 @@ public class BombItem : MonoBehaviour
 {
     [SerializeField] private float upLength;
     [SerializeField] private float moveSpeed;
+    private ItemBox itemBox;
     private bool isActive = true;
+    public void Init(ItemBox box)
+    {
+        itemBox = box;
+    }
     public void RequestSpawnItem()
     {
         isActive = false;
@@ -17,6 +22,7 @@ public class BombItem : MonoBehaviour
 
         if (other.CompareTag("Player") || other.CompareTag("Sword"))
         {
+            itemBox.RequestClearItem();
             gameObject.SetActive(false);
         }
     }

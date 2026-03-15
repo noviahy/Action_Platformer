@@ -1236,6 +1236,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1380151868}
     m_Modifications:
+    - target: {fileID: 1849230569271159419, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 3811342285889243926, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
       propertyPath: m_Name
       value: Cannon
@@ -1414,37 +1418,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4214958839786592271, guid: 26bf8d0b871a0ce43b37537a2136a509, type: 3}
   m_PrefabInstance: {fileID: 314338716}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &331700042
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 331700043}
-  m_Layer: 0
-  m_Name: Deads
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &331700043
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 331700042}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28, y: -0.85, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1400990865}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &356146308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2575,6 +2548,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon (1)
@@ -2907,6 +2884,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 184443152}
     m_Modifications:
+    - target: {fileID: 2670546793273728056, guid: d836bc82e358f4c4db7118593afd8f31, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 3429834624589332232, guid: d836bc82e358f4c4db7118593afd8f31, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.928941
@@ -2969,6 +2950,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1380151868}
     m_Modifications:
+    - target: {fileID: 1849230569271159419, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 3811342285889243926, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
       propertyPath: m_Name
       value: Cannon (4)
@@ -3354,6 +3339,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon (3)
@@ -3576,6 +3565,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1380151868}
     m_Modifications:
+    - target: {fileID: 1849230569271159419, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 3811342285889243926, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
       propertyPath: m_Name
       value: Cannon (5)
@@ -3762,6 +3755,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1380151868}
     m_Modifications:
+    - target: {fileID: 1849230569271159419, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 3811342285889243926, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
       propertyPath: m_Name
       value: Cannon (2)
@@ -6929,7 +6926,6 @@ Transform:
   - {fileID: 867698718}
   - {fileID: 184443152}
   - {fileID: 1380151868}
-  - {fileID: 331700043}
   - {fileID: 2060041300}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7793,7 +7789,7 @@ Transform:
   m_GameObject: {fileID: 1542729332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 8.15, y: 38.73, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7856,9 +7852,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow2D
   player: {fileID: 0}
-  smoothTime: 0
-  maxX: 0
-  maxY: 0
+  smoothTime: 0.5
+  maxX: 8
+  maxY: 39
+  minX: 0
+  minY: 0
 --- !u!1001 &1580712271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8355,6 +8353,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon
@@ -8439,6 +8441,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1380151868}
     m_Modifications:
+    - target: {fileID: 1849230569271159419, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 3811342285889243926, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
       propertyPath: m_Name
       value: Cannon (6)
@@ -9042,6 +9048,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1380151868}
     m_Modifications:
+    - target: {fileID: 1849230569271159419, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 3811342285889243926, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
       propertyPath: m_Name
       value: Cannon (3)
@@ -9166,6 +9176,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1380151868}
     m_Modifications:
+    - target: {fileID: 1849230569271159419, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 3811342285889243926, guid: da65a56ec0871074d81dc811c3543b95, type: 3}
       propertyPath: m_Name
       value: Cannon (1)
@@ -10048,6 +10062,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1380151868}
     m_Modifications:
+    - target: {fileID: 2685867370146318021, guid: 0357e5ca45f556840aa96720f694d08b, type: 3}
+      propertyPath: bounceForce
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4194967870151218430, guid: 0357e5ca45f556840aa96720f694d08b, type: 3}
       propertyPath: m_Name
       value: Trampoline
@@ -10707,6 +10725,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174da6e09e2d07249b294b41102bb50e, type: 3}
+--- !u!114 &2117865549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9102484762296752153, guid: 174da6e09e2d07249b294b41102bb50e, type: 3}
+  m_PrefabInstance: {fileID: 2117865548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce4b323cce2dcf4ebb0b90159697962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!4 &2117865550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3610038624347660995, guid: 174da6e09e2d07249b294b41102bb50e, type: 3}
@@ -10760,6 +10789,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon (2)
@@ -10822,6 +10855,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284551083785523254, guid: 58954223f56635348b3248e44cbc9343, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2117865549}
     - target: {fileID: 4285926757008663401, guid: 58954223f56635348b3248e44cbc9343, type: 3}
       propertyPath: m_Name
       value: FlyingMon (4)

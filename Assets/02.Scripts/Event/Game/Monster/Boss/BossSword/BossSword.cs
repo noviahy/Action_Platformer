@@ -12,6 +12,7 @@ public class BossSword : MonoBehaviour, IBoss
     [SerializeField] private GameObject activePoint;
     [SerializeField] private Bar bar;
     [SerializeField] private int BossHP;
+    [SerializeField] private Transform attackRoot;
     [SerializeField] private SpriteRenderer sprite;
 
     private Coroutine coroutine;
@@ -38,11 +39,15 @@ public class BossSword : MonoBehaviour, IBoss
     {
         weights = new float[System.Enum.GetValues(typeof(BossState)).Length];
         sprite = GetComponent<SpriteRenderer>();
+        moveX = -1;
+
     }
     private void Update()
     {
         diff = player.transform.position.x - transform.position.x;
-        moveX = diff > 0 ? 1 : -1;
+        Vector3 scale = attackRoot.localScale;
+        scale.x = Mathf.Abs(scale.x) * moveX;
+        attackRoot.localScale = scale;
         rushPoint = (Vector2)player.transform.position + Vector2.right * moveX * addDis;
 
         if (BossHP <= 0)
@@ -58,7 +63,7 @@ public class BossSword : MonoBehaviour, IBoss
 
         if (!isActive)
         {
-            if (player.transform.position.x <= activePoint.transform.position.x)
+            if (Mathf.Abs(player.transform.position.x - activePoint.transform.position.x) < 0.3f)
             {
                 isActive = true;
                 coroutine = StartCoroutine(StartHowling());
@@ -70,13 +75,13 @@ public class BossSword : MonoBehaviour, IBoss
         if (coroutine != null)
             return;
 
-        float t = Mathf.Clamp01(Mathf.Abs(diff) / 15f);
+        float t = Mathf.Clamp01(Mathf.Abs(diff) / 20f);
         weights[0] = Mathf.Lerp(20, 20, t); // °¡±î¿ò, ¸Ø
         weights[1] = Mathf.Lerp(10, 20, t);
         weights[2] = Mathf.Lerp(10, 20, t);
-        weights[3] = Mathf.Lerp(0, 40, t);
-        weights[4] = Mathf.Lerp(20, 30, t);
-        weights[5] = Mathf.Lerp(20, 30, t);
+        weights[3] = Mathf.Lerp(0, 30, t);
+        weights[4] = Mathf.Lerp(30, 30, t);
+        weights[5] = Mathf.Lerp(30, 30, t);
 
         if (diff >= rushDis)
         {
@@ -121,6 +126,7 @@ public class BossSword : MonoBehaviour, IBoss
     }
     public void GetNextPattern()
     {
+        setMoveX();
         CurrentState = GetRandomAction();
         pattern.RequestAction(CurrentState);
     }
@@ -133,9 +139,14 @@ public class BossSword : MonoBehaviour, IBoss
     {
         BossHP -= dmg;
     }
+    private void setMoveX()
+    {
+        moveX = diff > 0 ? 1 : -1;
+    }
     IEnumerator StartHowling()
     {
         yield return new WaitForSeconds(1.5f);
+        GetNextPattern();
         coroutine = null;
     }
     IEnumerator StartDeadMotion()

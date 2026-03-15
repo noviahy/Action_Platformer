@@ -33,10 +33,15 @@ public class ItemBox : MonoBehaviour
             
             item = Instantiate(itemPrefab, itemBox.transform.position, Quaternion.identity);
             var itemCode = item.GetComponent<BombItem>();
+            itemCode.Init(this);
 
             itemCode.RequestSpawnItem();
 
         }
+    }
+    public void RequestClearItem()
+    {
+        item = null;
     }
     IEnumerator WaitForNextSpawn()
     {

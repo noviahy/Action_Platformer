@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private Coroutine coroutine;
 
     private float defaultGravity;
+    public bool lockInput {  get; private set; } = false;
     private void Start()
     {
         defaultGravity = rb.gravityScale;
@@ -70,7 +71,15 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator WaitForHowling()
     {
-        rb.linearVelocity = Vector2.zero;
-        yield return new WaitForSeconds(1.5f);
+        lockInput = true;
+        float time = 0;
+
+        while (time < 1.5f)
+        {
+            rb.linearVelocity = Vector2.zero;
+            time += Time.deltaTime;
+            yield return null;
+        }
+        lockInput = false;
     }
 }

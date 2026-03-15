@@ -8,12 +8,19 @@ public class Bar : MonoBehaviour
     }
     public void RequestActive(bool value)
     {
-        StartCoroutine(SetActive(value));
+        if (value)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            StartCoroutine(SetActiveFalse());
+        }
     }
 
-    IEnumerator SetActive(bool value)
+    IEnumerator SetActiveFalse()
     {
         yield return new WaitForSeconds(1f);
-        gameObject.SetActive(value);
+        gameObject.SetActive(false);
     }
 }

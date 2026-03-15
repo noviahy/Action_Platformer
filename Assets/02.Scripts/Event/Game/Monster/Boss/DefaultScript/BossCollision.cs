@@ -3,9 +3,13 @@ using UnityEngine;
 public class BossCollision : MonoBehaviour
 {
     [SerializeField] private float force;
-    [SerializeField] private IBoss boss;
+    private IBoss boss;
     public bool isGround { get; private set; }
     public bool isCeiling { get; private set; }
+    private void Start()
+    {
+        boss = GetComponent<IBoss>();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Ground"))
@@ -34,11 +38,6 @@ public class BossCollision : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            var player = collision.GetComponentInParent<PlayerKnockbackHandler>();
-            player.GetKnockbackInfo(transform.position, force);
-        }
         if (collision.CompareTag("Sword"))
         {
             boss.RequestDamage(1);

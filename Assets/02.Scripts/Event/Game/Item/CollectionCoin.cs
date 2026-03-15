@@ -10,7 +10,7 @@ public class CollectionCoin : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isCollected) return;
+        if (isCollected) return;
 
         if (other.CompareTag("Player"))
         {

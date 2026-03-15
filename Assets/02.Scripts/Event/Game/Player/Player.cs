@@ -40,12 +40,14 @@ public class Player : MonoBehaviour
     {
         if (InputManager.Instance == null) return;
 
-        if (activePoint != null && !isBossActive && transform.position.x - activePoint.position.x < 0.3f)
+        if (activePoint != null && !isBossActive && Mathf.Abs(transform.position.x - activePoint.position.x) < 0.3f)
         {
             isBossActive = true;
+            playerMovement.RequestStop();
         }
 
         if (knockbackHandler.lockInput) return;
+        if (playerMovement.lockInput) return;
 
         if (groundCheck.IsGrounded && jumpDash)
         {

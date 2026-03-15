@@ -18,6 +18,8 @@ TagManager:
   - MovingPlatform
   - Dead
   - FallingObs
+  - Ground
+  - Ceiling
   layers:
   - Default
   - TransparentFX
@@ -30,7 +32,7 @@ TagManager:
   - Projectile
   - Ground
   - Trigger
-  - 
+  - Sword
   - 
   - 
   - 

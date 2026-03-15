@@ -8,9 +8,9 @@ public class BossSwordPattern : MonoBehaviour
     [SerializeField] BossSwordTimer bossTimer;
     [SerializeField] BossCollision collisionHandler;
 
-    [SerializeField] private Collider2D rushHitBox;
-    [SerializeField] private Collider2D slashHitBox;
-    [SerializeField] private Collider2D defaultHitBox;
+    [SerializeField] private GameObject rushHitBox;
+    [SerializeField] private GameObject slashHitBox;
+    [SerializeField] private GameObject defaultHitBox;
     [SerializeField] private float jumpForce;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float rushSpeed;
@@ -22,9 +22,9 @@ public class BossSwordPattern : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rushHitBox.enabled = false;
-        slashHitBox.enabled = false;
-        defaultHitBox.enabled = false;
+        rushHitBox.SetActive(false);
+        slashHitBox.SetActive(false);
+        defaultHitBox.SetActive(false);
 
         actionMap = new Dictionary<BossSword.BossState, Func<IEnumerator>>()
         {
@@ -113,9 +113,9 @@ public class BossSwordPattern : MonoBehaviour
     IEnumerator DoDefaultAttack()
     {
         idle();
-        defaultHitBox.enabled = true;
+        defaultHitBox.SetActive(true);
         yield return new WaitForSeconds(2f);
-        defaultHitBox.enabled = false;
+        defaultHitBox.SetActive(false);
 
         idle();
         yield return new WaitForSeconds(1f);
@@ -128,15 +128,15 @@ public class BossSwordPattern : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             float time = 0;
-            slashHitBox.enabled = true;
+            slashHitBox.SetActive(true);
             while (time <= 1f)
             {
                 walk();
                 time += Time.deltaTime;
                 yield return null;
             }
-            time = 0;
-            slashHitBox.enabled = false;
+            time = 0;   
+            slashHitBox.SetActive(false);
             while (time <= 0.5f)
             {
                 idle();
