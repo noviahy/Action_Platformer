@@ -6,7 +6,7 @@ public class Rotation : MonoBehaviour
 {
     [SerializeField] GameObject firePrefab;
     [SerializeField] GameObject fireBallSoket;
-    [SerializeField] Player player;
+    private Player player;
     [SerializeField] float activeDis;
     [SerializeField] float attackDis;
 
@@ -19,6 +19,7 @@ public class Rotation : MonoBehaviour
 
     private void Start()
     {
+        player = FindFirstObjectByType<Player>();
         gameManager = GameManager.Instance;
     }
 

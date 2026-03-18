@@ -1,38 +1,48 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private Wave[] waves;
     [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private Player player;
+    [SerializeField] private Bar[] bars;
 
     private int aliveCount = 0;
     private int currentWave = 0;
-
-    private void Start()
+    private bool waveStarted = false;
+    private Coroutine coroutine;
+    private void Update()
     {
-        StartWave();
+        if (!waveStarted && Mathf.Abs(transform.position.x - player.transform.position.x) < 0.3f)
+        {
+            waveStarted = true;
+            if (coroutine == null)
+                coroutine = StartCoroutine(WaveDelay());
+            foreach (Bar bar in bars)
+                bar.RequestActive(true);
+        }
     }
-
     void StartWave()
     {
-        if (currentWave >= waves.Length)
-            return;
-
         Wave wave = waves[currentWave];
-        aliveCount = 0;
+
+        aliveCount = wave.spawnCount;
+
+        int random = Random.Range(0, 6);
 
         for (int i = 0; i < wave.spawnCount; i++)
         {
             GameObject prefab = wave.monsterPrefabs[i % wave.monsterPrefabs.Length];
 
-            Transform spawnPoint = spawnPoints[i % spawnPoints.Length];
+            Transform spawnPoint = spawnPoints[random + i];
 
             GameObject monster = Instantiate(
                 prefab,
                 spawnPoint.position,
                 Quaternion.identity
             );
-            aliveCount++;
             monster.GetComponent<IMonster>().Init(this);
         }
 
@@ -42,11 +52,26 @@ public class WaveManager : MonoBehaviour
     public void OnMonsterDead()
     {
         aliveCount--;
+        Debug.Log(aliveCount);
 
-        if (aliveCount <= 0)
+        if (currentWave >= waves.Length && aliveCount <= 0)
         {
-            StartWave();
+            foreach (Bar bar in bars)
+                bar.RequestActive(false);
         }
+
+        if (aliveCount <= 0 && currentWave < waves.Length)
+        {
+            if (coroutine == null)
+                coroutine = StartCoroutine(WaveDelay());
+        }
+    }
+
+    IEnumerator WaveDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        StartWave();
+        coroutine = null;
     }
 }
 [System.Serializable]

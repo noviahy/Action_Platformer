@@ -4,6 +4,7 @@ public class BossCollision : MonoBehaviour
 {
     [SerializeField] private float force;
     private IBoss boss;
+    public bool justHit { get; private set; }
     public bool isGround { get; private set; }
     public bool isCeiling { get; private set; }
     private void Start()
@@ -15,10 +16,12 @@ public class BossCollision : MonoBehaviour
         if (collision.collider.CompareTag("Ground"))
         {
             isGround = true;
+            justHit = true;
         }
         if (collision.collider.CompareTag("Ceiling"))
         {
             isCeiling = true;
+            justHit = true;
         }
         if (collision.collider.CompareTag("FireBall"))
         {
@@ -46,5 +49,10 @@ public class BossCollision : MonoBehaviour
         {
             boss.RequestDamage(2);
         }
+    }
+
+    public void ResetHit()
+    {
+        justHit = false;
     }
 }

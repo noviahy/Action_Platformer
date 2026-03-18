@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RunMonster : MonoBehaviour
 {
-    [SerializeField] Player player;
+    private Player player;
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] RunMonKnockbackHandler knockbackHandler;
     [SerializeField] RunMonAI runMonAI;
@@ -44,6 +44,7 @@ public class RunMonster : MonoBehaviour
     }
     private void Start()
     {
+        player = FindFirstObjectByType<Player>();
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameManager.Instance;
         CurrentState = MonsterState.Idle;
@@ -80,7 +81,7 @@ public class RunMonster : MonoBehaviour
         if (gameManager.CurrentState != GameManager.GameState.Playing)
             return;
 
-        if (knockbackHandler.HP <= 0)
+        if (knockbackHandler.HP == 0)
         {
             knockbackHandler.RequestWaveDead();
             gameObject.SetActive(false);

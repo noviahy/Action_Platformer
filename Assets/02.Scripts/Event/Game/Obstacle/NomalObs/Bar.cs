@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 public class Bar : MonoBehaviour
 {
+    [SerializeField] Player player;
     private void Start()
     {
         gameObject.SetActive(false);

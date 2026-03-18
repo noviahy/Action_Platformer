@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NormalMonster : MonoBehaviour, IMonster
 {
-    [SerializeField] Player player;
+    private Player player;
     [SerializeField] int monsterHP;
     [SerializeField] int moveX;
     [SerializeField] float walkSpeed;
@@ -25,6 +25,7 @@ public class NormalMonster : MonoBehaviour, IMonster
 
     private void Start()
     {
+        player = FindFirstObjectByType<Player>();
         rb = GetComponentInParent<Rigidbody2D>();
         gameManager = GameManager.Instance;
     }
@@ -105,9 +106,8 @@ public class NormalMonster : MonoBehaviour, IMonster
     }
     public void GetKnockbackInfo(Vector2 hitPoint, float knockback)
     {
-        float dirX = transform.position.x - hitPoint.x > 0 ? 1f : -1f;
-
-        Vector2 dir = new Vector2(dirX, 0).normalized;
+        float dirX = Mathf.Sign(transform.position.x - hitPoint.x);
+        Vector2 dir = new Vector2(dirX, 0);
 
         knockbackDir = dir;
         knockbackForce = knockback;

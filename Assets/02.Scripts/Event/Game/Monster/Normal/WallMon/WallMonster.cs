@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WallMonster : MonoBehaviour, IMonster
 {
-    [SerializeField] Player player;
+    private Player player;
     [SerializeField] Rotation rotation;
     [SerializeField] int monsterHP;
 
@@ -12,6 +12,7 @@ public class WallMonster : MonoBehaviour, IMonster
 
     private void Start()
     {
+        player = FindFirstObjectByType<Player>();
         gameManager = GameManager.Instance;
     }
     private void FixedUpdate()
@@ -36,7 +37,7 @@ public class WallMonster : MonoBehaviour, IMonster
 
         rotation.RequestCoroutine();
     }
-    public void Init(WaveManager waveManager)
+    public void Init(WaveManager waveManager, Player player)
     {
         wave = waveManager;
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6745713720025983257}
   - component: {fileID: 7421603149525607781}
   - component: {fileID: 7939308362593007459}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac77ad48fdbf2542a4c216b47c5137e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunMonster
-  player: {fileID: 0}
   groundCheck: {fileID: 7421603149525607781}
   knockbackHandler: {fileID: 3803340833843472789}
   runMonAI: {fileID: -1603630104996515780}

@@ -12,7 +12,7 @@ public class GuideCannon : MonoBehaviour
     private Vector2 targetDir;
     private bool isReflected;
     private bool isFired = false;
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();

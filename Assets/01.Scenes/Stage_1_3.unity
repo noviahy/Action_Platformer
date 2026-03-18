@@ -185,6 +185,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4266006361155227942, guid: 1a4e23fb390db294a8e9c0ec0d7183b3, type: 3}
   m_PrefabInstance: {fileID: 73437690}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &73437692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3902134741467140253, guid: 1a4e23fb390db294a8e9c0ec0d7183b3, type: 3}
+  m_PrefabInstance: {fileID: 73437690}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7c320ec44960e47a2d7dce3f7378b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bar
 --- !u!1001 &117838405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -249,6 +260,18 @@ PrefabInstance:
       propertyPath: activePoint
       value: 
       objectReference: {fileID: 3589705841447253903}
+    - target: {fileID: 6752880941826931220, guid: 768c95748c2f70f47ae44dcb64d4e531, type: 3}
+      propertyPath: bars.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752880941826931220, guid: 768c95748c2f70f47ae44dcb64d4e531, type: 3}
+      propertyPath: 'bars.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4022785748136898417}
+    - target: {fileID: 6752880941826931220, guid: 768c95748c2f70f47ae44dcb64d4e531, type: 3}
+      propertyPath: 'bars.Array.data[1]'
+      value: 
+      objectReference: {fileID: 73437692}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

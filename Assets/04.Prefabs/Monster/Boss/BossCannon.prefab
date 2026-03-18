@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &594776218195943062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8446490315042489539}
+  m_Layer: 7
+  m_Name: BulletPoket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8446490315042489539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594776218195943062}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3429834624589332232}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4285926757008663401
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,9 +43,9 @@ GameObject:
   - component: {fileID: 3076684197025149293}
   - component: {fileID: -277058602332337740}
   - component: {fileID: -6950857688463078458}
-  - component: {fileID: 6752880941826931220}
-  - component: {fileID: -1215858229841906105}
-  - component: {fileID: -4070953117640279445}
+  - component: {fileID: 3847213944985182627}
+  - component: {fileID: -7260369466585091623}
+  - component: {fileID: -5341330264203263015}
   - component: {fileID: -4745865729764831023}
   m_Layer: 7
   m_Name: BossCannon
@@ -32,11 +63,13 @@ Transform:
   m_GameObject: {fileID: 4285926757008663401}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.73, y: -2.12, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 541020324017717818}
+  - {fileID: 4622801122861952640}
+  - {fileID: 8446490315042489539}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3076684197025149293
@@ -171,7 +204,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6752880941826931220
+--- !u!114 &3847213944985182627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,20 +213,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4285926757008663401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc634c16963ef0b46875f4425da1d5b7, type: 3}
+  m_Script: {fileID: 11500000, guid: ef1d6ead114605b4d98968c6a65ce965, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSword
+  m_EditorClassIdentifier: Assembly-CSharp::BossCannon
   player: {fileID: 0}
-  bossTimer: {fileID: 0}
-  pattern: {fileID: 0}
-  rushDis: 0
-  slashDis: 0
-  addDis: 0
+  bossTimer: {fileID: -5341330264203263015}
+  pattern: {fileID: -7260369466585091623}
   activePoint: {fileID: 0}
-  bar: {fileID: 0}
-  BossHP: 0
-  sprite: {fileID: 0}
---- !u!114 &-1215858229841906105
+  BossHP: 30
+  bars: []
+  attackRoot: {fileID: 8446490315042489539}
+--- !u!114 &-7260369466585091623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,19 +232,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4285926757008663401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3891aec7b0504bc4188aaab1ad40388c, type: 3}
+  m_Script: {fileID: 11500000, guid: 199bb7f98a3a3f34295bc6ef724562e6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSwordPattern
-  boss: {fileID: 0}
-  bossTimer: {fileID: 0}
-  collisionHandler: {fileID: 0}
-  rushHitBox: {fileID: 0}
-  slashHitBox: {fileID: 0}
-  defaultHitBox: {fileID: 0}
-  jumpForce: 0
-  walkSpeed: 0
-  rushSpeed: 0
---- !u!114 &-4070953117640279445
+  m_EditorClassIdentifier: Assembly-CSharp::BossCannonPattern
+  boss: {fileID: 3847213944985182627}
+  bossTimer: {fileID: -5341330264203263015}
+  collisionHandler: {fileID: -4745865729764831023}
+  explosion: {fileID: 3408428061076517154, guid: 2c2687c02be3e644a8bdc2473b3cb7cf, type: 3}
+  bulletPoket: {fileID: 8446490315042489539}
+  cannonPoket: {fileID: 4622801122861952640}
+  guideCannonPrefab: {fileID: 3811342285889243926, guid: 9b55652df8a85a349afc1f5a31d0f136, type: 3}
+  bulletPrefab: {fileID: 91288014138132594, guid: 3dc35bc07d0833a49ab2f73c2133f43c, type: 3}
+  jumpForce: 10
+  walkSpeed: 5
+  pingPongSpeed: 30
+--- !u!114 &-5341330264203263015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,11 +255,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4285926757008663401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b29407ae23c40a4083561da04ee209d, type: 3}
+  m_Script: {fileID: 11500000, guid: e248a57b02907b84f98fdfd2725d82a8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSwordTimer
-  boss: {fileID: 0}
-  bossPattern: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::BossCannonTimer
 --- !u!114 &-4745865729764831023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99bfe9b5e02c7741ac2c3e74d2fedf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossSwordCollision
-  force: 0
+  force: 8
 --- !u!1 &4712779049312551755
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,3 +363,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForPlayerTrigger
   force: 10
+--- !u!1 &8706277667347571180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4622801122861952640}
+  m_Layer: 7
+  m_Name: CannonPoket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4622801122861952640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706277667347571180}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3429834624589332232}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

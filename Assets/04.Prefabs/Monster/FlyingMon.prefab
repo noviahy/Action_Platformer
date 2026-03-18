@@ -77,7 +77,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -191,7 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37662191edaf4da409ff6d09cc160973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyingMonster
-  player: {fileID: 0}
   knockbackHandler: {fileID: -3902139764950786732}
   activeDis: 5
   flyingSpeed: 2

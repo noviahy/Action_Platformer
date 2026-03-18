@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator WaitForHowling()
     {
         lockInput = true;
+        rb.gravityScale = 0f;
         float time = 0;
 
         while (time < 1.5f)
@@ -80,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
+        rb.gravityScale = 2f;
         lockInput = false;
     }
 }

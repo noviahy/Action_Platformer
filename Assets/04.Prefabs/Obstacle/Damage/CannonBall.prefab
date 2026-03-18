@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CannonBall
   explosion: {fileID: 3408428061076517154, guid: 2c2687c02be3e644a8bdc2473b3cb7cf, type: 3}
-  moveSpeed: 3
+  moveSpeed: 6
   moveX: -1
 --- !u!58 &-3381272850292816936
 CircleCollider2D:

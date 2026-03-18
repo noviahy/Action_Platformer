@@ -49,6 +49,7 @@ public class CoinHPManager : MonoBehaviour
     public void GetHP()
     {
         calculator._GetHeart(1);
+        eventManager.RefreshPlayingUI();
     }
     public void Dead()
     {

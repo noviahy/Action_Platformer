@@ -10,7 +10,7 @@ public class BossSword : MonoBehaviour, IBoss
     [SerializeField] private float slashDis;
     [SerializeField] private float addDis;
     [SerializeField] private GameObject activePoint;
-    [SerializeField] private Bar bar;
+    [SerializeField] private Bar[] bars;
     [SerializeField] private int BossHP;
     [SerializeField] private Transform attackRoot;
     [SerializeField] private SpriteRenderer sprite;
@@ -132,7 +132,8 @@ public class BossSword : MonoBehaviour, IBoss
     }
     private void RequestBarActive()
     {
-        bar.RequestActive(isActive);
+        foreach (Bar bar in bars)
+            bar.RequestActive(isActive);
     }
 
     public void RequestDamage(int dmg)
@@ -156,7 +157,6 @@ public class BossSword : MonoBehaviour, IBoss
 
         while (time < duration)
         {
-
             time += Time.deltaTime;
             sprite.color = new Color(1, 1, 1, 1 - time / duration);
             yield return null;

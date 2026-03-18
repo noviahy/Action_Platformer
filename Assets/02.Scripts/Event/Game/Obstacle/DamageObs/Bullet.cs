@@ -1,25 +1,23 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class CannonBall : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-    [SerializeField] private Explosion explosion;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float moveX = 1f;
-    private Player player;
-    private Rigidbody2D rb;
+    [SerializeField] private float force;
     private Collider2D col;
+    private Rigidbody2D rb;
     private Vector2 dir;
-    private bool isReflected;
+    private bool isReflected = false;
+    private Player player;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        dir = Vector2.right * moveX;
         col = GetComponent<Collider2D>();
     }
-    public void Init(Player playerCode, int move)
+    public void Init(Player playerCode, int X)
     {
-        player = playerCode;
-        moveX = move;
+        dir = Vector2.right * X;
     }
 
     private void FixedUpdate()
@@ -35,6 +33,11 @@ public class CannonBall : MonoBehaviour
                 Physics2D.IgnoreCollision(col, collision.collider, true);
                 return;
             }
+            else
+            {
+                var player = collision.collider.GetComponentInParent<PlayerKnockbackHandler>();
+                player.GetKnockbackInfo(transform.position, force);
+            }
         }
         if (collision.collider.CompareTag("Monster"))
         {
@@ -43,22 +46,17 @@ public class CannonBall : MonoBehaviour
                 Physics2D.IgnoreCollision(col, collision.collider, true);
                 return;
             }
-        }
-        if (collision.collider.CompareTag("Cannon"))
-        {
-            if (!isReflected)
+            else
             {
-                Physics2D.IgnoreCollision(col, collision.collider, true);
-                return;
+                var boss = collision.collider.GetComponentInParent<BossCannon>();
+                if (boss != null)
+                {
+                    boss.RequestDamage(1);
+                }
             }
-            var cannon = collision.collider.GetComponent<Cannon>();
-            cannon.RequestDestroy();
         }
-        Physics2D.IgnoreCollision(col, collision.collider, false);
-        Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Sword"))

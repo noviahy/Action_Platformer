@@ -25,7 +25,7 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
     }
     public void RequestWaveDead()
     {
-        if(wave == null) return;
+        if (wave == null) return;
         wave.OnMonsterDead();
     }
     public void GetKnockbackInfo(Vector2 hitPoint, float knockback)
@@ -75,7 +75,7 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
             getVectorExplosion();
             doKnockback();
         }
-    }    
+    }
     private void doKnockback()
     {
         if (coroutine != null) return;
@@ -86,7 +86,7 @@ public class RunMonKnockbackHandler : MonoBehaviour, IMonster
     IEnumerator Knockback()
     {
         rb.linearVelocity = Vector2.zero;
-        
+
         rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(knockbackTime);

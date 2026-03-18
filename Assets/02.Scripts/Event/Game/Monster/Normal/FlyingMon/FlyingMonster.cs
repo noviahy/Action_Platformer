@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FlyingMonster : MonoBehaviour
 {
-    [SerializeField] Player player;
+    private Player player;
     [SerializeField] FlyingMonKnockbackHandler knockbackHandler;
 
     [SerializeField] private float activeDis;
@@ -36,6 +36,7 @@ public class FlyingMonster : MonoBehaviour
     }
     private void Start()
     {
+        player = FindFirstObjectByType<Player>();
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameManager.Instance;
         spawnPoint = transform.position;
@@ -76,7 +77,7 @@ public class FlyingMonster : MonoBehaviour
         if (gameManager.CurrentState != GameManager.GameState.Playing)
             return;
 
-        if (knockbackHandler.HP <= 0)
+        if (knockbackHandler.HP == 0)
         {
             knockbackHandler.RequestWaveDead();
             gameObject.SetActive(false);

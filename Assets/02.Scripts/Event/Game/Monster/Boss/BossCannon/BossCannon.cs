@@ -7,14 +7,15 @@ public class BossCannon : MonoBehaviour, IBoss
     [SerializeField] private BossCannonPattern pattern;
     [SerializeField] private GameObject activePoint;
     [SerializeField] private int BossHP;
-    [SerializeField] private Bar bar;
+    [SerializeField] private Bar[] bars;
+    [SerializeField] private Transform attackRoot;
 
     private Coroutine coroutine;
     private SpriteRenderer sprite;
     private float diff;
     private float[] weights;
     public bool isActive { get; private set; } = false;
-    public int moveX { get; private set; }
+    public int moveX { get; private set; } = 1;
 
     private BossState lastState = BossState.Idle;
     public enum BossState
@@ -32,11 +33,14 @@ public class BossCannon : MonoBehaviour, IBoss
     {
         weights = new float[System.Enum.GetValues(typeof(BossState)).Length];
         pattern.Init(player);
+        sprite = gameObject.GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
         diff = player.transform.position.x - transform.position.x;
-        moveX = diff > 0 ? 1 : -1;
+        Vector3 scale = attackRoot.localScale;
+        scale.x = Mathf.Abs(scale.x) * moveX;
+        attackRoot.localScale = scale;
 
         if (BossHP <= 0)
         {
@@ -51,7 +55,7 @@ public class BossCannon : MonoBehaviour, IBoss
 
         if (!isActive)
         {
-            if (player.transform.position.x <= activePoint.transform.position.x)
+            if (Mathf.Abs(player.transform.position.x - activePoint.transform.position.x) <= 0.3f)
             {
                 isActive = true;
                 coroutine = StartCoroutine(StartHowling());
@@ -101,6 +105,7 @@ public class BossCannon : MonoBehaviour, IBoss
     }
     public void GetNextPattern()
     {
+        SetMoveX();
         CurrentState = GetRandomAction();
         pattern.RequestAction(CurrentState);
     }
@@ -108,9 +113,14 @@ public class BossCannon : MonoBehaviour, IBoss
     {
         BossHP -= dmg;
     }
+    private void SetMoveX()
+    {
+        moveX = diff > 0 ? 1 : -1;
+    }
     private void RequestBarActive()
     {
-        bar.RequestActive(isActive);
+        foreach (Bar bar in bars)
+            bar.RequestActive(isActive);
     }
     IEnumerator StartDeadMotion()
     {
@@ -123,10 +133,12 @@ public class BossCannon : MonoBehaviour, IBoss
             sprite.color = new Color(1, 1, 1, 1 - time / duration);
             yield return null;
         }
+        gameObject.SetActive(false);
     }
     IEnumerator StartHowling()
     {
         yield return new WaitForSeconds(1.5f);
+        GetNextPattern();
         coroutine = null;
     }
 }

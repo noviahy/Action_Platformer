@@ -10,10 +10,6 @@ public class BossCannonPattern : MonoBehaviour
     [SerializeField] BossCollision collisionHandler;
     [SerializeField] private Explosion explosion;
 
-    [SerializeField] private Collider2D defaultScoket;
-    [SerializeField] private Collider2D slashHitBox;
-    [SerializeField] private Collider2D defaultHitBox;
-
     [SerializeField] private Transform bulletPoket;
     [SerializeField] private Transform cannonPoket;
 
@@ -29,7 +25,7 @@ public class BossCannonPattern : MonoBehaviour
     private Dictionary<BossCannon.BossState, Func<IEnumerator>> actionMap;
     private Rigidbody2D rb;
     private Vector2 targetDir;
-    private Vector2 dir;
+    private bool firstHitIgnored = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -125,6 +121,8 @@ public class BossCannonPattern : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             var bullet = Instantiate(bulletPrefab, bulletPoket.position, Quaternion.identity);
+            Bullet bulletCode = bullet.GetComponent<Bullet>();
+            bulletCode.Init(player, boss.moveX);
             yield return new WaitForSeconds(0.3f);
         }
 
@@ -141,22 +139,41 @@ public class BossCannonPattern : MonoBehaviour
             GuideCannon cannonCode = cannon.GetComponent<GuideCannon>();
             cannonCode.Init(player);
         }
-
         idle();
         yield return new WaitForSeconds(1f);
+
         coroutine = null;
         boss.GetNextPattern();
     }
     IEnumerator DoPingPongAttack()
     {
         idle();
-        for (int i = 0; i < 6; i++)
+        rb.gravityScale = 0f;
+
+        yield return new WaitForSeconds(1f);
+
+        targetDir = new Vector2(1, 1).normalized;
+
+        int bounceCount = 0;
+
+        while (bounceCount < 7)
         {
-            yield return new WaitUntil(() =>
-    collisionHandler.isGround || collisionHandler.isCeiling);
-            pingPong();
+            rb.linearVelocity = targetDir * pingPongSpeed;
+
+            if (collisionHandler.justHit)
+            {
+                pingPong();
+                collisionHandler.ResetHit();
+                if (firstHitIgnored)
+                    Instantiate(explosion, transform.position, Quaternion.identity);
+                firstHitIgnored = true;
+                bounceCount++;
+                yield return new WaitForSeconds(1f);
+            }
+
             yield return null;
         }
+        rb.gravityScale = 1f;
 
         idle();
         yield return new WaitForSeconds(1f);

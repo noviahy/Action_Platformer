@@ -10,6 +10,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] float nextStartInterval;
     [SerializeField] float activeDis;
     [SerializeField] ParticleSystem explodeParticel;
+    [SerializeField] int moveX;
     private GameManager gameManager;
     private Vector2 diff;
     private Coroutine coroutine;
@@ -41,7 +42,7 @@ public class Cannon : MonoBehaviour
         {
             var ball = Instantiate(cannonBallPrefab, spawnSoket.transform.position, Quaternion.identity);
             CannonBall ballCode = ball.GetComponent<CannonBall>();
-            ballCode.Init(player);
+            ballCode.Init(player, moveX);
             yield return new WaitForSeconds(fireInterval);
         }
         yield return new WaitForSeconds(nextStartInterval);
