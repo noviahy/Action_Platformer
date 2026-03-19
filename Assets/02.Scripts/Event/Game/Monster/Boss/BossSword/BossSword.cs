@@ -13,9 +13,12 @@ public class BossSword : MonoBehaviour, IBoss
     [SerializeField] private Bar[] bars;
     [SerializeField] private int BossHP;
     [SerializeField] private Transform attackRoot;
-    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private BossWave wave;
 
+    private SpriteRenderer sprite;
     private Coroutine coroutine;
+    private Collider2D col;
+    private Rigidbody2D rb;
     private float diff;
     private float[] weights;
 
@@ -39,6 +42,9 @@ public class BossSword : MonoBehaviour, IBoss
     {
         weights = new float[System.Enum.GetValues(typeof(BossState)).Length];
         sprite = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+
         moveX = -1;
 
     }
@@ -55,7 +61,8 @@ public class BossSword : MonoBehaviour, IBoss
             if (isActive)
             {
                 isActive = false;
-                RequestBarActive();
+                if (wave == null)
+                    RequestBarActive();
                 StartCoroutine(StartDeadMotion());
             }
             return;
@@ -154,6 +161,11 @@ public class BossSword : MonoBehaviour, IBoss
     {
         float time = 0;
         float duration = 1.5f;
+        rb.gravityScale = 0f;
+        col.enabled = false;
+
+        if (wave != null)
+            wave.OnBossDead();
 
         while (time < duration)
         {

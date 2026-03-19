@@ -9,9 +9,12 @@ public class BossCannon : MonoBehaviour, IBoss
     [SerializeField] private int BossHP;
     [SerializeField] private Bar[] bars;
     [SerializeField] private Transform attackRoot;
+    [SerializeField] private BossWave wave;
 
     private Coroutine coroutine;
     private SpriteRenderer sprite;
+    private Rigidbody2D rb;
+    private Collider2D col;
     private float diff;
     private float[] weights;
     public bool isActive { get; private set; } = false;
@@ -34,6 +37,8 @@ public class BossCannon : MonoBehaviour, IBoss
         weights = new float[System.Enum.GetValues(typeof(BossState)).Length];
         pattern.Init(player);
         sprite = gameObject.GetComponent<SpriteRenderer>();
+        col = gameObject.AddComponent<Collider2D>();
+        rb = gameObject.AddComponent<Rigidbody2D>();
     }
     private void Update()
     {
@@ -47,7 +52,8 @@ public class BossCannon : MonoBehaviour, IBoss
             if (isActive)
             {
                 isActive = false;
-                RequestBarActive();
+                if (wave == null)
+                    RequestBarActive();
                 StartCoroutine(StartDeadMotion());
             }
             return;
@@ -126,6 +132,11 @@ public class BossCannon : MonoBehaviour, IBoss
     {
         float time = 0;
         float duration = 1.5f;
+
+        col.enabled = false;
+        rb.gravityScale = 0f;
+        if (wave != null)
+            wave.OnBossDead();
 
         while (time < duration)
         {

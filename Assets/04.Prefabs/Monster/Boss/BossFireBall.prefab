@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1704220042502927394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4760440446821915748}
+  m_Layer: 10
+  m_Name: Random
+  m_TagString: Monster
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4760440446821915748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704220042502927394}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.727, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3429834624589332232}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4285926757008663401
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,10 +43,10 @@ GameObject:
   - component: {fileID: 3076684197025149293}
   - component: {fileID: -277058602332337740}
   - component: {fileID: -6950857688463078458}
-  - component: {fileID: 6752880941826931220}
-  - component: {fileID: -1215858229841906105}
-  - component: {fileID: -4070953117640279445}
+  - component: {fileID: 8940731972056842194}
   - component: {fileID: -4745865729764831023}
+  - component: {fileID: 1806856697442896419}
+  - component: {fileID: 4517143598224350959}
   m_Layer: 7
   m_Name: BossFireBall
   m_TagString: Boss
@@ -37,6 +68,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5666956774181412019}
+  - {fileID: 4288034558229835385}
+  - {fileID: 6456370409093853133}
+  - {fileID: 876389388922429741}
+  - {fileID: 4760440446821915748}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3076684197025149293
@@ -171,7 +206,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6752880941826931220
+--- !u!114 &8940731972056842194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,54 +215,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4285926757008663401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc634c16963ef0b46875f4425da1d5b7, type: 3}
+  m_Script: {fileID: 11500000, guid: f1ed3fd6e7f837642b8d59fc6d5052d7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSword
+  m_EditorClassIdentifier: Assembly-CSharp::BossFireBall
   player: {fileID: 0}
-  bossTimer: {fileID: 0}
-  pattern: {fileID: 0}
-  rushDis: 0
-  slashDis: 0
-  addDis: 0
+  bossTimer: {fileID: 4517143598224350959}
+  pattern: {fileID: 1806856697442896419}
   activePoint: {fileID: 0}
   bar: {fileID: 0}
-  BossHP: 0
-  sprite: {fileID: 0}
---- !u!114 &-1215858229841906105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4285926757008663401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3891aec7b0504bc4188aaab1ad40388c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSwordPattern
-  boss: {fileID: 0}
-  bossTimer: {fileID: 0}
-  collisionHandler: {fileID: 0}
-  rushHitBox: {fileID: 0}
-  slashHitBox: {fileID: 0}
-  defaultHitBox: {fileID: 0}
-  jumpForce: 0
-  walkSpeed: 0
-  rushSpeed: 0
---- !u!114 &-4070953117640279445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4285926757008663401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b29407ae23c40a4083561da04ee209d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSwordTimer
-  boss: {fileID: 0}
-  bossPattern: {fileID: 0}
+  BossHP: 30
 --- !u!114 &-4745865729764831023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +236,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99bfe9b5e02c7741ac2c3e74d2fedf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossSwordCollision
-  force: 0
+  force: 8
+--- !u!114 &1806856697442896419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285926757008663401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1e8f14a52088e4882251165c0b8025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossFireBallPattern
+  boss: {fileID: 8940731972056842194}
+  bossTimer: {fileID: 4517143598224350959}
+  collisionHandler: {fileID: -4745865729764831023}
+  pillarPoints: []
+  fireBallSokets:
+  - {fileID: 4288034558229835385}
+  - {fileID: 6456370409093853133}
+  - {fileID: 876389388922429741}
+  randomSokets: {fileID: 4760440446821915748}
+  pillarPrefab: {fileID: 5087544464059538718, guid: dc78815435848a549a64a6dd4279d342, type: 3}
+  fireBallPrefab: {fileID: 91288014138132594, guid: 90196562a01cab0438393f679be3e5d2, type: 3}
+  lavaPrefab: {fileID: 3811342285889243926, guid: 97af440b9c2bfc546aca677e60d9745f, type: 3}
+  jumpForce: 7
+  walkSpeed: 5
+  lavaMaxForce: 8
+  lavaMinForce: 3
+--- !u!114 &4517143598224350959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285926757008663401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d8d5953d380af4c81620c2a58920ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossFireBallTimer
 --- !u!1 &4724753636171887564
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,4 +368,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c252f8ff65d01d84b86834672c55d636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForPlayerTrigger
-  force: 10
+  force: 8
+--- !u!1 &6908905306453403177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4288034558229835385}
+  m_Layer: 10
+  m_Name: Default1
+  m_TagString: Monster
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4288034558229835385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6908905306453403177}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.785, y: 0.369, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3429834624589332232}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8132530755212654168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 876389388922429741}
+  m_Layer: 10
+  m_Name: Default3
+  m_TagString: Monster
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &876389388922429741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8132530755212654168}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.785, y: -0.238, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3429834624589332232}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9031034411543758674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6456370409093853133}
+  m_Layer: 10
+  m_Name: Default2
+  m_TagString: Monster
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6456370409093853133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9031034411543758674}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.785, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3429834624589332232}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
