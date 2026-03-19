@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -15,7 +14,10 @@ public class WaveManager : MonoBehaviour
     private Coroutine coroutine;
     private void Update()
     {
-        if (!waveStarted && Mathf.Abs(transform.position.x - player.transform.position.x) < 0.3f)
+        float diffX = Mathf.Abs(transform.position.x - player.transform.position.x);
+        float diffY = Mathf.Abs(transform.position.y - player.transform.position.y);
+
+        if (!waveStarted && diffX < 0.3f && diffY < 5f)
         {
             waveStarted = true;
             if (coroutine == null)

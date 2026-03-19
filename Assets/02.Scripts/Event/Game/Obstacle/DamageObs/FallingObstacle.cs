@@ -6,7 +6,7 @@ public class FallingObstacle : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] private float fallGravity;
     [SerializeField] private float activeDisX = 0.3f;
-    [SerializeField] private float activeDisY = -100f; // À½¼ö
+    [SerializeField] private float activeDisY = 10f;
     [SerializeField] private float upSpead;
 
     private Rigidbody2D rb;
@@ -16,8 +16,17 @@ public class FallingObstacle : MonoBehaviour
     private bool isReturning = false;
     private void Start()
     {
-       rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         defaultPoint = transform.position;
+    }
+    private void Update()
+    {
+        float diffX = Mathf.Abs(player.transform.position.x - transform.position.x);
+        float diffY = player.transform.position.y - transform.position.y;
+        float diffYAbs = Mathf.Abs(diffY);
+
+        if (diffX < activeDisX && diffY < 0 && diffYAbs < activeDisY && !isReturning)
+            isFalling = true;
     }
 
     private void FixedUpdate()
@@ -25,19 +34,16 @@ public class FallingObstacle : MonoBehaviour
         if (isFalling || isReturning)
             return;
 
-        float diffX = Mathf.Abs(player.transform.position.x - transform.position.x);
-        float diffY = player.transform.position.y - transform.position.y;
-
-        if (diffX < activeDisX && diffY < 0 && activeDisY < diffY)
-                rb.gravityScale = fallGravity;
+        rb.gravityScale = fallGravity;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!isFalling)
+        if (!isFalling)
             return;
 
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            isFalling = false;
             StartCoroutine(ReturnToPoint());
         }
     }
