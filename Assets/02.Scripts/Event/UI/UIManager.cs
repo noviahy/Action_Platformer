@@ -23,6 +23,10 @@ public class UIManager : MonoBehaviour
             Debug.LogError($"UIstate not found: {nextState}");
             return;
         }
+        /*
+        if (currentState.StateType == EStateType.GameOver && nextState == EStateType.Clear)
+            return;
+        */
 
         // At initialization, there is no currentState, so a button click sets the state to StartUI.
         if (next.StateType == EStateType.StartUI)

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8331444845188216527}
   m_Layer: 8
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: FireBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -5,8 +5,10 @@ public class FallingObstacle : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] private float fallGravity;
-    [SerializeField] private float activeDis;
+    [SerializeField] private float activeDisX = 0.3f;
+    [SerializeField] private float activeDisY = -100f; // À½¼ö
     [SerializeField] private float upSpead;
+
     private Rigidbody2D rb;
     private Vector2 defaultPoint;
 
@@ -26,7 +28,7 @@ public class FallingObstacle : MonoBehaviour
         float diffX = Mathf.Abs(player.transform.position.x - transform.position.x);
         float diffY = player.transform.position.y - transform.position.y;
 
-        if (diffX < activeDis && diffY < 0)
+        if (diffX < activeDisX && diffY < 0 && activeDisY < diffY)
                 rb.gravityScale = fallGravity;
     }
     private void OnCollisionEnter2D(Collision2D collision)

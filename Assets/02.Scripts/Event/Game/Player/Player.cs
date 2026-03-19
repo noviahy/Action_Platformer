@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     private bool jumpDash = false;
     private bool lockWalkJump = false;
     public float Facing { get; private set; } = 1;
-    public float acceleration {  get; private set; } = 0;
+    public float acceleration { get; private set; } = 0;
 
     private void OnEnable()
     {
@@ -40,10 +40,15 @@ public class Player : MonoBehaviour
     {
         if (InputManager.Instance == null) return;
 
-        if (activePoint != null && !isBossActive && Mathf.Abs(transform.position.x - activePoint.position.x) < 0.3f)
+        if (activePoint != null && !isBossActive)
         {
-            isBossActive = true;
-            playerMovement.RequestStop();
+            Vector2 diff = transform.position - activePoint.position;
+            float distSpr = diff.sqrMagnitude;
+            if (!isBossActive && distSpr * distSpr < 5f)
+            {
+                isBossActive = true;
+                playerMovement.RequestStop();
+            }
         }
 
         if (knockbackHandler.lockInput) return;
@@ -52,7 +57,7 @@ public class Player : MonoBehaviour
         if (groundCheck.IsGrounded && jumpDash)
         {
             jumpDash = false;
-        } 
+        }
         // Dash
         if (requestDash)
         {
@@ -67,7 +72,7 @@ public class Player : MonoBehaviour
                 lockWalkJump = true;
                 playerMovement.dash();
             }
-        }  
+        }
         // Jump
         if (requestJump)
         {
