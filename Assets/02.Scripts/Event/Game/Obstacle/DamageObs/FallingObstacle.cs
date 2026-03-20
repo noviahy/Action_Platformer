@@ -22,7 +22,7 @@ public class FallingObstacle : MonoBehaviour
     private void Update()
     {
         float diffX = Mathf.Abs(player.transform.position.x - transform.position.x);
-        float diffY = player.transform.position.y - transform.position.y;
+        float diffY = Mathf.Abs(player.transform.position.y - transform.position.y);
         float diffYAbs = Mathf.Abs(diffY);
 
         if (diffX < activeDisX && diffY < 0 && diffYAbs < activeDisY && !isReturning)

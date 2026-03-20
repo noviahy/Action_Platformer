@@ -181,5 +181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FallingObstacle
   player: {fileID: 0}
   fallGravity: 1.7
-  activeDis: 0.8
+  activeDisX: 0
+  activeDisY: 0
   upSpead: 1

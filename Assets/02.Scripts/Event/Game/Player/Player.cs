@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Collections;
 using UnityEngine;
 /*
 NOTE:
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
     private bool lockWalkJump = false;
     public float Facing { get; private set; } = 1;
     public float acceleration { get; private set; } = 0;
+    public float deceleration { get; private set; } = 1;
 
     private void OnEnable()
     {
@@ -103,6 +105,15 @@ public class Player : MonoBehaviour
     {
         acceleration = 0;
     }
+    public void RequestSetDeceleration(float speed)
+    {
+        deceleration = speed;
+    }
+    public void RequestNoDeceleration()
+    {
+        deceleration = 1;
+    }
+
     public void RequestDead()
     {
         coinHPManager.Dead();

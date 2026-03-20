@@ -201,4 +201,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce69672f4c1cea40baec5d5bafb87fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lava
-  lavaPoolPrefab: {fileID: 0}
+  lavaPoolPrefab: {fileID: 5087544464059538718, guid: 757e926acdbe98d43a789773b4a6bead, type: 3}
