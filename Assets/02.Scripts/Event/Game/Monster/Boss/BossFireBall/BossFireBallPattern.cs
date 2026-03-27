@@ -50,7 +50,7 @@ public class BossFireBallPattern : MonoBehaviour
     }
     private void getRandomMoveX()
     {
-        moveX = UnityEngine.Random.Range(0, 2) == 0? -1 : 1;
+        moveX = UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1;
     }
     private void idle()
     {
@@ -70,7 +70,12 @@ public class BossFireBallPattern : MonoBehaviour
     }
     private void spawnFireBall(int i)
     {
-        Instantiate(fireBallPrefab, fireBallSokets[i].position, Quaternion.identity);
+        float angle = 30f * i;
+        Vector2 dir = Quaternion.Euler(0, 0, angle) * Vector2.right;
+
+        var fireBall = Instantiate(fireBallPrefab, fireBallSokets[i].position, Quaternion.identity);
+        var fireBallCode = fireBall.GetComponent<FireBall>();
+        fireBallCode.Init(dir * moveX);
     }
     private void spawnPilldar()
     {
@@ -82,7 +87,7 @@ public class BossFireBallPattern : MonoBehaviour
         float angle = UnityEngine.Random.Range(45f, 135f);
         float rad = Mathf.Rad2Deg * angle;
 
-        Vector2 dir = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+        Vector2 dir = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
 
         float force = UnityEngine.Random.Range(lavaMinForce, lavaMaxForce);
         var lava = Instantiate(lavaPrefab, randomSokets.position, Quaternion.identity);
@@ -152,7 +157,7 @@ public class BossFireBallPattern : MonoBehaviour
     IEnumerator DoPillarAttack()
     {
         idle();
-        for (int i = 0; i <=6; i++)
+        for (int i = 0; i <= 6; i++)
         {
             spawnPilldar();
             yield return new WaitForSeconds(1f);
@@ -163,7 +168,7 @@ public class BossFireBallPattern : MonoBehaviour
         coroutine = null;
         boss.GetNextPattern();
     }
-    IEnumerator DoLandomAttack() 
+    IEnumerator DoLandomAttack()
     {
         idle();
 

@@ -5,9 +5,10 @@ public class BossFireBall : MonoBehaviour, IBoss
     [SerializeField] private Player player;
     [SerializeField] private BossFireBallTimer bossTimer;
     [SerializeField] private BossFireBallPattern pattern;
-    [SerializeField] private GameObject activePoint;
-    [SerializeField] private Bar bar;
+    [SerializeField] private Transform activePoint;
+    [SerializeField] private Bar[] bars;
     [SerializeField] private int BossHP;
+    [SerializeField] private Transform attackRoot;
 
     private Coroutine coroutine;
     private SpriteRenderer sprite;
@@ -32,11 +33,14 @@ public class BossFireBall : MonoBehaviour, IBoss
     private void Start()
     {
         weights = new float[System.Enum.GetValues(typeof(BossState)).Length];
-        sprite = gameObject.AddComponent<SpriteRenderer>();
+        sprite = gameObject.GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
         diff = player.transform.position.x - transform.position.x;
+        Vector3 scale = attackRoot.localScale;
+        scale.x = Mathf.Abs(scale.x) * moveX;
+        attackRoot.localScale = scale;
         moveX = diff > 0 ? 1 : -1;
 
         if (BossHP <= 0)
@@ -52,7 +56,7 @@ public class BossFireBall : MonoBehaviour, IBoss
 
         if (!isActive)
         {
-            if (player.transform.position.x <= activePoint.transform.position.x)
+            if (Mathf.Abs(player.transform.position.x - activePoint.position.x) < 0.3f)
             {
                 isActive = true;
                 coroutine = StartCoroutine(StartHowling());
@@ -65,12 +69,12 @@ public class BossFireBall : MonoBehaviour, IBoss
             return;
 
         float t = Mathf.Clamp01(Mathf.Abs(diff) / 15f);
-        weights[0] = Mathf.Lerp(20, 20, t); // °¡±î¿ò, ¸Ø
-        weights[1] = Mathf.Lerp(10, 20, t);
-        weights[2] = Mathf.Lerp(10, 20, t);
-        weights[3] = Mathf.Lerp(30, 20, t);
-        weights[4] = Mathf.Lerp(40, 20, t);
-        weights[5] = Mathf.Lerp(40, 20, t);
+        weights[0] = Mathf.Lerp(5, 10, t); // °¡±î¿ò, ¸Ø
+        weights[1] = Mathf.Lerp(25, 15, t);
+        weights[2] = Mathf.Lerp(15, 20, t);
+        weights[3] = Mathf.Lerp(35, 20, t);
+        weights[4] = Mathf.Lerp(10, 35, t);
+        weights[5] = Mathf.Lerp(40, 40, t);
     }
     private BossState GetRandomAction()
     {
@@ -102,6 +106,7 @@ public class BossFireBall : MonoBehaviour, IBoss
     }
     public void GetNextPattern()
     {
+        SetMoveX();
         CurrentState = GetRandomAction();
         pattern.RequestAction(CurrentState);
     }
@@ -111,7 +116,12 @@ public class BossFireBall : MonoBehaviour, IBoss
     }
     private void RequestBarActive()
     {
-        bar.RequestActive(isActive);
+        foreach (var bar in bars)
+            bar.RequestActive(isActive);
+    }
+    private void SetMoveX()
+    {
+        moveX = diff > 0 ? 1 : -1;
     }
     IEnumerator StartDeadMotion()
     {
@@ -129,5 +139,6 @@ public class BossFireBall : MonoBehaviour, IBoss
     {
         yield return new WaitForSeconds(1.5f);
         coroutine = null;
+        GetNextPattern();
     }
 }

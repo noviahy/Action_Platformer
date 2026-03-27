@@ -139,6 +139,8 @@ public class BossSword : MonoBehaviour, IBoss
     }
     private void RequestBarActive()
     {
+        if(bars == null) return;
+
         foreach (Bar bar in bars)
             bar.RequestActive(isActive);
     }

@@ -169,5 +169,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ba29b93b07ce54f89614a1f92eca57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireBall
-  moveSpeed: 0
-  force: 0
+  moveSpeed: 7
+  force: 5

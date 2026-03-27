@@ -64,7 +64,7 @@ public class Rotation : MonoBehaviour
             GameObject fireBall = Instantiate(firePrefab, fireBallSoket.transform.position, Quaternion.identity);
 
             FireBall fireBallCode = fireBall.GetComponent<FireBall>();
-            fireBallCode.Init(shootDir.normalized, player);
+            fireBallCode.Init(shootDir.normalized);
             yield return new WaitForSeconds(1f);
         }
         yield return new WaitForSeconds(3f);

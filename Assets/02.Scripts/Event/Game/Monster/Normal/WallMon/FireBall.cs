@@ -10,17 +10,21 @@ public class FireBall : MonoBehaviour
     private Collider2D col;
     private Vector2 direction;
     private bool isReflected = false;
-    public void Init(Vector2 diff, Player playerCode)
+    private void Start()
+    {
+        player = FindFirstObjectByType<Player>();
+    }
+    public void Init(Vector2 diff)
     {
         rb = GetComponent<Rigidbody2D>();
-        player = playerCode;
         direction = diff;
         sprite = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
     }
     private void FixedUpdate()
     {
-        if (direction == null) return;
+        if (direction == Vector2.zero) return;
+        direction = direction.normalized;
         rb.linearVelocity = direction * moveSpeed;
     }
     private void OnCollisionEnter2D(Collision2D collision)

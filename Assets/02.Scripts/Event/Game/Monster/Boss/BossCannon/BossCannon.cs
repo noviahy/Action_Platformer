@@ -37,8 +37,8 @@ public class BossCannon : MonoBehaviour, IBoss
         weights = new float[System.Enum.GetValues(typeof(BossState)).Length];
         pattern.Init(player);
         sprite = gameObject.GetComponent<SpriteRenderer>();
-        col = gameObject.AddComponent<Collider2D>();
-        rb = gameObject.AddComponent<Rigidbody2D>();
+        col = gameObject.GetComponent<Collider2D>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
     private void Update()
     {
@@ -74,12 +74,13 @@ public class BossCannon : MonoBehaviour, IBoss
             return;
 
         float t = Mathf.Clamp01(Mathf.Abs(diff) / 15f);
-        weights[0] = Mathf.Lerp(20, 20, t); // °¡±î¿ò, ¸Ø
-        weights[1] = Mathf.Lerp(10, 30, t);
-        weights[2] = Mathf.Lerp(10, 20, t);
-        weights[3] = Mathf.Lerp(30, 30, t);
+        weights[0] = Mathf.Lerp(5, 10, t); // °¡±î¿ò, ¸Ø
+        weights[1] = Mathf.Lerp(25, 15, t);
+        weights[2] = Mathf.Lerp(15, 20, t);
+
+        weights[3] = Mathf.Lerp(35, 15, t);
         weights[4] = Mathf.Lerp(10, 40, t);
-        weights[5] = Mathf.Lerp(30, 30, t);
+        weights[5] = Mathf.Lerp(10, 35, t);
     }
     private BossState GetRandomAction()
     {
